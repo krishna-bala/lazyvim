@@ -67,7 +67,7 @@ return {
       clangd = function(_, _opts)
         _opts.cmd = {
           "clangd",
-          -- "--log=verbose",
+          "--log=error",
           "--background-index",
           -- "--cross-file-rename",
           "--compile-commands-dir=/home/krishna/foxbots/",

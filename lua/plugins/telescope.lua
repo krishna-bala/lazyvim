@@ -98,5 +98,11 @@ return {
       end,
       desc = "Live Grep (Args)",
     },
+    -- {
+    --   "<leader>ss",
+    --   function()
+    --     require("telescope.builtin").lsp_document_symbols({ symbol_width = 60 })
+    --   end,
+    -- },
   },
 }
