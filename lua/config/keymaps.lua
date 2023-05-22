@@ -2,6 +2,7 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 --
+
 local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
@@ -39,3 +40,4 @@ map(
   "<cmd>e ~/.config/nvim/init.lua<CR>",
   { noremap = true, silent = true, desc = "Open nvim/init.lua" }
 )
+-- map("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true, desc = "lazygit toggle" })

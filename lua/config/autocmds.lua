@@ -27,3 +27,15 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   desc = "Don't continue comments on new lines, with o, or with O",
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("git"),
+  pattern = {
+    "gitcommit",
+    "gitrebase",
+    "gitconfig",
+  },
+  callback = function()
+    vim.opt.bufhidden = "delete"
+  end,
+})

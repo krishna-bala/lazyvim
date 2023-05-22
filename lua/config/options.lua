@@ -9,3 +9,4 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.wrap = true
 
 -- vim.g.node_host_prog = "/home/krishna/.nvm/versions/node/v16.20.0/bin/node"
+vim.fn.setenv("GIT_EDITOR", "nvr -cc split --remote-wait")
