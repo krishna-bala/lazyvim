@@ -8,12 +8,16 @@ return {
   "telescope.nvim",
   dependencies = {
     "nvim-telescope/telescope-live-grep-args.nvim",
+    "rcarriga/nvim-notify",
   },
   opts = function(_, opts)
-    -- require("telescope").load_extension("live_grep_args")
+    -- necessary to use :Telescope notify
+    require("telescope").load_extension("notify")
+
     local actions = require("telescope.actions")
     local action_state = require("telescope.actions.state")
     local lga_actions = require("telescope-live-grep-args.actions")
+
     -- live-grep-args extension options
     opts.extensions = {
       live_grep_args = {
@@ -97,6 +101,11 @@ return {
         telescope.extensions.live_grep_args.live_grep_args()
       end,
       desc = "Live Grep (Args)",
+    },
+    {
+      "<leader>snm",
+      "<cmd>Telescope notify<cr>",
+      desc = "Show notify messages",
     },
     -- {
     --   "<leader>ss",

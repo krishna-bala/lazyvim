@@ -8,6 +8,7 @@ return {
   opts = function(_, opts)
     opts.sources = vim.tbl_extend("force", opts.sources, {
       nls.builtins.formatting.black,
+      nls.builtins.formatting.shfmt,
     })
   end,
 }
