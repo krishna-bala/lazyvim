@@ -1,29 +1,17 @@
+function _G.set_terminal_keymaps()
+  local opts = { buffer = 0 }
+  vim.keymap.set('t', '<leader><esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<leader><C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<leader><C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<leader><C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<leader><C-l>', [[<Cmd>wincmd l<CR>]], opts)
+end
+
 return {
   "akinsho/toggleterm.nvim",
   lazy = false,
   init = function()
-    local Terminal = require("toggleterm.terminal").Terminal
-    local lazygit = Terminal:new({
-      cmd = "lazygit",
-      autochdir = true,
-      -- function to run on opening the terminal
-      on_open = function(term)
-        vim.cmd("startinsert!")
-        vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
-      end,
-      -- function to run on closing the terminal
-      on_close = function(term)
-        vim.cmd("startinsert!")
-      end,
-      direction = "horizontal",
-      size = 50,
-      hidden = true,
-      start_in_insert = true,
-    })
-
-    function _lazygit_toggle()
-      lazygit:toggle()
-    end
   end,
   opts = {
     size = 30,
@@ -32,10 +20,10 @@ return {
     hide_numbers = true,
     shade_filetypes = {},
     shade_terminals = true,
-    shading_factor = "-20",
+    shading_factor = "-30",
     start_in_insert = true,
     insert_mappings = true,
-    persist_size = false,
+    persist_size = true,
     direction = "horizontal",
     float_opts = {
       border = "curved",

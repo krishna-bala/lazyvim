@@ -28,7 +28,9 @@ map("v", "c", '"_c', { noremap = true })
 map("n", "x", '"_x', { noremap = true })
 map("x", "x", '"_x', { noremap = true })
 map("v", "x", '"_x', { noremap = true })
-map("v", "p", '"_dP', { noremap = true })
+
+-- Commenting this out because it interferes with LuaSnip. See https://github.com/L3MON4D3/LuaSnip/discussions/726.
+-- map("v", "p", '"_dP', { noremap = true })
 
 -- allows * to highlight and search but not jump (preserves jump list)
 map("n", "*", "<cmd>keepjumps normal! mi*`i<CR>", { noremap = true, silent = true })

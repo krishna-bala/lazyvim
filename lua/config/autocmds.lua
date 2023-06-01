@@ -39,3 +39,14 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt.bufhidden = "delete"
   end,
 })
+
+if set_terminal_keymaps ~= nil then
+  -- if you only want these mappings for toggle term use term://*toggleterm#* instead
+  vim.api.nvim_create_autocmd("TermOpen", {
+    group = augroup("toggleterm"),
+    pattern = { "term://*" },
+    callback = function()
+      set_terminal_keymaps()
+    end
+  })
+end
