@@ -7,12 +7,14 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+local del = vim.keymap.del
+
 -- Windows
-map("n", "<leader>wo", "<C-w>o", { noremap = true })
-map("n", "<leader>wH", "<C-w>H", { noremap = true })
-map("n", "<leader>wJ", "<C-w>J", { noremap = true })
-map("n", "<leader>wK", "<C-w>K", { noremap = true })
-map("n", "<leader>wL", "<C-w>L", { noremap = true })
+map("n", "<leader>wo", "<C-w>o", { noremap = true, desc = "Maximize window" })
+map("n", "<leader>wH", "<C-w>H", { noremap = true, desc = "Maximize on the Left edge" })
+map("n", "<leader>wJ", "<C-w>J", { noremap = true, desc = "Maximize on the Bottom edge" })
+map("n", "<leader>wK", "<C-w>K", { noremap = true, desc = "Maximize on the Top edge" })
+map("n", "<leader>wL", "<C-w>L", { noremap = true, desc = "Maximize on the Right edge" })
 map("n", "<leader>w=", "<C-w>=", { noremap = true, desc = "Equally high and wide" })
 
 -- System clipboard yank/paste
@@ -43,3 +45,37 @@ map(
   { noremap = true, silent = true, desc = "Open nvim/init.lua" }
 )
 -- map("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true, desc = "lazygit toggle" })
+
+-- Delete the default terminal mappings
+del("n", "<leader>ft")
+del("n", "<leader>fT")
+del("n", "<C-/>")
+del("n", "<C-_>")
+del("t", "<C-/>")
+del("t", "<C-_>")
+del("t", "<C-h>")
+del("t", "<C-j>")
+del("t", "<C-k>")
+del("t", "<C-l>")
+del("t", "<esc><esc>")
+
+-- Add custom terminal mappings
+map('t', '<leader><esc>', [[<C-\><C-n>]], { noremap = true, desc = "Go to Normal mode" })
+map('t', '<leader><C-h>', [[<Cmd>wincmd h<CR>]], { noremap = true, desc = "Go to Left window" })
+map('t', '<leader><C-j>', [[<Cmd>wincmd j<CR>]], { noremap = true, desc = "Go to Below window" })
+map('t', '<leader><C-k>', [[<Cmd>wincmd k<CR>]], { noremap = true, desc = "Go to Above window" })
+map('t', '<leader><C-l>', [[<Cmd>wincmd l<CR>]], { noremap = true, desc = "Go to Right window" })
+
+-- Delete default toggle diagnostics and change to toggle diagnostics for a given buffer
+del("n", "<leader>ud")
+map(
+  "n", "<leader>ud",
+  function()
+    if vim.diagnostic.is_disabled(0) then
+      return vim.diagnostic.enable(0)
+    else
+      return vim.diagnostic.disable(0)
+    end
+  end,
+  { desc = "toggle buffer diagnostic" }
+)

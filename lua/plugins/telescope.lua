@@ -35,6 +35,7 @@ return {
     opts.defaults = vim.tbl_extend("force", opts.defaults, {
       layout_config = {
         horizontal = { width = 0.9 },
+        scroll_speed = 3,
       },
     })
     -- delete buffers
@@ -85,22 +86,33 @@ return {
       ["<C-v>"] = telescope_custom_actions.multi_selection_open_vsplit,
       ["<C-s>"] = telescope_custom_actions.multi_selection_open_split,
       ["<C-t>"] = telescope_custom_actions.multi_selection_open_tab,
+      ["<C-d>"] = false,
+      ["<C-u>"] = false,
+      ["<C-j>"] = actions.preview_scrolling_down,
+      ["<C-k>"] = actions.preview_scrolling_up,
     })
+
     opts.defaults.mappings.n = vim.tbl_extend("force", opts.defaults.mappings.n, {
       ["<CR>"] = telescope_custom_actions.multi_selection_open,
       ["<C-v>"] = telescope_custom_actions.multi_selection_open_vsplit,
       ["<C-s>"] = telescope_custom_actions.multi_selection_open_split,
       ["<C-t>"] = telescope_custom_actions.multi_selection_open_tab,
+      ["<C-d>"] = false,
+      ["<C-u>"] = false,
+      ["<C-j>"] = actions.preview_scrolling_down,
+      ["<C-k>"] = actions.preview_scrolling_up,
     })
   end,
   keys = {
-    {
-      "<leader>/",
-      function()
-        telescope.extensions.live_grep_args.live_grep_args()
-      end,
-      desc = "Live Grep (Args)",
-    },
+    { "<leader>/",  false },
+    { "<leader>sw", false },
+    -- {
+    --   "<leader>/",
+    --   function()
+    --     telescope.extensions.live_grep_args.live_grep_args()
+    --   end,
+    --   desc = "Live Grep (Args)",
+    -- },
     {
       "<leader>snm",
       "<cmd>Telescope notify<cr>",

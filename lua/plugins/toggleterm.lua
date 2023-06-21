@@ -1,13 +1,3 @@
-function _G.set_terminal_keymaps()
-  local opts = { buffer = 0 }
-  vim.keymap.set('t', '<leader><esc>', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', '<leader><C-h>', [[<Cmd>wincmd h<CR>]], opts)
-  vim.keymap.set('t', '<leader><C-j>', [[<Cmd>wincmd j<CR>]], opts)
-  vim.keymap.set('t', '<leader><C-k>', [[<Cmd>wincmd k<CR>]], opts)
-  vim.keymap.set('t', '<leader><C-l>', [[<Cmd>wincmd l<CR>]], opts)
-end
-
 return {
   "akinsho/toggleterm.nvim",
   lazy = false,
@@ -17,6 +7,7 @@ return {
     size = 30,
     open_mapping = [[<c-\>]],
     autochdir = true,
+    auto_scroll = false,
     hide_numbers = true,
     shade_filetypes = {},
     shade_terminals = true,
@@ -31,4 +22,14 @@ return {
     close_on_exit = true,
     shell = vim.o.shell,
   },
+  keys = {
+
+    {
+      [[<leader><c-\>]],
+      [[<cmd>2ToggleTerm direction="vertical" size=]] .. vim.o.columns * 0.5 .. [[<cr>]],
+      desc = "Toggle Terminal (vertical)"
+
+    }
+
+  }
 }
