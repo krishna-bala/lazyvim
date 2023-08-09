@@ -1,5 +1,7 @@
+-- automatically disabled if using flash.nvim in config.lua
 return {
   "ggandor/leap.nvim",
+  enabled = false,
   keys = false,
   config = function(_, opts)
     -- add your own keymaps here
