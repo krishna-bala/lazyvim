@@ -1,7 +1,9 @@
+if true then return {} end
+
 local nls = require("null-ls")
 
 return {
-  "jose-elias-alvarez/null-ls.nvim",
+  "nvimtools/none-ls.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",
   },

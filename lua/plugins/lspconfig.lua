@@ -26,6 +26,11 @@ local lspconfig = require("lspconfig")
 
 return {
   "neovim/nvim-lspconfig",
+  init = function()
+    local keys = require("lazyvim.plugins.lsp.keymaps").get()
+    -- change the goto definition mapping so it doesn't reuse an open window
+    keys[#keys + 1] = { "gd", "<cmd>lua vim.lsp.buf.definition({reuse_win = false})<cr>" }
+  end,
   opts = function(_, opts)
     opts.servers = vim.tbl_extend("force", opts.servers, {
       clangd = {

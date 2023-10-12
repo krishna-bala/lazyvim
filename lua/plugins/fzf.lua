@@ -20,7 +20,12 @@ return {
   keys = {
     {
       "<leader>/",
-      "<cmd>FzfLua live_grep<CR>",
+      "<cmd>FzfLua live_grep_glob<CR>",
+      desc = "Live Grep (Args)",
+    },
+    {
+      "<leader>?",
+      "<cmd>FzfLua live_grep_resume<CR>",
       desc = "Live Grep (Args)",
     },
     {
