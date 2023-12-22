@@ -104,8 +104,9 @@ return {
     })
   end,
   keys = {
-    { "<leader>/",  false },
+    { "<leader>/", false },
     { "<leader>sw", false },
+    { "<leader>gs", false },
     -- {
     --   "<leader>/",
     --   function()

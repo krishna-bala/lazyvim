@@ -2,7 +2,6 @@ if false then
   return {}
 end
 
-
 return {
   "ibhagwan/fzf-lua",
   lazy = false,
@@ -13,8 +12,7 @@ return {
       winopts = {
         height = 0.90,
         width = 0.95,
-
-      }
+      },
     }
   end,
   keys = {
@@ -33,5 +31,10 @@ return {
       "<cmd>FzfLua grep_cword<CR>",
       desc = "Grep Current Word",
     },
-  }
+    {
+      "<leader>gs",
+      "<cmd>FzfLua git_status<CR>",
+      desc = "Git Status",
+    },
+  },
 }
