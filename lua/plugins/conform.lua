@@ -3,12 +3,7 @@ return {
   dependencies = { "mason.nvim" },
   opts = {
     formatters_by_ft = {
-      -- lua = { "stylua" },
-      -- fish = { mfish_indent" },
       sh = { "shfmt" },
-      -- python = { "isort", "yapf", "ruff", "ruff-lsp" },
-      python = { "isort", "yapf" },
-      -- python = { "pylsp" },
       markdown = { "prettier" },
     },
     -- LazyVim will merge the options you set here with builtin formatters.

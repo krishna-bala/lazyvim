@@ -1,7 +1,3 @@
-if false then
-  return {}
-end
-
 return {
   {
     "catppuccin/nvim",
@@ -22,9 +18,30 @@ return {
   },
 
   {
+    "rose-pine/neovim",
+    lazy = false,
+  },
+
+  {
+    "EdenEast/nightfox.nvim",
+    lazy = false,
+  },
+
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+  },
+
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = false,
+  },
+
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      colorscheme = "tokyonight-moon",
     },
   },
 }

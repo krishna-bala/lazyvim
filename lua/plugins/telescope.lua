@@ -1,9 +1,3 @@
-if false then
-  return {}
-end
-
-local telescope = require("telescope")
-
 return {
   "telescope.nvim",
   dependencies = {
