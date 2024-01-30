@@ -3,8 +3,9 @@ return {
   dependencies = { "mason.nvim" },
   opts = {
     formatters_by_ft = {
-      sh = { "shfmt" },
+      sh = { "shfmt", "shellharden" },
       markdown = { "prettier" },
+      python = { "docformatter" },
     },
     -- LazyVim will merge the options you set here with builtin formatters.
     -- You can also define any custom formatters here.

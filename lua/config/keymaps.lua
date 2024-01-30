@@ -39,15 +39,6 @@ map("x", "x", '"_x', { noremap = true })
 -- allows * to highlight and search but not jump (preserves jump list)
 map("n", "*", "<cmd>keepjumps normal! mi*`i<CR>", { noremap = true, silent = true })
 
--- open nvim config
-map(
-  "n",
-  "<leader>nv",
-  "<cmd>e ~/.config/nvim/init.lua<CR>",
-  { noremap = true, silent = true, desc = "Open nvim/init.lua" }
-)
--- map("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true, desc = "lazygit toggle" })
-
 -- Delete the default terminal mappings
 del("n", "<leader>ft")
 del("n", "<leader>fT")
@@ -77,7 +68,3 @@ map("n", "<leader>ud", function()
     return vim.diagnostic.disable(0)
   end
 end, { desc = "toggle buffer diagnostic" })
-
-map("n", "<leader>rf", [[<Cmd>cd %:p:h<CR>]], { noremap = true, desc = "Change directory to current file" })
-map("n", "<leader>rc", [[:lua vim.cmd('cd ' .. vim.fn.stdpath('config'))<CR>]],
-  { noremap = true, desc = "Change directory to neovim config" })
