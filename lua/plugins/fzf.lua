@@ -13,6 +13,7 @@ return {
         height = 0.90,
         width = 0.95,
       },
+      previewer = "builtin",
     }
   end,
   keys = {

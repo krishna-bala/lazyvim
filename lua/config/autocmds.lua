@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "*",
   },
   callback = function()
-    vim.opt.formatoptions = vim.opt.formatoptions - "r"
+    -- vim.opt.formatoptions = vim.opt.formatoptions - "r"
     vim.opt.formatoptions = vim.opt.formatoptions - "o"
     vim.opt.formatoptions = vim.opt.formatoptions - "l"
   end,
@@ -47,6 +47,6 @@ if set_terminal_keymaps ~= nil then
     pattern = { "term://*" },
     callback = function()
       set_terminal_keymaps()
-    end
+    end,
   })
 end
