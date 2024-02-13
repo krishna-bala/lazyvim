@@ -17,11 +17,14 @@ return {
         "<leader>gb",
         "<cmd>Git blame<CR>",
         desc = ":Git blame",
-      }
-    }
+      },
+    },
   },
 
   {
     "tommcdo/vim-fubitive",
+  },
+  {
+    "tpope/vim-rhubarb",
   },
 }
