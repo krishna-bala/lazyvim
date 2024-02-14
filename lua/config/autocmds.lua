@@ -21,9 +21,32 @@ vim.api.nvim_create_autocmd("FileType", {
     "*",
   },
   callback = function()
-    vim.opt.formatoptions = vim.opt.formatoptions - "r"
+    -- vim.opt.formatoptions = vim.opt.formatoptions - "r"
     vim.opt.formatoptions = vim.opt.formatoptions - "o"
     vim.opt.formatoptions = vim.opt.formatoptions - "l"
   end,
   desc = "Don't continue comments on new lines, with o, or with O",
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("git"),
+  pattern = {
+    "gitcommit",
+    "gitrebase",
+    "gitconfig",
+  },
+  callback = function()
+    vim.opt.bufhidden = "delete"
+  end,
+})
+
+if set_terminal_keymaps ~= nil then
+  -- if you only want these mappings for toggle term use term://*toggleterm#* instead
+  vim.api.nvim_create_autocmd("TermOpen", {
+    group = augroup("toggleterm"),
+    pattern = { "term://*" },
+    callback = function()
+      set_terminal_keymaps()
+    end,
+  })
+end
