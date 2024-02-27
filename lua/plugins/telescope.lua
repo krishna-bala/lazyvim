@@ -99,7 +99,7 @@ return {
   end,
   keys = {
     { "<leader>/", false },
-    { "<leader>sw", false },
+    { "<leader>sw", mode = { "n", "v" }, false },
     { "<leader>gs", false },
     -- {
     --   "<leader>/",
