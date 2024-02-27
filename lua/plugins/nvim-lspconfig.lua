@@ -11,8 +11,7 @@ return {
         keys = {
           { "<leader>cR", false },
           { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-
-        }
+        },
       },
       pylsp = {
         -- add specific configurations for pylsp here
@@ -23,16 +22,16 @@ return {
               pyflakes = { enabled = true },
               mccabe = { enabled = true },
               pycodestyle = { enabled = true },
-              pydocstyle = { enabled = true },
+              pydocstyle = { enabled = false },
               autopep8 = { enabled = false },
               yapf = { enabled = true },
               isort = { enabled = true },
               flake8 = { enabled = false },
               -- pylint doesn't play nice with bazel
               pylint = { enabled = false },
-            }
-          }
-        }
+            },
+          },
+        },
       },
     })
   end,

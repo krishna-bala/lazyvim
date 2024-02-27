@@ -68,3 +68,27 @@ map("n", "<leader>ud", function()
     return vim.diagnostic.disable(0)
   end
 end, { desc = "toggle buffer diagnostic" })
+
+-- Create a command to format docstrings in python using docformatter. Must have docformatter installed.
+vim.api.nvim_create_user_command("Docformatter", function()
+  -- Check if the current buffer is a Python file
+  if vim.bo.filetype ~= "python" then
+    print("This command can only be used on Python files.")
+    return
+  end
+  -- Check if docformatter is installed by trying to get its version
+  vim.fn.system("docformatter --version")
+  -- Check if the command execution was successful
+  if vim.v.shell_error ~= 0 then
+    print("docformatter is not installed. Please install it to use this command.")
+    return
+  end
+
+  -- Format the current Python file with docformatter
+  local current_file = vim.api.nvim_buf_get_name(0)
+  os.execute("docformatter -i " .. vim.fn.shellescape(current_file))
+
+  -- Reload the buffer to reflect changes
+  vim.cmd("edit!")
+  print("File formatted with docformatter.")
+end, { desc = "Format the current Python file with docformatter" })
