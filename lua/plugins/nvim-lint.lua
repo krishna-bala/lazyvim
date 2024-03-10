@@ -5,7 +5,7 @@ return {
     -- Event to trigger linters
     events = { "BufWritePost", "BufReadPost", "InsertLeave" },
     linters_by_ft = {
-      cpp = { "cpplint" },
+      -- cpp = { "cpplint" },
       sh = { "shellcheck" },
       -- Use the "*" filetype to run linters on all filetypes.
       -- ['*'] = { 'global linter' },
