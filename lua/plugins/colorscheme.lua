@@ -57,9 +57,24 @@ return {
   },
 
   {
+    "embark-theme/vim",
+    lazy = false,
+  },
+
+  {
+    "ribru17/bamboo.nvim",
+    lazy = false,
+  },
+
+  {
+    "LunarVim/lunar.nvim",
+    lazy = false,
+  },
+
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight-moon",
+      colorscheme = "tokyonight",
     },
   },
 }
