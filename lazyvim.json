@@ -1,11 +1,12 @@
 {
   "extras": [
     "lazyvim.plugins.extras.editor.mini-files",
+    "lazyvim.plugins.extras.editor.trouble-v3",
     "lazyvim.plugins.extras.lang.clangd",
+    "lazyvim.plugins.extras.lang.docker",
     "lazyvim.plugins.extras.lang.markdown",
     "lazyvim.plugins.extras.ui.mini-animate",
-    "lazyvim.plugins.extras.util.project",
-    "lazyvim.plugins.extras.editor.aerial"
+    "lazyvim.plugins.extras.util.project"
   ],
   "news": {
     "NEWS.md": "3314"
