@@ -11,6 +11,10 @@ local del = vim.keymap.del
 
 -- Windows
 map("n", "<leader>wo", "<C-w>o", { noremap = true, desc = "Maximize window" })
+map("n", "<leader>wx", "<C-w>x", { noremap = true, desc = "Exchange current window with next" })
+map("n", "<leader>wX", "<C-w>X", { noremap = true, desc = "Exchange current window with previous" })
+map("n", "<leader>wr", "<C-w>r", { noremap = true, desc = "Rotate windows downwards/rightwards" })
+map("n", "<leader>wR", "<C-w>R", { noremap = true, desc = "Rotate windows upwards/leftwards" })
 map("n", "<leader>wH", "<C-w>H", { noremap = true, desc = "Maximize on the Left edge" })
 map("n", "<leader>wJ", "<C-w>J", { noremap = true, desc = "Maximize on the Bottom edge" })
 map("n", "<leader>wK", "<C-w>K", { noremap = true, desc = "Maximize on the Top edge" })
