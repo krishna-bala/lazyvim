@@ -12,6 +12,11 @@ return {
           { "<leader>cR", false },
           { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
         },
+        filetypes = {
+          "c",
+          "cpp",
+          "cuda",
+        },
       },
       pylsp = {
         -- add specific configurations for pylsp here
