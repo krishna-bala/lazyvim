@@ -17,6 +17,22 @@ return {
           "cpp",
           "cuda",
         },
+        -- stylua: ignore start
+        cmd = {
+          "docker", "run", "--rm", "-i",
+          "-v", "foxbots-home:/home/krishna",
+          "-v", "/home/krishna/foxbots:/home/krishna/foxbots",
+          "--workdir", "/home/krishna/foxbots",
+          "--entrypoint", "clangd-14",
+          "gcr.io/studied-biplane-165901/foxbots/devel-tools:latest",
+          -- clangd arguments
+          "--compile-commands-dir", "/home/krishna/foxbots",
+          "--background-index", "--clang-tidy",
+          "--completion-style=detailed", "--function-arg-placeholders",
+          "--fallback-style=llvm", "--header-insertion=never",
+          "--query-driver=**",
+        },
+        -- stylua: ignore end
       },
       pylsp = {
         -- add specific configurations for pylsp here
