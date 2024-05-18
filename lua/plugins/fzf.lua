@@ -36,7 +36,7 @@ return {
           -- In normal mode, visually select the word under cursor first
           vim.cmd("normal yiw")
         elseif mode == "v" or mode == "V" or mode == "\x16" then
-          -- vim.cmd("y")
+          vim.cmd("normal y")
           -- TODO
         end
         local text = vim.fn.getreg('"')
