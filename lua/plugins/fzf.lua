@@ -9,24 +9,13 @@ return {
   opts = function(_, opts)
     return {
       "telescope",
-      winopts = {
-        height = 0.90,
-        width = 0.95,
-      },
+      winopts = { height = 0.90, width = 0.95 },
       previewer = "builtin",
     }
   end,
   keys = {
-    {
-      "<leader>/",
-      "<cmd>FzfLua live_grep_glob<CR>",
-      desc = "Live Grep (Args)",
-    },
-    {
-      "<leader>?",
-      "<cmd>FzfLua live_grep_resume<CR>",
-      desc = "Live Grep (Args)",
-    },
+    { "<leader>/", "<cmd>FzfLua live_grep_glob<CR>", desc = "Live Grep (Args)" },
+    { "<leader>?", "<cmd>FzfLua live_grep_resume<CR>", desc = "Live Grep (Args)" },
     {
       "<leader>sw",
       mode = { "n", "v" },
