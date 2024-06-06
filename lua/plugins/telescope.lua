@@ -1,31 +1,10 @@
 return {
   "telescope.nvim",
-  dependencies = {
-    "nvim-telescope/telescope-live-grep-args.nvim",
-    "rcarriga/nvim-notify",
-  },
+  dependencies = {},
   opts = function(_, opts)
-    -- necessary to use :Telescope notify
-    require("telescope").load_extension("notify")
-
     local actions = require("telescope.actions")
     local action_state = require("telescope.actions.state")
-    local lga_actions = require("telescope-live-grep-args.actions")
 
-    -- live-grep-args extension options
-    opts.extensions = {
-      live_grep_args = {
-        auto_quoting = false,
-        mappings = {
-          n = {
-            ["<leader>p"] = lga_actions.quote_prompt(),
-            ["<leader>i"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-            ["<leader>t"] = lga_actions.quote_prompt({ postfix = " -t" }),
-            ["<leader>b"] = lga_actions.quote_prompt({ postfix = " -tcpp --iglob *" }),
-          },
-        },
-      },
-    }
     opts.defaults = vim.tbl_extend("force", opts.defaults, {
       layout_config = {
         horizontal = { width = 0.9 },
@@ -47,7 +26,6 @@ return {
 
     function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
       local picker = action_state.get_current_picker(prompt_bufnr)
-      local selected_entry = action_state.get_selected_entry()
       local num_selections = #picker:get_multi_selection()
       if not num_selections or num_selections <= 1 then
         actions.select_default(prompt_bufnr)
@@ -101,18 +79,6 @@ return {
     { "<leader>/", false },
     { "<leader>sw", mode = { "n", "v" }, false },
     { "<leader>gs", false },
-    -- {
-    --   "<leader>/",
-    --   function()
-    --     telescope.extensions.live_grep_args.live_grep_args()
-    --   end,
-    --   desc = "Live Grep (Args)",
-    -- },
-    {
-      "<leader>snm",
-      "<cmd>Telescope notify<cr>",
-      desc = "Show notify messages",
-    },
     {
       "q/",
       "<cmd>Telescope search_history<cr>",
@@ -122,12 +88,6 @@ return {
       "q:",
       "<cmd>Telescope command_history<cr>",
       desc = "Show command history",
-    },
-    {
-      "<leader>ss",
-      function()
-        require("telescope.builtin").lsp_document_symbols({ symbol_width = 60 })
-      end,
     },
   },
 }
