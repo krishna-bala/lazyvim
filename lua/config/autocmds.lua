@@ -40,13 +40,44 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-if set_terminal_keymaps ~= nil then
-  -- if you only want these mappings for toggle term use term://*toggleterm#* instead
-  vim.api.nvim_create_autocmd("TermOpen", {
-    group = augroup("toggleterm"),
-    pattern = { "term://*" },
-    callback = function()
-      set_terminal_keymaps()
-    end,
-  })
-end
+-- vim.api.nvim_create_autocmd({
+--   "WinScrolled", -- or WinResized on NVIM-v0.9 and higher
+--   "BufWinEnter",
+--   "CursorHold",
+--   "InsertLeave",
+-- }, {
+--   group = vim.api.nvim_create_augroup("barbecue.updater", {}),
+--   callback = function()
+--     require("barbecue").setup({
+--       show_navic = false,
+--       create_autocmd = false,
+--       attach_navic = false,
+--       show_dirname = false,
+--     })
+--     require("barbecue.ui").update()
+--   end,
+-- })
+-- -- Autocommand to clear winbar on window leave
+-- vim.api.nvim_create_autocmd({ "WinLeave" }, {
+--   callback = function()
+--     local win_id = vim.api.nvim_get_current_win()
+--     require("barbecue").setup({
+--       show_navic = false,
+--       create_autocmd = false,
+--       attach_navic = false,
+--       show_dirname = false,
+--     })
+--     require("barbecue.ui").update(win_id)
+--   end,
+-- })
+
+-- -- Autocommand to set nvim navic on winbar on window enter
+-- vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+--   callback = function()
+--     -- vim.wo.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+--     if require("nvim-navic").is_available() then
+--       vim.wo.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+--     end
+--   end,
+-- })
+--
