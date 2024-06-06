@@ -37,9 +37,6 @@ map("x", "x", '"_x', { noremap = true })
 -- map("v", "x", '"_x', { noremap = true })
 -- map("v", "c", '"_c', { noremap = true })
 
--- Commenting this out because it interferes with LuaSnip. See https://github.com/L3MON4D3/LuaSnip/discussions/726.
--- map("v", "p", '"_dP', { noremap = true })
-
 -- allows * to highlight and search but not jump (preserves jump list)
 map("n", "*", "<cmd>keepjumps normal! mi*`i<CR>", { noremap = true, silent = true })
 
@@ -66,12 +63,11 @@ map("t", "<leader><C-l>", [[<Cmd>wincmd l<CR>]], { noremap = true, desc = "Go to
 -- Delete default toggle diagnostics and change to toggle diagnostics for a given buffer
 del("n", "<leader>ud")
 map("n", "<leader>ud", function()
-  if vim.diagnostic.is_disabled(0) then
-    return vim.diagnostic.enable(0)
-  else
-    return vim.diagnostic.disable(0)
-  end
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = 0 }), { bufnr = 0 })
 end, { desc = "toggle buffer diagnostic" })
+map("n", "<leader>uD", function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { desc = "toggle global diagnostics" })
 
 -- Create a command to format docstrings in python using docformatter. Must have docformatter installed.
 vim.api.nvim_create_user_command("Docformatter", function()
