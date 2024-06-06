@@ -20,8 +20,8 @@ return {
         -- stylua: ignore start
         cmd = {
           "docker", "run", "--rm", "-i",
-          "-v", "foxbots-home:/home/krishna/",
-          -- "-v", "/home/krishna/.cache/bazel:/home/krishna/.cache/bazel",
+          -- "-v", "foxbots-home:/home/krishna/",
+          "-v", "/home/krishna/.cache/bazel:/home/krishna/.cache/bazel",
           "-v", "/home/krishna/foxbots:/home/krishna/foxbots",
           "--workdir", "/home/krishna/foxbots",
           "--entrypoint", "clangd-14",
