@@ -18,6 +18,15 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = false,
+    opts = {
+      transparent = true,
+      on_highlights = function(hl, c)
+        hl.WinSeparator = {
+          fg = c.border_highlight,
+          bold = true,
+        }
+      end,
+    },
   },
 
   {
@@ -74,7 +83,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      colorscheme = "tokyonight-moon",
     },
   },
 }
