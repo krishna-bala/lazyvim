@@ -3,16 +3,13 @@ return {
   opts = function(_, opts)
     opts.left = {
       {
-        title = "Neo-Tree",
+        title = "Neo-Tree Buffers",
         ft = "neo-tree",
         filter = function(buf)
-          return vim.b[buf].neo_tree_source == "filesystem"
+          return vim.b[buf].neo_tree_source == "buffers"
         end,
         pinned = true,
-        open = function()
-          require("neo-tree.command").execute({ dir = LazyVim.root() })
-        end,
-        size = { height = 0.5 },
+        open = "Neotree position=top buffers dir=/home/krishna",
       },
       { title = "Neotest Summary", ft = "neotest-summary" },
       {
@@ -24,15 +21,18 @@ return {
         pinned = true,
         open = "Neotree position=right git_status",
       },
-      {
-        title = "Neo-Tree Buffers",
-        ft = "neo-tree",
-        filter = function(buf)
-          return vim.b[buf].neo_tree_source == "buffers"
-        end,
-        pinned = true,
-        open = "Neotree position=top buffers dir=/home/krishna",
-      },
+      -- {
+      --   title = "Neo-Tree",
+      --   ft = "neo-tree",
+      --   filter = function(buf)
+      --     return vim.b[buf].neo_tree_source == "filesystem"
+      --   end,
+      --   pinned = true,
+      --   open = function()
+      --     require("neo-tree.command").execute({ dir = LazyVim.root() })
+      --   end,
+      --   size = { height = 0.5 },
+      -- },
       "neo-tree",
     }
   end,
