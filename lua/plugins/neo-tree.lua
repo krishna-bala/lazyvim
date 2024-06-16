@@ -7,6 +7,14 @@ return {
     buffers = {
       bind_to_cwd = false,
     },
+    filesystem = {
+      window = {
+        mappings = {
+          -- disable fuzzy finder
+          ["/"] = "noop",
+        },
+      },
+    },
   },
   keys = {
     {
