@@ -35,26 +35,26 @@ return {
         },
         -- stylua: ignore end
       },
-      -- pylsp = {
-      --   -- add specific configurations for pylsp here
-      --   settings = {
-      --     pylsp = {
-      --       plugins = {
-      --         rope = { enabled = false },
-      --         pyflakes = { enabled = true },
-      --         mccabe = { enabled = true },
-      --         pycodestyle = { enabled = true },
-      --         pydocstyle = { enabled = false },
-      --         autopep8 = { enabled = false },
-      --         yapf = { enabled = true },
-      --         isort = { enabled = true },
-      --         flake8 = { enabled = false },
-      --         -- pylint doesn't play nice with bazel
-      --         pylint = { enabled = false },
-      --       },
-      --     },
-      --   },
-      -- },
+      pylsp = {
+        -- add specific configurations for pylsp here
+        settings = {
+          pylsp = {
+            plugins = {
+              rope = { enabled = false },
+              pyflakes = { enabled = true },
+              mccabe = { enabled = true },
+              pycodestyle = { enabled = true },
+              pydocstyle = { enabled = false },
+              autopep8 = { enabled = false },
+              yapf = { enabled = true },
+              isort = { enabled = true },
+              flake8 = { enabled = false },
+              -- pylint doesn't play nice with bazel
+              pylint = { enabled = false },
+            },
+          },
+        },
+      },
     })
   end,
 }
