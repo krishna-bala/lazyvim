@@ -21,19 +21,70 @@ return {
         pinned = true,
         open = "Neotree position=right git_status",
       },
-      -- {
-      --   title = "Neo-Tree",
-      --   ft = "neo-tree",
-      --   filter = function(buf)
-      --     return vim.b[buf].neo_tree_source == "filesystem"
-      --   end,
-      --   pinned = true,
-      --   open = function()
-      --     require("neo-tree.command").execute({ dir = LazyVim.root() })
-      --   end,
-      --   size = { height = 0.5 },
-      -- },
       "neo-tree",
     }
   end,
+  keys = {
+    { "<leader>ue", false },
+    { "<leader>uE", false },
+    {
+      "<leader>et",
+      function()
+        require("edgy").toggle()
+      end,
+      desc = "Edgy Toggle",
+    },
+    {
+      "<leader>es",
+      function()
+        require("edgy").select()
+      end,
+      desc = "Edgy Select Window",
+    },
+    {
+      "<leader>ed",
+      function()
+        local current_buf = vim.api.nvim_get_current_buf()
+        local current_status = vim.b[current_buf].edgy_disable
+        vim.b[current_buf].edgy_disable = not current_status
+      end,
+      desc = "Edgy Disable/Enable Current Buffer"
+    },
+    {
+      "<leader>ee",
+      function()
+        require("neo-tree.command").execute(
+          { toggle = true, dir = LazyVim.root() }
+        )
+      end,
+      desc = "Edgy Explorer",
+    },
+    {
+      "<leader>eB",
+      function()
+        require("neo-tree.command").execute(
+          { source = "buffers", toggle = true, dir = LazyVim.root() }
+        )
+      end,
+      desc = "Edgy Buffers",
+    },
+    {
+      "<leader>eb",
+      function()
+        require("neo-tree.command").execute(
+          { source = "buffers", toggle = true, dir = "/" }
+        )
+      end,
+      desc = "Edgy Buffers",
+    },
+    {
+      "<leader>eg",
+      function()
+        require("neo-tree.command").execute(
+          { source = "git_status", toggle = true }
+        )
+      end,
+      desc = "Edgy Git",
+    },
+  },
 }

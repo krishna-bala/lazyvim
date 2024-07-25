@@ -10,6 +10,8 @@ end
 local del = vim.keymap.del
 
 -- Windows
+map("n", "<leader>wc", "<C-w>c", { noremap = true, desc = "Close window" })
+map("n", "<leader>wd", "<C-w>c", { noremap = true, desc = "Close window" })
 map("n", "<leader>wo", "<C-w>o", { noremap = true, desc = "Maximize window" })
 map("n", "<leader>wx", "<C-w>x", { noremap = true, desc = "Exchange current window with next" })
 map("n", "<leader>wX", "<C-w>X", { noremap = true, desc = "Exchange current window with previous" })
@@ -45,20 +47,19 @@ del("n", "<leader>ft")
 del("n", "<leader>fT")
 del("n", "<C-/>")
 del("n", "<C-_>")
+
 del("t", "<C-/>")
 del("t", "<C-_>")
 del("t", "<C-h>")
 del("t", "<C-j>")
 del("t", "<C-k>")
 del("t", "<C-l>")
-del("t", "<esc><esc>")
 
 -- Add custom terminal mappings
-map("t", "<leader><esc>", [[<C-\><C-n>]], { noremap = true, desc = "Go to Normal mode" })
-map("t", "<leader><C-h>", [[<Cmd>wincmd h<CR>]], { noremap = true, desc = "Go to Left window" })
-map("t", "<leader><C-j>", [[<Cmd>wincmd j<CR>]], { noremap = true, desc = "Go to Below window" })
-map("t", "<leader><C-k>", [[<Cmd>wincmd k<CR>]], { noremap = true, desc = "Go to Above window" })
-map("t", "<leader><C-l>", [[<Cmd>wincmd l<CR>]], { noremap = true, desc = "Go to Right window" })
+map("t", "<esc><C-h>", [[<Cmd>wincmd h<CR>]], { noremap = true, desc = "Go to Left window" })
+map("t", "<esc><C-j>", [[<Cmd>wincmd j<CR>]], { noremap = true, desc = "Go to Below window" })
+map("t", "<esc><C-k>", [[<Cmd>wincmd k<CR>]], { noremap = true, desc = "Go to Above window" })
+map("t", "<esc><C-l>", [[<Cmd>wincmd l<CR>]], { noremap = true, desc = "Go to Right window" })
 
 -- Delete default toggle diagnostics and change to toggle diagnostics for a given buffer
 del("n", "<leader>ud")

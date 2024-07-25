@@ -14,8 +14,8 @@ return {
     }
   end,
   keys = {
-    { "<leader>/", "<cmd>FzfLua live_grep_glob<CR>", desc = "Live Grep (Args)" },
-    { "<leader>?", "<cmd>FzfLua live_grep_resume<CR>", desc = "Live Grep (Args)" },
+    { "<leader>/",     "<cmd>FzfLua live_grep_glob<CR>",   desc = "Live Grep (Args)" },
+    { "<leader><C-/>", "<cmd>FzfLua live_grep_resume<CR>", desc = "Live Grep (Args)" },
     {
       "<leader>sw",
       mode = { "n", "v" },

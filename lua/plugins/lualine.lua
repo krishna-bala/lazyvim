@@ -2,7 +2,6 @@ return {
   "nvim-lualine/lualine.nvim",
   opts = function(_, opts)
     opts.options.globalstatus = true
-    -- opts.sections.lualine_b = {}
     opts.sections.lualine_z = {}
     opts.inactive_sections = {
       lualine_b = {},

@@ -6,6 +6,7 @@ return {
   opts = {
     buffers = {
       bind_to_cwd = false,
+      show_unloaded = true,
     },
     filesystem = {
       window = {
@@ -20,14 +21,24 @@ return {
     {
       "<leader>be",
       function()
-        require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = "/home/krishna" })
+        require("neo-tree.command").execute(
+          { source = "buffers", toggle = true, dir = "/home/krishna" }
+        )
       end,
     },
     {
       "<leader>bE",
       function()
-        require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = "/" })
+        require("neo-tree.command").execute(
+          { source = "buffers", toggle = true, dir = "/" }
+        )
       end,
+    },
+    {
+      "<leader>e", false
+    },
+    {
+      "<leader>E", false
     },
   },
 }

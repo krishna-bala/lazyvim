@@ -35,26 +35,30 @@ return {
         },
         -- stylua: ignore end
       },
-      -- pylsp = {
-      --   -- add specific configurations for pylsp here
-      --   settings = {
-      --     pylsp = {
-      --       plugins = {
-      --         rope = { enabled = false },
-      --         pyflakes = { enabled = true },
-      --         mccabe = { enabled = true },
-      --         pycodestyle = { enabled = true },
-      --         pydocstyle = { enabled = false },
-      --         autopep8 = { enabled = false },
-      --         yapf = { enabled = true },
-      --         isort = { enabled = true },
-      --         flake8 = { enabled = false },
-      --         -- pylint doesn't play nice with bazel
-      --         pylint = { enabled = false },
-      --       },
-      --     },
-      --   },
-      -- },
+      -- ruff_lsp = {},
+      pylsp = {
+        -- add specific configurations for pylsp here
+        settings = {
+          pylsp = {
+            plugins = {
+              rope = { enabled = false },
+              pyflakes = { enabled = false },
+              mccabe = { enabled = false },
+              pycodestyle = { enabled = false },
+              pydocstyle = { enabled = false },
+              autopep8 = { enabled = false },
+              yapf = { enabled = false },
+              isort = { enabled = false },
+              flake8 = { enabled = false },
+              -- pylint doesn't play nice with bazel
+              pylint = { enabled = false },
+            },
+          },
+        },
+        root_dir = function(fname)
+          return require('lspconfig').util.root_pattern('requirements.txt')(fname) or vim.fn.getcwd()
+        end,
+      },
     })
   end,
 }
