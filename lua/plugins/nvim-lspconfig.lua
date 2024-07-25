@@ -35,7 +35,6 @@ return {
         },
         -- stylua: ignore end
       },
-      -- ruff_lsp = {},
       pylsp = {
         -- add specific configurations for pylsp here
         settings = {
@@ -56,7 +55,7 @@ return {
           },
         },
         root_dir = function(fname)
-          return require('lspconfig').util.root_pattern('requirements.txt')(fname) or vim.fn.getcwd()
+          return require("lspconfig").util.root_pattern("requirements.txt")(fname) or vim.fn.getcwd()
         end,
       },
     })
