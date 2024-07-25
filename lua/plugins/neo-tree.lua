@@ -2,6 +2,10 @@ return {
   "nvim-neo-tree/neo-tree.nvim",
   dependencies = {
     "s1n7ax/nvim-window-picker",
+    opts = {
+      hint = "floating-big-letter",
+      show_prompt = false,
+    },
   },
   opts = {
     buffers = {
@@ -9,6 +13,7 @@ return {
       show_unloaded = true,
     },
     filesystem = {
+      bind_to_cwd = false,
       window = {
         mappings = {
           -- disable fuzzy finder
@@ -21,24 +26,22 @@ return {
     {
       "<leader>be",
       function()
-        require("neo-tree.command").execute(
-          { source = "buffers", toggle = true, dir = "/home/krishna" }
-        )
+        require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = "/home/krishna" })
       end,
     },
     {
       "<leader>bE",
       function()
-        require("neo-tree.command").execute(
-          { source = "buffers", toggle = true, dir = "/" }
-        )
+        require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = "/" })
       end,
     },
     {
-      "<leader>e", false
+      "<leader>e",
+      false,
     },
     {
-      "<leader>E", false
+      "<leader>E",
+      false,
     },
   },
 }

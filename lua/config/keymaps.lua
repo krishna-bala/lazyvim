@@ -39,7 +39,7 @@ map("x", "x", '"_x', { noremap = true })
 -- map("v", "x", '"_x', { noremap = true })
 -- map("v", "c", '"_c', { noremap = true })
 
--- allows * to highlight and search but not jump (preserves jump list)
+-- allows * to highlight and search but not (preserves jump list)
 map("n", "*", "<cmd>keepjumps normal! mi*`i<CR>", { noremap = true, silent = true })
 
 -- Delete the default terminal mappings
@@ -54,6 +54,7 @@ del("t", "<C-h>")
 del("t", "<C-j>")
 del("t", "<C-k>")
 del("t", "<C-l>")
+-- del("t", "<esc><esc>")
 
 -- Add custom terminal mappings
 map("t", "<esc><C-h>", [[<Cmd>wincmd h<CR>]], { noremap = true, desc = "Go to Left window" })
