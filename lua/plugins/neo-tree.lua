@@ -24,13 +24,13 @@ return {
   },
   keys = {
     {
-      "<leader>be",
+      "<leader>bE",
       function()
         require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = "/home/krishna" })
       end,
     },
     {
-      "<leader>bE",
+      "<leader>be",
       function()
         require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = "/" })
       end,
