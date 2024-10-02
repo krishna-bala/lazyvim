@@ -54,7 +54,7 @@ return {
           },
         },
         root_dir = function(fname)
-          return require("lspconfig").util.root_pattern("requirements.txt")(fname) or vim.fn.getcwd()
+          return vim.fn.getcwd()
         end,
       },
     })
