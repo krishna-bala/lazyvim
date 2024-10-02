@@ -35,6 +35,13 @@ return {
       desc = "Edgy Toggle",
     },
     {
+      "<leader>eE",
+      function()
+        require("neo-tree.command").execute({ toggle = true })
+      end,
+      desc = "Neo-Tree Toggle",
+    },
+    {
       "<leader>es",
       function()
         require("edgy").select()
