@@ -5,7 +5,7 @@ return {
       cpp = { glyph = "" },
     },
     extension = {
-      h = { glyph = "", hl = 'MiniIconsRed' },
+      h = { glyph = "", hl = "MiniIconsRed" },
     },
-  }
+  },
 }
