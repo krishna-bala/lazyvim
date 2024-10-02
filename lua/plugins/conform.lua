@@ -5,7 +5,7 @@ return {
     formatters_by_ft = {
       sh = { "shfmt", "shellharden" },
       markdown = { "prettier" },
-      python = { "docformatter" },
+      python = { "docformatter", "black" },
     },
     -- LazyVim will merge the options you set here with builtin formatters.
     -- You can also define any custom formatters here.

@@ -4,7 +4,7 @@ return {
     lazy = false,
     keys = {
       {
-        "<leader>gdom",
+        "<leader>gdmb",
         "<cmd>Git difftool -y --merge-base origin/master<CR>",
         desc = ":Git difftool -y --merge-base origin/master",
       },

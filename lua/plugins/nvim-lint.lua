@@ -5,8 +5,9 @@ return {
     -- Event to trigger linters
     events = { "BufWritePost", "BufReadPost", "InsertLeave" },
     linters_by_ft = {
-      cpp = { "cpplint" },
+      -- cpp = { "cpplint" },
       sh = { "shellcheck" },
+      dockerfile = { "hadolint" },
       -- Use the "*" filetype to run linters on all filetypes.
       -- ['*'] = { 'global linter' },
       -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
@@ -16,6 +17,9 @@ return {
     -- or add custom linters.
     ---@type table<string,table>
     linters = {
+      shellcheck = {
+        args = { "-x" },
+      },
       -- -- Example of using selene only when a selene.toml file is present
       -- selene = {
       --   -- `condition` is another LazyVim extension that allows you to
