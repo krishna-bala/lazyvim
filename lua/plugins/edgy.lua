@@ -78,5 +78,12 @@ return {
       end,
       desc = "Edgy Git",
     },
+    {
+      "<leader>eg",
+      function()
+        require("neo-tree.command").execute({ source = "git_status", toggle = true })
+      end,
+      desc = "Edgy Git",
+    },
   },
 }
