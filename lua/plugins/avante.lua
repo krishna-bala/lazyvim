@@ -5,10 +5,10 @@ return {
   version = false, -- set this if you want to always pull the latest change
   opts = {
     provider = "claude",
-    auto_suggestions_provider = "claude",
+    auto_suggestions_provider = "copilot",
     behaviour = {
       auto_suggestions = true,
-      auto_suggestions_delay = 100,
+      auto_suggestions_delay = 500,
     },
     claude = {
       api_key_name = "cmd:bw get notes anthropic-api-key", -- the shell command must prefixed with `^cmd:(.*)`
