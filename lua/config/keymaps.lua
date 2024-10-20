@@ -11,7 +11,6 @@ local del = vim.keymap.del
 
 -- Windows
 map("n", "<leader>wc", "<C-w>c", { noremap = true, desc = "Close window" })
-map("n", "<leader>wd", "<C-w>c", { noremap = true, desc = "Close window" })
 map("n", "<leader>wo", "<C-w>o", { noremap = true, desc = "Maximize window" })
 map("n", "<leader>wx", "<C-w>x", { noremap = true, desc = "Exchange current window with next" })
 map("n", "<leader>wX", "<C-w>X", { noremap = true, desc = "Exchange current window with previous" })

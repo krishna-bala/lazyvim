@@ -11,7 +11,6 @@ return {
         pinned = true,
         open = "Neotree position=top buffers dir=/",
       },
-      { title = "Neotest Summary", ft = "neotest-summary" },
       {
         title = "Neo-Tree Git",
         ft = "neo-tree",
@@ -21,21 +20,20 @@ return {
         pinned = true,
         open = "Neotree position=right git_status",
       },
-      "neo-tree",
     }
   end,
   keys = {
     { "<leader>ue", false },
     { "<leader>uE", false },
     {
-      "<leader>ee",
+      "<leader>et",
       function()
         require("edgy").toggle()
       end,
       desc = "Edgy Toggle",
     },
     {
-      "<leader>eE",
+      "<leader>ee",
       function()
         require("neo-tree.command").execute({ toggle = true })
       end,
