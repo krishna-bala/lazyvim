@@ -2,7 +2,10 @@ return {
   "nvim-lualine/lualine.nvim",
   opts = function(_, opts)
     -- dont show the winbar for some filetypes
-    opts.options.disabled_filetypes.winbar = { "dashboard", "lazy", "alpha", "edgy", "neo-tree", "toggleterm" }
+    opts.options.disabled_filetypes = {
+      winbar = { "dashboard", "lazy", "alpha", "edgy", "neo-tree", "toggleterm", "harpoon" },
+      statusline = { "dashboard", "alpha", "ministarter", "harpoon" },
+    }
 
     local icons = LazyVim.config.icons
     local b_filename = {
@@ -35,13 +38,6 @@ return {
     }
     -- opts.options.globalstatus = true
     opts.sections.lualine_c = {}
-    -- opts.inactive_sections = {
-    --   lualine_b = {},
-    --   lualine_c = {},
-    --   lualine_x = {},
-    --   lualine_y = {},
-    --   lualine_z = {},
-    -- }
     return opts
   end,
 }
