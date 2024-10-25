@@ -1,5 +1,7 @@
 return {
   "stevearc/oil.nvim",
+  -- Optional dependencies
+  dependencies = { { "echasnovski/mini.icons", opts = {} } },
   ---@module 'oil'
   ---@type oil.SetupOpts
   opts = {
@@ -10,7 +12,7 @@ return {
       ["-"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
       ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
       ["<C-p>"] = "actions.preview",
-      ["<C-c>"] = "actions.close",
+      ["q"] = "actions.close",
       ["<C-r>"] = "actions.refresh",
       -- ["-"] = "actions.parent",
       ["<BS>"] = "actions.open_cwd",
@@ -21,8 +23,16 @@ return {
       ["g."] = "actions.toggle_hidden",
       ["g\\"] = "actions.toggle_trash",
     },
+    view_options = {
+      -- Show files and directories that start with "."
+      show_hidden = true,
+    },
+    float = {
+      max_width = 80, -- Adjust the width as needed
+      max_height = 80, -- Adjust the height as needed
+    },
   },
-  -- Optional dependencies
-  dependencies = { { "echasnovski/mini.icons", opts = {} } },
-  -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+  keys = {
+    { "<leader>fo", "<cmd>Oil --float<cr>", desc = "Open Oil" },
+  },
 }
