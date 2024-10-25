@@ -26,18 +26,11 @@ return {
     { "<leader>ue", false },
     { "<leader>uE", false },
     {
-      "<leader>et",
+      "<leader>ee",
       function()
         require("edgy").toggle()
       end,
       desc = "Edgy Toggle",
-    },
-    {
-      "<leader>ee",
-      function()
-        require("neo-tree.command").execute({ toggle = true })
-      end,
-      desc = "Neo-Tree Toggle",
     },
     {
       "<leader>es",
