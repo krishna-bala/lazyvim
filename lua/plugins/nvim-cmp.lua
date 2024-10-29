@@ -3,35 +3,42 @@ return {
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
     local cmp = require("cmp")
-    local current_source_index = 1
+    local copilot_enabled = true
 
-    -- Function to cycle through sources
-    local function cycle_sources()
+    -- Function to toggle Copilot source
+    local function toggle_copilot()
       local sources = opts.sources or {}
       if #sources == 0 then
         return sources
       end
-      current_source_index = (current_source_index % #sources) + 1
-      local current_source = sources[current_source_index]
-      vim.notify("Cycled to source: " .. (current_source.name or "unknown"))
-      return { current_source }
+
+      if copilot_enabled then
+        sources = vim.tbl_filter(function(source)
+          return source.name ~= "copilot"
+        end, sources)
+        vim.notify("Copilot disabled")
+      else
+        table.insert(sources, { name = "copilot" })
+        vim.notify("Copilot enabled")
+      end
+      copilot_enabled = not copilot_enabled
+      -- cmp.setup(opts) -- Apply the new configuration
+      return sources
     end
 
     opts.mapping = vim.tbl_extend(
       "force",
       opts.mapping,
       cmp.mapping.preset.insert({
-        ["<C-space>"] = cmp.mapping(function(fallback)
-          local sources = cycle_sources()
+        ["<C-l>"] = cmp.mapping(function(fallback)
+          local sources = toggle_copilot()
           if #sources == 0 then
-            fallback()
-          else
-            cmp.complete({
-              config = {
-                sources = sources,
-              },
-            })
+            fallback() -- Fallback to default behavior if no sources available
+            return
           end
+          cmp.complete({
+            config = { sources = sources },
+          })
         end, { "i", "c" }),
       })
     )

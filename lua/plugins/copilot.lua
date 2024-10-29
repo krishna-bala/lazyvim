@@ -8,4 +8,11 @@ return {
       help = true,
     },
   },
+  keys = {
+    {
+      "<leader>at",
+      "<Cmd>Copilot toggle<cr>",
+      desc = "Toggle Copilot Suggestion",
+    },
+  },
 }
