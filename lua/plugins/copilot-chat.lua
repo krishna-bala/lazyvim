@@ -20,6 +20,7 @@ return {
         return select.visual(source) or select.buffer(source)
       end,
       prompts = prompts,
+      model = "o1-preview-2024-09-12",
     }
   end,
   config = function(_, opts)
