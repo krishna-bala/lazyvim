@@ -1,10 +1,13 @@
-return [[Write commit message for the change with conventional commit format. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit. Here is a template:
+return
+[[Write a commit message for the change with conventional commit format. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit. Do not print any text that is not part of the commit. Here is a template:
 
+```gitcommit
 <type>(<optional scope>): <description>
 
 [optional body]
 
 [optional footer(s)]
+
 # Refs: AUTO-
 
 # Types
@@ -19,4 +22,5 @@ return [[Write commit message for the change with conventional commit format. Ma
 # * perf: A code change that improves performance
 # * refactor: A code change that neither fixes a bug nor adds a feature
 # * style: Changes that do not affect the meaning of the code (white-space, formatting, etc)
-# * test: Adding missing tests or correcting existing tests]]
+# * test: Adding missing tests or correcting existing tests
+```]]
