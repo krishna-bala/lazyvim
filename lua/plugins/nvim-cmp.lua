@@ -3,6 +3,8 @@ return {
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
     local cmp = require("cmp")
+    local luasnip = require("luasnip")
+
     local copilot_enabled = true
 
     -- Function to toggle Copilot source
@@ -30,6 +32,10 @@ return {
       "force",
       opts.mapping,
       cmp.mapping.preset.insert({
+
+        ----------------------
+        -- Copilot mappings --
+        ----------------------
         ["<C-l>"] = cmp.mapping(function(fallback)
           local sources = toggle_copilot()
           if #sources == 0 then
@@ -40,6 +46,44 @@ return {
             config = { sources = sources },
           })
         end, { "i", "c" }),
+
+        ----------------------
+        -- LuaSnip mappings --
+        ----------------------
+        ['<CR>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            if luasnip.expandable() then
+              luasnip.expand()
+            else
+              cmp.confirm({
+                behavior = cmp.ConfirmBehavior.Replace,
+                select = true,
+              })
+            end
+          else
+            fallback()
+          end
+        end),
+
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.locally_jumpable(1) then
+            luasnip.jump(1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.locally_jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
       })
     )
     return opts
