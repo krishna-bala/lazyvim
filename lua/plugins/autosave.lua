@@ -6,6 +6,7 @@ return {
   opts = {
     -- your config goes here
     -- or just leave it empty :)
-    debounce_delay = 500,
+    debounce_delay = 1000,
+    -- TODO(krishna): Don't autosave on oil buffers!
   },
 }

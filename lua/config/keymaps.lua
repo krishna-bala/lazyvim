@@ -42,17 +42,10 @@ map("x", "x", '"_x', { noremap = true })
 map("n", "*", "<cmd>keepjumps normal! mi*`i<CR>", { noremap = true, silent = true })
 
 -- Delete the default terminal mappings
-del("n", "<leader>ft")
-del("n", "<leader>fT")
-del("n", "<C-/>")
-del("n", "<C-_>")
-
-del("t", "<C-/>")
-del("t", "<C-_>")
-del("t", "<C-h>")
-del("t", "<C-j>")
-del("t", "<C-k>")
-del("t", "<C-l>")
+-- del("t", "<C-h>")
+-- del("t", "<C-j>")
+-- del("t", "<C-k>")
+-- del("t", "<C-l>")
 -- del("t", "<esc><esc>")
 
 -- Add custom terminal mappings

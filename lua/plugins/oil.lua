@@ -5,6 +5,7 @@ return {
   ---@module 'oil'
   ---@type oil.SetupOpts
   opts = {
+    use_default_keymaps = false,
     keymaps = {
       ["g?"] = "actions.show_help",
       ["<CR>"] = "actions.select",
@@ -14,8 +15,8 @@ return {
       ["<C-p>"] = "actions.preview",
       ["q"] = "actions.close",
       ["<C-r>"] = "actions.refresh",
-      -- ["-"] = "actions.parent",
-      ["<BS>"] = "actions.open_cwd",
+      ["<BS>"] = "actions.parent",
+      ["<C-h>"] = "actions.open_cwd",
       ["`"] = "actions.cd",
       ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory", mode = "n" },
       ["gs"] = "actions.change_sort",
@@ -28,7 +29,7 @@ return {
       show_hidden = true,
     },
     float = {
-      max_width = 80, -- Adjust the width as needed
+      max_width = 100, -- Adjust the width as needed
       max_height = 80, -- Adjust the height as needed
     },
   },
