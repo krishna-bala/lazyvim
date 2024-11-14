@@ -4,9 +4,14 @@ return {
   cmd = "ASToggle", -- optional for lazy loading on command
   event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
   opts = {
-    -- your config goes here
-    -- or just leave it empty :)
     debounce_delay = 1000,
-    -- TODO(krishna): Don't autosave on oil buffers!
+    condition = function(buf)
+      -- Don't auto-save for oil buffers
+      local buftype = vim.bo[buf].filetype
+      if buftype == "oil" then
+        return false
+      end
+      return true
+    end,
   },
 }
