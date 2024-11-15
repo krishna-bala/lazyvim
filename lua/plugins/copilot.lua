@@ -1,7 +1,7 @@
 return {
   "zbirenbaum/copilot.lua",
   opts = {
-    suggestion = { enabled = true },
+    suggestion = { enabled = false },
     panel = { enabled = false },
     filetypes = {
       markdown = true,
