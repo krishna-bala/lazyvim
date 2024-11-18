@@ -8,13 +8,13 @@ local prompts = {
   },
   Commit = {
     prompt = commit_prompt,
-    selection = select.gitdiff,
+    -- selection = select.gitdiff,
   },
   CommitStaged = {
     prompt = commit_staged_prompt,
-    selection = function(source)
-      return select.gitdiff(source, true)
-    end,
+    -- selection = function(source)
+    --   return select.gitdiff(source, true)
+    -- end,
   },
 }
 
