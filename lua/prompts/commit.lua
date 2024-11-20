@@ -1,6 +1,9 @@
-return [[> #git:staged\n\nWrite commit message for the change with conventional commit format. Make sure the title has maximum 72 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit. Here is a template:
+return [[> #git:staged \n\n
+Write commit message for the change with conventional commit format. 
+Make sure the title has maximum 72 characters and message is wrapped at 72 characters. 
+Wrap the whole message in code block with language gitcommit. Here is a template:
 
-<type>(<optional scope>): <description>
+<type>[(<optional scope>)]: <description>
 
 [optional body]
 
