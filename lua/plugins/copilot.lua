@@ -11,8 +11,16 @@ return {
   keys = {
     {
       "<leader>at",
-      "<Cmd>Copilot toggle<cr>",
-      desc = "Toggle Copilot Suggestion",
+      function()
+        local copilot_status = require("copilot.client").is_disabled()
+        if copilot_status then
+          vim.cmd("Copilot enable")
+        else
+          vim.cmd("Copilot disable")
+        end
+        vim.notify("Copilot " .. (copilot_status and "enabled" or "disabled"), vim.log.levels.INFO)
+      end,
+      desc = "Toggle Copilot",
     },
   },
 }

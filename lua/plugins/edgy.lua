@@ -21,6 +21,18 @@ return {
         open = "Neotree position=right git_status",
       },
     }
+    opts.right = opts.right or {}
+    -- Find and update the existing copilot-chat element
+    for i, item in ipairs(opts.right) do
+      if item.ft == "copilot-chat" then
+        opts.right[i] = {
+          ft = "copilot-chat",
+          title = "Copilot Chat",
+          size = { width = 80 },
+        }
+        break
+      end
+    end
   end,
   keys = {
     { "<leader>ue", false },

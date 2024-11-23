@@ -5,7 +5,7 @@ return {
     local cmp = require("cmp")
     local luasnip = require("luasnip")
 
-    local copilot_enabled = true
+    vim.g.copilot_cmp_enabled = true
 
     -- Function to toggle Copilot source
     local function toggle_copilot()
@@ -14,17 +14,15 @@ return {
         return sources
       end
 
-      if copilot_enabled then
+      if vim.g.copilot_cmp_enabled then
         sources = vim.tbl_filter(function(source)
           return source.name ~= "copilot"
         end, sources)
-        vim.notify("Copilot disabled")
       else
         table.insert(sources, { name = "copilot" })
-        vim.notify("Copilot enabled")
       end
-      copilot_enabled = not copilot_enabled
-      -- cmp.setup(opts) -- Apply the new configuration
+      vim.g.copilot_cmp_enabled = not vim.g.copilot_cmp_enabled
+      vim.notify("copilot nvim-cmp: " .. (vim.g.copilot_cmp_enabled and "enabled" or "disabled"), vim.log.levels.INFO)
       return sources
     end
 
@@ -50,7 +48,7 @@ return {
         ----------------------
         -- LuaSnip mappings --
         ----------------------
-        ['<CR>'] = cmp.mapping(function(fallback)
+        ["<CR>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             if luasnip.expandable() then
               luasnip.expand()
