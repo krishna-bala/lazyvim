@@ -14,4 +14,7 @@ return {
     }
     return opts
   end,
+  keys = {
+    { "<leader>gb", false }, -- disable gitbrowse blame line in favor of gitsigns blame
+  },
 }
