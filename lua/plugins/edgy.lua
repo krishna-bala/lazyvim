@@ -35,8 +35,8 @@ return {
     end
   end,
   keys = {
+    -- require("edgy").toggle()
     { "<leader>ue", false },
-    { "<leader>uE", false },
     {
       "<leader>ee",
       function()
@@ -44,6 +44,8 @@ return {
       end,
       desc = "Edgy Toggle",
     },
+    -- require("edgy").select()
+    { "<leader>uE", false },
     {
       "<leader>es",
       function()
@@ -61,16 +63,16 @@ return {
       desc = "Edgy Disable/Enable Current Buffer",
     },
     {
-      "<leader>eB",
+      "<leader>eb",
       function()
-        require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = LazyVim.root() })
+        require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = "/" })
       end,
       desc = "Edgy Buffers",
     },
     {
-      "<leader>eb",
+      "<leader>eB",
       function()
-        require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = "/" })
+        require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = LazyVim.root() })
       end,
       desc = "Edgy Buffers",
     },
