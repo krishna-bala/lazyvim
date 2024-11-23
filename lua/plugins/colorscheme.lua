@@ -70,8 +70,8 @@ return {
   --   "ribru17/bamboo.nvim",
   --   lazy = false,
   -- },
-  {
-    "LunarVim/lunar.nvim",
-    lazy = false,
-  },
+  -- {
+  --   "LunarVim/lunar.nvim",
+  --   lazy = false,
+  -- },
 }
