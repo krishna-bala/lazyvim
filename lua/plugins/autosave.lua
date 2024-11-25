@@ -7,7 +7,7 @@ return {
     debounce_delay = 1000,
     condition = function(buf)
       -- Don't auto-save for oil buffers
-      local excluded_filetypes = { "oil" }
+      local excluded_filetypes = { "oil", "harpoon" }
       local buftype = vim.bo[buf].filetype
       return not vim.tbl_contains(excluded_filetypes, buftype)
     end,
