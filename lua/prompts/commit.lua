@@ -1,4 +1,4 @@
-return [[> #git:staged \n\n
+return [[> #git:staged
 Write commit message for the change with conventional commit format. 
 Make sure the title has maximum 72 characters and message is wrapped at 72 characters. 
 Wrap the whole message in code block with language gitcommit. Here is a template:

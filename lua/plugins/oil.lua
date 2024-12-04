@@ -31,7 +31,7 @@ return {
       show_hidden = true,
     },
     float = {
-      max_width = 100, -- Adjust the width as needed
+      max_width = 120, -- Adjust the width as needed
       max_height = 80, -- Adjust the height as needed
     },
   },
