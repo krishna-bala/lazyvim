@@ -1,8 +1,15 @@
-return [[> #git:staged
-Write commit message for the change with conventional commit format. 
-Make sure the title has maximum 72 characters and message is wrapped at 72 characters. 
-Wrap the whole message in code block with language gitcommit. Here is a template:
+return [[
+> #git:staged
 
+Write commit message for the change with conventional commit format.
+Make sure the title has maximum 72 characters and message is wrapped at 72 characters.
+Wrap the whole message in code block with language gitcommit.
+Do not include any extra explanations.
+Do not include the optional body or optional footer if reasonably possible.
+
+Here is a template:
+
+```gitcommit
 <type>[(<optional scope>)]: <description>
 
 [optional body]
@@ -21,4 +28,6 @@ Wrap the whole message in code block with language gitcommit. Here is a template
 # * perf: A code change that improves performance
 # * refactor: A code change that neither fixes a bug nor adds a feature
 # * style: Changes that do not affect the meaning of the code (white-space, formatting, etc)
-# * test: Adding missing tests or correcting existing tests]]
+# * test: Adding missing tests or correcting existing tests
+```
+]]
