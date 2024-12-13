@@ -11,7 +11,6 @@ local del = vim.keymap.del
 
 -- Windows
 map("n", "<leader>wc", "<C-w>c", { noremap = true, desc = "Close window" })
-map("n", "<leader>wo", "<C-w>o", { noremap = true, desc = "Maximize window" })
 map("n", "<leader>wx", "<C-w>x", { noremap = true, desc = "Exchange current window with next" })
 map("n", "<leader>wX", "<C-w>X", { noremap = true, desc = "Exchange current window with previous" })
 map("n", "<leader>wr", "<C-w>r", { noremap = true, desc = "Rotate windows downwards/rightwards" })
@@ -33,10 +32,6 @@ map("n", "c", '"_c', { noremap = true })
 map("x", "c", '"_c', { noremap = true })
 map("n", "x", '"_x', { noremap = true })
 map("x", "x", '"_x', { noremap = true })
-
--- Don't use visual mode keymap - it messes with nvim-cmp
--- map("v", "x", '"_x', { noremap = true })
--- map("v", "c", '"_c', { noremap = true })
 
 -- allows * to highlight and search but not (preserves jump list)
 map("n", "*", "<cmd>keepjumps normal! mi*`i<CR>", { noremap = true, silent = true })
