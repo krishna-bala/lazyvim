@@ -19,15 +19,6 @@ return {
     end
     opts.dashboard = dashboard
 
-    -- -- zen tweaks for "zoom" mode
-    -- local zen = opts.zen or {}
-    -- zen.toggles = zen.toggles or {}
-    -- zen.toggles.dim = true
-    -- zen.zoom = zen.zoom or {}
-    -- zen.zoom.window = zen.zoom.window or {}
-    -- zen.zoom.window.backdrop = true
-    -- opts.zen = zen
-    --
     -- window tweaks for zen
     local styles = opts.styles or {}
     styles.zen = styles.zen or {}
@@ -37,11 +28,6 @@ return {
     styles.zen.keys.q = "close"
     opts.styles = styles
 
-    -- convenience for registering keymap
-    -- require("snacks").toggle.zen():map("<leader>uz")
     return opts
   end,
-  keys = {
-    { "<leader>gb", false }, -- disable gitbrowse blame line in favor of gitsigns blame
-  },
 }
