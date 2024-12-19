@@ -4,6 +4,7 @@ return {
   cmd = "ASToggle", -- optional for lazy loading on command
   event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
   opts = {
+    enabled = false,
     debounce_delay = 1000,
     condition = function(buf)
       -- Don't auto-save for oil buffers
