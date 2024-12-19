@@ -71,5 +71,22 @@ return {
       end,
       prompt = "Choose a git file context",
     }
+    opts.contexts.file = {
+      input = function(callback)
+        local fzf = require("fzf-lua")
+        local fzf_path = require("fzf-lua.path")
+        fzf.files({
+          complete = function(selected, _opts)
+            local file = fzf_path.entry_to_file(selected[1], _opts, _opts._uri)
+            if file.path == "none" then
+              return
+            end
+            vim.defer_fn(function()
+              callback(file.path)
+            end, 100)
+          end,
+        })
+      end,
+    }
   end,
 }
