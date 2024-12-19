@@ -6,6 +6,8 @@ return {
       sh = { "shfmt", "shellharden" },
       markdown = { "prettier" },
       python = { "docformatter", "black" },
+      bzl = { "buildifier" },
+      proto = { "buf" },
     },
   },
 }
