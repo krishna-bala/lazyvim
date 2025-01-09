@@ -4,5 +4,6 @@ return {
     opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed, {
       "clangd",
     })
+    return opts
   end,
 }

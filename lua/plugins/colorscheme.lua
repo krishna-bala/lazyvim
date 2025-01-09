@@ -13,10 +13,6 @@ return {
     },
   },
   {
-    "catppuccin/nvim",
-    lazy = false,
-  },
-  {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "tokyonight-moon",
