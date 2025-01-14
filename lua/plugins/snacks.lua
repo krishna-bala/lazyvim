@@ -28,6 +28,15 @@ return {
     styles.zen.keys.q = "close"
     opts.styles = styles
 
+    local gitbrowse = opts.gitbrowse or {}
+    gitbrowse.url_patterns = gitbrowse.url_patterns or {}
+    gitbrowse.url_patterns["bitbucket%.org"] = {
+      branch = "/src/{branch}",
+      file = "/src/{branch}/{file}#lines-{line_start}:{line_end}",
+      commit = "/commits/{commit}",
+    }
+    opts.gitbrowse = gitbrowse
+
     return opts
   end,
 }

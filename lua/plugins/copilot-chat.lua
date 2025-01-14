@@ -92,6 +92,5 @@ return {
     opts.mappings.reset = opts.mappings.reset or {}
     opts.mappings.reset.normal = "<C-x>"
     opts.mappings.reset.insert = "<C-x>"
-    return opts
   end,
 }

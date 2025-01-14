@@ -21,15 +21,15 @@ return {
           "docker", "run", "--rm", "-i",
           -- "-v", "foxbots-home:/home/krishna/",
           "-v", "/home/krishna/.cache/bazel:/home/krishna/.cache/bazel",
-          "-v", "/home/krishna/foxbots:/home/krishna/foxbots",
-          "--workdir", "/home/krishna/foxbots",
+          "-v", vim.fn.getcwd() .. ":" .. vim.fn.getcwd(),  -- Mount current directory
+          "--workdir", vim.fn.getcwd(),  -- Set working directory to current directory
           "--entrypoint", "clangd-14",
           "gcr.io/studied-biplane-165901/foxbots/devel-tools:latest",
           -- clangd arguments
-          "--compile-commands-dir", "/home/krishna/foxbots",
+          "--compile-commands-dir", vim.fn.getcwd(),  -- Look for compile_commands.json in current directory
           "--background-index", "--clang-tidy",
           "--completion-style=detailed", "--function-arg-placeholders",
-          "--fallback-style=llvm", "--header-insertion=never",
+          "--fallback-style=llvm", "--header-insertion=iwyu",
           "--query-driver=**",
         },
         -- stylua: ignore end
