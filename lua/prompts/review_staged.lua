@@ -1,64 +1,66 @@
 return [[
-    /COPILOT_GENERATE
-    Your task is to review the provided code snippet, focusing specifically on its readability and maintainability.
-    Identify any issues related to:
+> /COPILOT_GENERATE
+> #git_files:staged
+> #git:staged
 
-    - Naming conventions that are unclear, misleading or doesn't follow conventions for the language being used.
-    - The presence of unnecessary comments, or the lack of necessary ones.
-    - Overly complex expressions that could benefit from simplification.
-    - High nesting levels that make the code difficult to follow.
-    - The use of excessively long names for variables or functions.
-    - Any inconsistencies in naming, formatting, or overall coding style.
-    - Repetitive code patterns that could be more efficiently handled through abstraction or optimization.
+Your task is to review the provided code, focusing specifically on the diff.
+The full files are provided as context.
+Focus on providing feedback on readability and maintainability.
+Identify any issues related to:
 
-    Your feedback must be concise, directly addressing each identified issue with:
+- Naming conventions that are unclear, misleading or doesn't follow conventions for the language being used.
+- The presence of unnecessary comments, or the lack of necessary ones.
+- Overly complex expressions that could benefit from simplification.
+- High nesting levels that make the code difficult to follow.
+- The use of excessively long names for variables or functions.
+- Any inconsistencies in naming, formatting, or overall coding style.
+- Repetitive code patterns that could be more efficiently handled through abstraction or optimization.
 
-    - A clear description of the problem. Include the original code if possible.
-    - A concrete suggestion for how to improve or correct the issue.
+Your feedback must be concise, directly addressing each identified issue with:
 
-    Format your feedback as follows:
+- A clear description of the problem. Include the original code if possible.
+- A concrete suggestion for how to improve or correct the issue.
 
-    ```md
-    <file_name.filetype>
-    ```
+Format your feedback as follows:
 
-    <issue_description>
+```md
+<file_name.filetype>
+```
 
-    ```filetype
-    <fix (if applicable)>
-    ```
+<issue_description>
 
-    If you find multiple issues on the same line, list each issue separately within the same feedback statement, using a semicolon to separate them.
+```filetype
+<fix (if applicable)>
+```
 
-    Example feedback:
+If you find multiple issues on the same line, list each issue separately within the same feedback statement, using a semicolon to separate them.
 
-    The variable name 'x' is unclear. Comment next to variable declaration is unnecessary.
+Example feedback:
 
-    ```ft
-    <fix>
-    ```
+The variable name 'x' is unclear. Comment next to variable declaration is unnecessary.
 
-    [fileA.ft](fileA.ft)
+```ft
+<fix>
+```
 
-    Expression is overly complex. Break down the expression into simpler components.
+[fileA.ft](fileA.ft)
 
-    [fileA.ft](fileA.ft)
-    ```
+Expression is overly complex. Break down the expression into simpler components.
 
-    Using camel case here is unconventional for lua. Use snake case instead.
+[fileA.ft](fileA.ft)
+```
 
-    [fileA.ft](fileA.ft)
+Using camel case here is unconventional for lua. Use snake case instead.
 
-    Excessive nesting makes the code hard to follow. Consider refactoring to reduce nesting levels.
+[fileA.ft](fileA.ft)
 
-    ```ft
-    <fix>
-    ```
+Excessive nesting makes the code hard to follow. Consider refactoring to reduce nesting levels.
 
-    [fileB.ft](fileB.ft)
+```ft
+<fix>
+```
 
-    The variable name 'y' is unclear.
+[fileB.ft](fileB.ft)
 
-    #git_files:staged
-    #git:staged
-  ]]
+The variable name 'y' is unclear.
+]]
