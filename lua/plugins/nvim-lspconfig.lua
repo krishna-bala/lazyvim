@@ -23,7 +23,7 @@ return {
           "-v", "/home/krishna/.cache/bazel:/home/krishna/.cache/bazel",
           "-v", "/home/krishna/foxbots:/home/krishna/foxbots",
           "--workdir", "/home/krishna/foxbots",
-          "--entrypoint", "clangd-14",
+          "--entrypoint", "clangd-19",
           "gcr.io/studied-biplane-165901/foxbots/devel-tools:latest",
           -- clangd arguments
           "--compile-commands-dir", "/home/krishna/foxbots",
