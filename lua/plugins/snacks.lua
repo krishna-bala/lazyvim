@@ -28,6 +28,7 @@ return {
     styles.zen.keys.q = "close"
     opts.styles = styles
 
+    -- gitbrowse tweaks until patch is in
     local gitbrowse = opts.gitbrowse or {}
     gitbrowse.url_patterns = gitbrowse.url_patterns or {}
     gitbrowse.url_patterns["bitbucket%.org"] = {

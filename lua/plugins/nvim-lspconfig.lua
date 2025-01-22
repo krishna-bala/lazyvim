@@ -19,12 +19,11 @@ return {
         -- stylua: ignore start
         cmd = {
           "docker", "run", "--rm", "-i",
-          -- "-v", "foxbots-home:/home/krishna/",
           "-v", "/home/krishna/.cache/bazel:/home/krishna/.cache/bazel",
           "-v", "/home/krishna/foxbots:/home/krishna/foxbots",
           "--workdir", "/home/krishna/foxbots",
           "--entrypoint", "clangd-19",
-          "gcr.io/studied-biplane-165901/foxbots/devel-tools:latest",
+          "gcr.io/studied-biplane-165901/foxbots/devel-tools:2025-01-03-v2",
           -- clangd arguments
           "--compile-commands-dir", "/home/krishna/foxbots",
           "--background-index", "--clang-tidy",

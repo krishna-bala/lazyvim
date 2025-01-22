@@ -1,7 +1,6 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
---
 
 local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
@@ -36,27 +35,11 @@ map("x", "x", '"_x', { noremap = true })
 -- allows * to highlight and search but not (preserves jump list)
 map("n", "*", "<cmd>keepjumps normal! mi*`i<CR>", { noremap = true, silent = true })
 
--- Delete the default terminal mappings
--- del("t", "<C-h>")
--- del("t", "<C-j>")
--- del("t", "<C-k>")
--- del("t", "<C-l>")
--- del("t", "<esc><esc>")
-
 -- Add custom terminal mappings
 map("t", "<esc><C-h>", [[<Cmd>wincmd h<CR>]], { noremap = true, desc = "Go to Left window" })
 map("t", "<esc><C-j>", [[<Cmd>wincmd j<CR>]], { noremap = true, desc = "Go to Below window" })
 map("t", "<esc><C-k>", [[<Cmd>wincmd k<CR>]], { noremap = true, desc = "Go to Above window" })
 map("t", "<esc><C-l>", [[<Cmd>wincmd l<CR>]], { noremap = true, desc = "Go to Right window" })
-
--- Delete default toggle diagnostics and change to toggle diagnostics for a given buffer
-del("n", "<leader>ud")
-map("n", "<leader>ud", function()
-  vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = 0 }), { bufnr = 0 })
-end, { desc = "toggle buffer diagnostic" })
-map("n", "<leader>uD", function()
-  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, { desc = "toggle global diagnostics" })
 
 -- Create a command to format docstrings in python using docformatter. Must have docformatter installed.
 vim.api.nvim_create_user_command("Docformatter", function()

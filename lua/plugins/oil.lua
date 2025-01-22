@@ -11,14 +11,14 @@ return {
     keymaps = {
       ["g?"] = "actions.show_help",
       ["<CR>"] = "actions.select",
-      ["|"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
-      ["-"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
-      ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
-      ["<C-p>"] = "actions.preview",
+      ["<leader>|"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+      ["<leader>-"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
+      ["<leader><tab><tab>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+      ["<M-p>"] = "actions.preview",
       ["q"] = "actions.close",
       ["<C-r>"] = "actions.refresh",
       ["<BS>"] = "actions.parent",
-      ["<C-h>"] = "actions.open_cwd",
+      ["<leader>cwd"] = "actions.open_cwd",
       ["`"] = "actions.cd",
       ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory", mode = "n" },
       ["gs"] = "actions.change_sort",
@@ -37,5 +37,6 @@ return {
   },
   keys = {
     { "<leader>fo", "<cmd>Oil --float<cr>", desc = "Open Oil" },
+    { "<leader>fO", "<cmd>Oil<cr>", desc = "Open Oil" },
   },
 }
