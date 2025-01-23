@@ -3,23 +3,33 @@ return {
   opts = function(_, opts)
     opts.left = {
       {
-        title = "Neo-Tree Buffers",
+        title = "Explorer",
+        ft = "neo-tree",
+        filter = function(buf)
+          return vim.b[buf].neo_tree_source == "filesystem"
+        end,
+        pinned = true,
+        open = "Neotree",
+      },
+      {
+        title = "Buffers",
         ft = "neo-tree",
         filter = function(buf)
           return vim.b[buf].neo_tree_source == "buffers"
         end,
         pinned = true,
-        open = "Neotree position=top buffers dir=/",
+        open = "Neotree buffers dir=/",
       },
       {
-        title = "Neo-Tree Git",
+        title = "Git",
         ft = "neo-tree",
         filter = function(buf)
           return vim.b[buf].neo_tree_source == "git_status"
         end,
         pinned = true,
-        open = "Neotree position=right git_status",
+        open = "Neotree git_status",
       },
+      "neo-tree",
     }
     opts.right = opts.right or {}
     -- Find and update the existing copilot-chat element
@@ -65,23 +75,30 @@ return {
     {
       "<leader>eb",
       function()
-        require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = "/" })
+        require("neo-tree.command").execute({ source = "buffers", dir = "/" })
       end,
       desc = "Edgy Buffers",
     },
     {
       "<leader>eB",
       function()
-        require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = LazyVim.root() })
+        require("neo-tree.command").execute({ source = "buffers", dir = LazyVim.root() })
       end,
       desc = "Edgy Buffers",
     },
     {
       "<leader>eg",
       function()
-        require("neo-tree.command").execute({ source = "git_status", toggle = true })
+        require("neo-tree.command").execute({ source = "git_status" })
       end,
       desc = "Edgy Git",
+    },
+    {
+      "<leader>ef",
+      function()
+        require("neo-tree.command").execute({ source = "filesystem" })
+      end,
+      desc = "Edgy Files",
     },
   },
 }
