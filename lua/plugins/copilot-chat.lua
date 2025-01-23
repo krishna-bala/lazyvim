@@ -5,6 +5,7 @@ return {
   build = "make tiktoken",
   opts = function(_, opts)
     opts.model = "claude-3.5-sonnet"
+
     opts.prompts = opts.prompts or {}
     opts.prompts = require("prompts.copilot-prompts")
 
@@ -79,7 +80,7 @@ return {
           confirm = function(picker, item)
             picker:close()
             if item then
-              callback(item.text)
+              callback(vim.fn.fnamemodify(item.file, ":p:."))
             end
           end,
           main = { current = true },
