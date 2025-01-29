@@ -56,6 +56,8 @@ return {
           return vim.fn.getcwd()
         end,
       },
+      pyright = { enabled = false },
+      ruff = { settings = { ruff = {} } },
     })
   end,
 }

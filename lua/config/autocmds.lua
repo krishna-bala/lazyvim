@@ -6,15 +6,6 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_config_" .. name, { clear = true })
 end
 
--- vim.api.nvim_create_autocmd("FileType", {
---   group = augroup("commentstring"),
---   pattern = { "*.cc", "*.c", "*.h" },
---   callback = function()
---     vim.opt.commentstring = "// %s"
---   end,
---   desc = "Change commentstring for c/c++ files",
--- })
-
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("formatoptions"),
   pattern = {
