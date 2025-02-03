@@ -1,0 +1,51 @@
+return {
+  -- "nvim-neo-tree/neo-tree.nvim",
+  -- dependencies = {
+  --   "s1n7ax/nvim-window-picker",
+  -- },
+  -- opts = {
+  --   buffers = {
+  --     bind_to_cwd = false,
+  --     show_unloaded = true,
+  --   },
+  --   filesystem = {
+  --     bind_to_cwd = false,
+  --     window = {
+  --       mappings = {
+  --         -- disable fuzzy finder
+  --         ["/"] = "noop",
+  --       },
+  --     },
+  --   },
+  -- },
+  -- -- keys = {
+  -- --   {
+  -- --     "<leader>bE",
+  -- --     function()
+  -- --       require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = "/home/krishna" })
+  -- --     end,
+  -- --   },
+  -- --   {
+  -- --     "<leader>be",
+  -- --     function()
+  -- --       require("neo-tree.command").execute({ source = "buffers", toggle = true, dir = "/" })
+  -- --     end,
+  -- --   },
+  -- --   {
+  -- --     "<leader>e",
+  -- --     false,
+  -- --   },
+  -- --   {
+  -- --     "<leader>E",
+  -- --     false,
+  -- --   },
+  -- --   {
+  -- --     "<leader>fe",
+  -- --     false,
+  -- --   },
+  -- --   {
+  -- --     "<leader>fE",
+  -- --     false,
+  -- --   },
+  -- -- },
+}

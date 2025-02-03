@@ -1,8 +1,5 @@
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
-  branch = "canary",
-  cmd = "CopilotChat",
-  build = "make tiktoken",
   opts = function(_, opts)
     opts.model = "claude-3.5-sonnet"
 
@@ -107,4 +104,14 @@ return {
     opts.mappings.reset.normal = "<C-x>"
     opts.mappings.reset.insert = "<C-x>"
   end,
+  keys = {
+    {
+      "<leader>ap",
+      function()
+        local actions = require("CopilotChat.actions")
+        require("CopilotChat.integrations.snacks").pick(actions.prompt_actions())
+      end,
+      desc = "CopilotChat Prompt Actions",
+    },
+  },
 }
