@@ -113,5 +113,21 @@ return {
       end,
       desc = "CopilotChat Prompt Actions",
     },
+    {
+      "<leader>aa",
+      function()
+        require("CopilotChat").toggle({ selection = false })
+      end,
+      desc = "CopilotChat",
+      mode = { "n", "v" },
+    },
+    {
+      "<leader>as",
+      function()
+        require("CopilotChat").toggle()
+      end,
+      desc = "CopilotChat Selection",
+      mode = { "n", "v" },
+    },
   },
 }
