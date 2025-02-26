@@ -9,7 +9,7 @@ end
 local del = vim.keymap.del
 
 -- Windows
-map("n", "<leader>wc", "<C-w>c", { noremap = true, desc = "Close window" })
+map("n", "<leader>wo", "<C-w>o", { noremap = true, desc = "Close all other windows" })
 map("n", "<leader>wx", "<C-w>x", { noremap = true, desc = "Exchange current window with next" })
 map("n", "<leader>wX", "<C-w>X", { noremap = true, desc = "Exchange current window with previous" })
 map("n", "<leader>wr", "<C-w>r", { noremap = true, desc = "Rotate windows downwards/rightwards" })

@@ -3,6 +3,7 @@ return {
   name = "window-picker",
   event = "VeryLazy",
   version = "2.*",
+  enabled = false,
   opts = {
     hint = "floating-big-letter",
     show_prompt = false,
