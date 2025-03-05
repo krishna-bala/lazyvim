@@ -109,7 +109,7 @@ return {
       "<leader>ap",
       function()
         local actions = require("CopilotChat.actions")
-        require("CopilotChat.integrations.snacks").pick(actions.prompt_actions())
+        require("CopilotChat").select_prompt()
       end,
       desc = "CopilotChat Prompt Actions",
     },
@@ -124,6 +124,11 @@ return {
     {
       "<leader>as",
       function()
+        local mode = vim.fn.mode()
+        if mode ~= "v" and mode ~= "V" and mode ~= "\22" then
+          -- Not in visual mode, select the entire buffer
+          vim.cmd("normal! ggVG")
+        end
         require("CopilotChat").toggle()
       end,
       desc = "CopilotChat Selection",
