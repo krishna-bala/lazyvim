@@ -50,5 +50,34 @@ return {
         },
       },
     }
+    opts.picker.sources.explorer = opts.picker.sources.explorer or {}
+    opts.picker.sources.explorer.hidden = true
+    opts.picker.sources.explorer.follow_file = false
   end,
+  keys = {
+    { "<leader>e", false },
+    { "<leader>E", false },
+    {
+      "<leader>er",
+      function()
+        local explorer = Snacks.picker.get({ source = "explorer" })[1]
+        if explorer then
+          explorer:close()
+        end
+
+        -- Open explorer at the root directory and reveal the current file
+        Snacks.explorer.reveal()
+      end,
+    },
+    {
+      "<leader>ee",
+      function()
+        local explorer = Snacks.picker.get({ source = "explorer" })[1]
+        if explorer then
+          explorer:close()
+        end
+        Snacks.explorer({ cwd = LazyVim.root() })
+      end,
+    },
+  },
 }
