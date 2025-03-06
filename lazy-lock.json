@@ -1,5 +1,5 @@
 {
-  "CopilotChat.nvim": { "branch": "main", "commit": "4cc01589eb3945810eadf8486fb0fb5743209ece" },
+  "CopilotChat.nvim": { "branch": "main", "commit": "67ae3a376730e3740c62943779f8093103372169" },
   "LazyVim": { "branch": "main", "commit": "3f034d0a7f58031123300309f2efd3bb0356ee21" },
   "LuaSnip": { "branch": "master", "commit": "c9b9a22904c97d0eb69ccb9bab76037838326817" },
   "SchemaStore.nvim": { "branch": "main", "commit": "b6ee84c6db9c8d557e0c8b71f1b6800e77611771" },
@@ -33,7 +33,7 @@
   "modes.nvim": { "branch": "main", "commit": "1e34663c32e8f5d915921a938e0dc4e3e788ceb8" },
   "neogen": { "branch": "main", "commit": "05d754004da8c89115b291f2a23ca530a8cac8fd" },
   "noice.nvim": { "branch": "main", "commit": "0427460c2d7f673ad60eb02b35f5e9926cf67c59" },
-  "nui.nvim": { "branch": "main", "commit": "53e907ffe5eedebdca1cd503b00aa8692068ca46" },
+  "nui.nvim": { "branch": "main", "commit": "8d3bce9764e627b62b07424e0df77f680d47ffdb" },
   "nvim-lint": { "branch": "master", "commit": "6e9dd545a1af204c4022a8fcd99727ea41ffdcc8" },
   "nvim-lspconfig": { "branch": "master", "commit": "84e0cd5a3c58e88ef706fdf4a1eed59ded1d3ce2" },
   "nvim-treesitter": { "branch": "master", "commit": "55c5c762fee2e813b4e43bbfaf5b91d182bd2875" },
