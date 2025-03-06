@@ -108,7 +108,6 @@ return {
     {
       "<leader>ap",
       function()
-        local actions = require("CopilotChat.actions")
         require("CopilotChat").select_prompt()
       end,
       desc = "CopilotChat Prompt Actions",
@@ -116,9 +115,18 @@ return {
     {
       "<leader>aa",
       function()
-        require("CopilotChat").toggle({ selection = false })
+        local temp_buf = vim.api.nvim_create_buf(false, true)
+        -- Switch to the temporary buffer
+        local current_win = vim.api.nvim_get_current_win()
+        local current_buf = vim.api.nvim_get_current_buf()
+        vim.api.nvim_win_set_buf(current_win, temp_buf)
+
+        require("CopilotChat").toggle()
+        -- Return to original buffer and delete temporary buffer
+        vim.api.nvim_win_set_buf(current_win, current_buf)
+        vim.api.nvim_buf_delete(temp_buf, { force = true })
       end,
-      desc = "CopilotChat",
+      desc = "CopilotChat - No Selection",
       mode = { "n", "v" },
     },
     {
