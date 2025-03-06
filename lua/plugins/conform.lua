@@ -9,6 +9,7 @@ return {
       -- python = { "docformatter", "black" },
       bzl = { "buildifier" },
       proto = { "buf" },
+      tex = { "tex-fmt" },
     },
   },
 }
