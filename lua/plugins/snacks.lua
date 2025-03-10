@@ -1,5 +1,7 @@
 return {
   "folke/snacks.nvim",
+
+  ---@param opts snacks.Config
   opts = function(_, opts)
     -- dashboard tweaks
     opts.dashboard = opts.dashboard or {}

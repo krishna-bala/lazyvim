@@ -8,6 +8,7 @@ return {
       -- cpp = { "cpplint" },
       sh = { "shellcheck" },
       dockerfile = { "hadolint" },
+      yaml = { "eslint_d" },
       -- rst = { "doc8" },
       -- Use the "*" filetype to run linters on all filetypes.
       -- ['*'] = { 'global linter' },

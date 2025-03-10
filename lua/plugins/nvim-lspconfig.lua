@@ -52,12 +52,29 @@ return {
             },
           },
         },
-        root_dir = function(fname)
+        root_dir = function(_)
           return vim.fn.getcwd()
         end,
       },
       pyright = { enabled = false },
       ruff = { settings = { ruff = {} } },
+      eslint = {
+        filetypes = {
+          "javascript",
+          "typescript",
+          "javascriptreact",
+          "typescriptreact",
+          "vue",
+          "yaml",
+          "yml",
+        },
+        settings = {
+          workingDirectories = {
+            mode = "auto",
+          },
+          format = true,
+        },
+      },
     })
   end,
 }
