@@ -142,5 +142,17 @@ return {
       desc = "CopilotChat Selection",
       mode = { "n", "v" },
     },
+    {
+      "<leader>aw",
+      "<cmd>CopilotChatSave<cr>",
+      desc = "CopilotChatSave",
+      mode = { "n", "v" },
+    },
+    {
+      "<leader>al",
+      "<cmd>CopilotChatLoad<cr>",
+      desc = "CopilotChatLoad",
+      mode = { "n", "v" },
+    },
   },
 }

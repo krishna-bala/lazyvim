@@ -81,5 +81,15 @@ return {
         Snacks.explorer({ cwd = LazyVim.root() })
       end,
     },
+    {
+      "<leader>eE",
+      function()
+        local explorer = Snacks.picker.get({ source = "explorer" })[1]
+        if explorer then
+          explorer:close()
+        end
+        Snacks.explorer({ cwd = vim.fn.getcwd() })
+      end,
+    },
   },
 }
