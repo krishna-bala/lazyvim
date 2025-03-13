@@ -1,5 +1,6 @@
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
+  ---@param opts CopilotChat.config
   opts = function(_, opts)
     opts.model = "claude-3.7-sonnet"
 
@@ -14,95 +15,220 @@ return {
         }, callback)
       end,
       resolve = function(input)
-        input = input or "unstaged"
-        local out = ""
-
+        -- Parse input to determine mode
+        local mode = "both" -- default mode
         if input == "staged" then
-          -- Get staged files
-          local handle = io.popen("git diff --staged --name-only")
-          local files = ""
-          if handle then
-            files = handle:read("*a") or ""
-            handle:close()
-          end
+          mode = "staged"
+        elseif input == "unstaged" then
+          mode = "unstaged"
+        end
 
-          -- Read contents of each staged file
-          for filename in files:gmatch("[^\n]+") do
-            local content_handle = io.popen(string.format("git show :%s", filename))
-            local diff_handle = io.popen(string.format("git diff --staged -- :%s", filename))
-            if content_handle and diff_handle then
-              local content = content_handle:read("*a")
-              local diff = diff_handle:read("*a")
-              out = out .. diff .. string.format("\n--- %s ---\n%s\n", filename, content)
-              content_handle:close()
-            end
-          end
-        else
-          -- Get unstaged files
-          local handle = io.popen("git ls-files --others --modified --exclude-standard")
-          local files = ""
-          if handle then
-            files = handle:read("*a") or ""
-            handle:close()
-          end
+        ---@type {content: string, filename: string, filetype: string}[]
+        local files_data = {}
 
-          -- Read current contents of each unstaged file
-          for filename in files:gmatch("[^\n]+") do
-            local file = io.open(filename, "r")
-            local diff_handle = io.popen(string.format("git diff -- :%s", filename))
-            if file and diff_handle then
-              local content = file:read("*a")
-              local diff = diff_handle:read("*a")
-              out = out .. diff .. string.format("\n--- %s ---\n%s\n", filename, content)
-              file:close()
+        local function detect_filetype(path, content)
+          local filetype = vim.filetype.match({ filename = path }) or "text"
+          if filetype == "text" and path:match("%.h$") then
+            filetype = "cpp"
+          end
+          return filetype
+        end
+
+        -- Get file content from git index or working tree
+        local function get_file_content(path, from_index)
+          -- For staged files, get from git index
+          if from_index then
+            local handle = io.popen("git show :" .. path)
+            if not handle then
+              return nil
             end
+            local content = handle:read("*a") or ""
+            handle:close()
+            return content
+          else
+            -- For unstaged files, read directly from disk
+            local file = io.open(path, "r")
+            if not file then
+              return nil
+            end
+            local content = file:read("*a") or ""
+            file:close()
+            return content
           end
         end
 
-        return {
-          {
-            content = out,
-            filename = input .. "_git_files",
+        -- Get file content from HEAD
+        local function get_original_file_content(path)
+          local handle = io.popen("git show HEAD:" .. path)
+          if not handle then
+            return nil
+          end
+          local content = handle:read("*a") or ""
+          handle:close()
+          return content
+        end
+
+        -- Get diff for a file
+        local function get_diff(path, staged)
+          local diff_cmd = staged and "git diff --staged -- " .. path or "git diff -- " .. path
+          local handle = io.popen(diff_cmd)
+          local diff = (handle and handle:read("*a")) or ""
+          if handle then
+            handle:close()
+          end
+          return diff
+        end
+
+        -- Add file content to output
+        local function add_file_content(path, content)
+          if not content then
+            return
+          end
+          local filetype = detect_filetype(path, content)
+          table.insert(files_data, {
+            content = content,
+            filename = path,
+            filetype = filetype,
+          })
+        end
+
+        -- Add file status to output
+        local function add_file_status(path, content, is_staged)
+          local status_type = is_staged and "(STAGED)" or "(UNSTAGED)"
+          local status_filename = path .. " " .. status_type .. " CONTEXT"
+          table.insert(files_data, {
+            content = content,
+            filename = status_filename,
             filetype = "diff",
-          },
-        }
+          })
+        end
+
+        -- Process git status output
+        local status_handle = io.popen("git status -s -uall")
+        if not status_handle then
+          return { { content = "Failed to run git status", filename = "error", filetype = "text" } }
+        end
+
+        for line in status_handle:read("*a"):gmatch("[^\n]+") do
+          local index_status = line:sub(1, 1)
+          local worktree_status = line:sub(2, 2)
+
+          -- Skip untracked files
+          if index_status == "?" and worktree_status == "?" then
+            goto continue
+          end
+
+          -- Handle renamed files
+          if index_status == "R" then
+            local old_path, new_path = line:match("R%s+(.+)%s+%->%s+(.+)")
+            if old_path and new_path then
+              if mode == "staged" or mode == "both" then
+                -- For staged rename, show both what was renamed and the diff
+                local content = get_file_content(new_path, true) -- Get from index
+                add_file_content(new_path, content)
+                local status = "RENAMED: " .. old_path .. " → " .. new_path
+                local diff = get_diff(new_path, true)
+                if diff ~= "" then
+                  status = status .. "\n\n" .. diff
+                end
+                add_file_status(new_path, status, true)
+              end
+            end
+            goto continue
+          end
+
+          -- Handle other changes
+          local path = line:match("[^ ]+$")
+          if not path then
+            goto continue
+          end
+
+          -- Handle staged changes
+          if (mode == "staged" or mode == "both") and index_status ~= " " then
+            if index_status == "A" then
+              -- Added file
+              local content = get_file_content(path, true)
+              add_file_content(path, content)
+              add_file_status(path, "NEW FILE", true)
+            elseif index_status == "M" then
+              -- Modified file
+              local content = get_file_content(path, true)
+              add_file_content(path, content)
+              add_file_status(path, get_diff(path, true), true)
+            elseif index_status == "D" then
+              -- Deleted file
+              local content = get_original_file_content(path)
+              add_file_content(path, content)
+              add_file_status(path, "DELETED FILE", true)
+            end
+          end
+
+          -- Handle unstaged changes
+          if (mode == "unstaged" or mode == "both") and worktree_status ~= " " then
+            if worktree_status == "M" then
+              -- Modified file (unstaged)
+              local content = get_file_content(path, false)
+              add_file_content(path, content)
+              add_file_status(path, get_diff(path, false), false)
+            elseif worktree_status == "D" then
+              -- Deleted file (unstaged)
+              local content = index_status == " " and get_original_file_content(path) or get_file_content(path, true)
+              add_file_content(path, content)
+              add_file_status(path, "DELETED FILE (unstaged)", false)
+            end
+          end
+
+          ::continue::
+        end
+
+        status_handle:close()
+
+        if #files_data == 0 then
+          return { { content = "No " .. mode .. " changes found", filename = "message", filetype = "text" } }
+        end
+
+        return files_data
       end,
       prompt = "Choose a git file context",
     }
-    opts.contexts.file = {
-      input = function(callback)
-        require("snacks.picker").pick({
-          finder = "files",
-          format = "file",
-          confirm = function(picker, item)
-            picker:close()
-            if item then
-              callback(vim.fn.fnamemodify(item.file, ":p:."))
-            end
-          end,
-          main = { current = true },
-        })
-      end,
-    }
-    opts.contexts.buffer = {
-      input = function(callback)
-        require("snacks.picker").pick({
-          finder = "buffers",
-          format = "buffer",
-          confirm = function(picker, item)
-            picker:close()
-            if item then
-              callback(item.text)
-            end
-          end,
-          main = { current = true },
-        })
-      end,
-    }
+
+    opts.contexts.file = opts.contexts.file or {}
+    opts.contexts.file.input = function(callback)
+      require("snacks.picker").pick({
+        finder = "files",
+        format = "file",
+        confirm = function(picker, item)
+          picker:close()
+          if item then
+            callback(vim.fn.fnamemodify(item.file, ":p:."))
+          end
+        end,
+        main = { current = true },
+      })
+    end
+
+    opts.contexts.buffer = opts.contexts.buffer or {}
+    opts.contexts.buffer.input = function(callback)
+      require("snacks.picker").pick({
+        finder = "buffers",
+        format = "buffer",
+        confirm = function(picker, item)
+          picker:close()
+          if item then
+            callback(item.text)
+          end
+        end,
+        main = { current = true },
+      })
+    end
+
     opts.mappings = opts.mappings or {}
     opts.mappings.reset = opts.mappings.reset or {}
     opts.mappings.reset.normal = "<C-x>"
     opts.mappings.reset.insert = "<C-x>"
+
+    opts.window = opts.window or {}
+    opts.window.width = 100
   end,
   keys = {
     {
@@ -144,14 +270,30 @@ return {
     },
     {
       "<leader>aw",
-      "<cmd>CopilotChatSave<cr>",
-      desc = "CopilotChatSave",
+      function()
+        vim.ui.input({ prompt = "Save chat to file (empty for default): " }, function(filename)
+          if filename == "" then
+            vim.cmd("CopilotChatSave")
+          elseif filename then
+            vim.cmd("CopilotChatSave " .. filename)
+          end
+        end)
+      end,
+      desc = "CopilotChatSave (with prompt)",
       mode = { "n", "v" },
     },
     {
       "<leader>al",
-      "<cmd>CopilotChatLoad<cr>",
-      desc = "CopilotChatLoad",
+      function()
+        vim.ui.input({ prompt = "Load chat from file (empty for default): " }, function(filename)
+          if filename == "" then
+            vim.cmd("CopilotChatLoad")
+          elseif filename then
+            vim.cmd("CopilotChatLoad " .. filename)
+          end
+        end)
+      end,
+      desc = "CopilotChatLoad (with prompt)",
       mode = { "n", "v" },
     },
   },
