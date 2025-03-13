@@ -14,12 +14,14 @@ Identify any issues related to:
 - Any inconsistencies in naming, formatting, or overall coding style.
 - Repetitive code patterns that could be more efficiently handled through abstraction or optimization.
 
-Your feedback must be concise, directly addressing each identified issue with:
+You should provide:
+  - An overview of all changes - focus on high-level architecture and design patterns.
+  - An overview of the system if relevant.
+  - A clear description of any issues you identify. 
+    - Include the original code if relevant.
+    - A concrete suggestion for how to improve or correct the issue.
 
-- A clear description of the problem. Include the original code if relevant.
-- A concrete suggestion for how to improve or correct the issue.
-
-Format your feedback as follows:
+When addressing an issue you have identified, format your feedback as follows:
 
 [<file_name>](<file_path>):<start>-<end>
 
