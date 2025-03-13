@@ -64,3 +64,10 @@ vim.api.nvim_create_user_command("Docformatter", function()
   vim.cmd("edit!")
   print("File formatted with docformatter.")
 end, { desc = "Format the current Python file with docformatter" })
+
+-- Add filename under cursor to buffer list
+map("n", "<leader>ba", function()
+  local filename = vim.fn.expand("<cfile>")
+  local buf = vim.fn.bufadd(filename)
+  vim.fn.bufload(buf)
+end, { noremap = true, desc = "Add <cfile> to buffer list" })
