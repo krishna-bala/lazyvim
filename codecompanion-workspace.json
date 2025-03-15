@@ -8,14 +8,33 @@
       "name": "Core Configuration",
       "system_prompt": "This group contains the main configuration files for Neovim.",
       "data": [
-        "core_config"
+        "config_options",
+        "config_lazy"
       ]
     },
     {
       "name": "Plugins",
       "system_prompt": "This group contains the configuration files related to the plugins.",
       "data": [
-        "plugins"
+        "plugin_modes",
+        "codecompanion",
+        "copilot",
+        "diffview",
+        "edgy",
+        "lualine",
+        "mason",
+        "modes",
+        "nvim-lint",
+        "nvim-lspconfig",
+        "nvim-treesitter",
+        "persistence",
+        "snacks",
+        "todo-comments",
+        "trouble",
+        "vectorcode",
+        "vimtex",
+        "which-key",
+        "window-picker"
       ]
     },
     {
@@ -40,17 +59,13 @@
       ]
     },
     {
-      "name": "Prompts",
-      "system_prompt": "This group contains the prompt files for LLM interactions.",
+      "name": "LSP and Diagnostics",
+      "system_prompt": "This group contains configuration files related to LSP servers, diagnostics, and code formatting.",
       "data": [
-        "prompts"
-      ]
-    },
-    {
-      "name": "Snippets",
-      "system_prompt": "This group contains the snippet files.",
-      "data": [
-        "snippets"
+        "lsp_config",
+        "mason_config",
+        "trouble_config",
+        "conform_config"
       ]
     },
     {
@@ -65,15 +80,20 @@
     }
   ],
   "data": {
-    "core_config": {
+    "config_options": {
       "type": "file",
-      "path": "lua/config/*.lua",
-      "description": "Main configuration files for Neovim."
+      "path": "lua/config/options.lua",
+      "description": "Main options configuration for Neovim."
     },
-    "plugins": {
+    "config_lazy": {
       "type": "file",
-      "path": "lua/plugins/*.lua",
-      "description": "Configuration files related to the plugins."
+      "path": "lua/config/lazy.lua",
+      "description": "Configuration for the lazy.nvim plugin manager."
+    },
+    "plugin_modes": {
+      "type": "file",
+      "path": "lua/plugins/modes.lua",
+      "description": "Configuration for visual mode indicators."
     },
     "keybindings": {
       "type": "file",
@@ -90,15 +110,25 @@
       "path": "lua/plugins/colorscheme.lua",
       "description": "Files related to the visual aspects of your Neovim setup."
     },
-    "prompts": {
+    "lsp_config": {
       "type": "file",
-      "path": "lua/prompts/*.lua",
-      "description": "Prompt files for LLM interactions."
+      "path": "lua/plugins/nvim-lspconfig.lua",
+      "description": "Configuration for language servers."
     },
-    "snippets": {
+    "mason_config": {
       "type": "file",
-      "path": "lua/snippets/*.lua",
-      "description": "Snippet files."
+      "path": "lua/plugins/mason.lua",
+      "description": "Configuration for Mason LSP installer."
+    },
+    "trouble_config": {
+      "type": "file",
+      "path": "lua/plugins/trouble.lua",
+      "description": "Configuration for Trouble diagnostics viewer."
+    },
+    "conform_config": {
+      "type": "file",
+      "path": "lua/plugins/conform.lua",
+      "description": "Configuration for code formatting."
     },
     "disabled_colorscheme": {
       "type": "file",
