@@ -68,6 +68,29 @@ end, { desc = "Format the current Python file with docformatter" })
 -- Add filename under cursor to buffer list
 map("n", "<leader>ba", function()
   local filename = vim.fn.expand("<cfile>")
+  if filename == "" then
+    vim.notify("No filename under cursor", vim.log.levels.ERROR)
+    return
+  end
+
+  -- Add file to buffer list and ensure it's properly loaded
   local buf = vim.fn.bufadd(filename)
-  vim.fn.bufload(buf)
-end, { noremap = true, desc = "Add <cfile> to buffer list" })
+  vim.fn.bufload(buf) -- Load the buffer
+
+  if vim.fn.bufexists(buf) == 1 then
+    -- Store current window
+    local current_win = vim.api.nvim_get_current_win()
+
+    -- Use window-picker to select target window
+    local picked_window = require("window-picker").pick_window({ filter_rules = { autoselect_one = false } })
+
+    if picked_window then
+      -- Focus picked window and set the buffer
+      vim.api.nvim_set_current_win(picked_window)
+      vim.api.nvim_win_set_buf(picked_window, buf)
+      -- Return to original window
+      vim.api.nvim_set_current_win(current_win)
+    end
+    vim.api.nvim_set_option_value("buflisted", true, { buf = buf })
+  end
+end, { noremap = true, desc = "Add <cfile> to buffer list and pick window" })

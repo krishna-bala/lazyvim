@@ -1,5 +1,6 @@
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
+  enabled = false,
   ---@param opts CopilotChat.config
   opts = function(_, opts)
     opts.model = "claude-3.7-sonnet"
