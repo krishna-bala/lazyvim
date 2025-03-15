@@ -3,6 +3,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
+    "Davidyz/VectorCode",
   },
   opts = {
     strategies = {
@@ -75,6 +76,14 @@ return {
             },
           },
         },
+        tools = {
+          vectorcode = {
+            description = "Run VectorCode to retrieve the project context.",
+            callback = function()
+              return require("vectorcode.integrations.codecompanion").chat.make_tool()
+            end,
+          }
+        },
       },
     },
     window = {
@@ -90,7 +99,6 @@ return {
     {
       "<leader>ap",
       function()
-        -- Use CodeCompanionActions instead of the non-existent prompt.pick
         vim.cmd("CodeCompanionActions")
       end,
       desc = "CodeCompanion Prompt Actions",

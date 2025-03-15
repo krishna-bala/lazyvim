@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "name": "Neovim Configuration",
+  "version": "1.0.0",
+  "system_prompt": "This is the default system prompt for the Neovim configuration workspace.",
+  "groups": [
+    {
+      "name": "Core Configuration",
+      "system_prompt": "This group contains the main configuration files for Neovim.",
+      "data": [
+        "core_config"
+      ]
+    },
+    {
+      "name": "Plugins",
+      "system_prompt": "This group contains the configuration files related to the plugins.",
+      "data": [
+        "plugins"
+      ]
+    },
+    {
+      "name": "Keybindings",
+      "system_prompt": "This group contains the files that define custom keybindings.",
+      "data": [
+        "keybindings"
+      ]
+    },
+    {
+      "name": "Autocommands",
+      "system_prompt": "This group contains the files that define autocommands.",
+      "data": [
+        "autocommands"
+      ]
+    },
+    {
+      "name": "Themes and Appearance",
+      "system_prompt": "This group contains the files related to the visual aspects of your Neovim setup.",
+      "data": [
+        "themes"
+      ]
+    },
+    {
+      "name": "Prompts",
+      "system_prompt": "This group contains the prompt files for LLM interactions.",
+      "data": [
+        "prompts"
+      ]
+    },
+    {
+      "name": "Snippets",
+      "system_prompt": "This group contains the snippet files.",
+      "data": [
+        "snippets"
+      ]
+    },
+    {
+      "name": "Disabled Plugins",
+      "system_prompt": "This group contains the configuration files for plugins that are currently disabled.",
+      "data": [
+        "disabled_colorscheme",
+        "disabled_oil",
+        "disabled_toggleterm",
+        "disabled_telescope"
+      ]
+    }
+  ],
+  "data": {
+    "core_config": {
+      "type": "file",
+      "path": "lua/config/*.lua",
+      "description": "Main configuration files for Neovim."
+    },
+    "plugins": {
+      "type": "file",
+      "path": "lua/plugins/*.lua",
+      "description": "Configuration files related to the plugins."
+    },
+    "keybindings": {
+      "type": "file",
+      "path": "lua/config/keymaps.lua",
+      "description": "Files that define custom keybindings."
+    },
+    "autocommands": {
+      "type": "file",
+      "path": "lua/config/autocmds.lua",
+      "description": "Files that define autocommands."
+    },
+    "themes": {
+      "type": "file",
+      "path": "lua/plugins/colorscheme.lua",
+      "description": "Files related to the visual aspects of your Neovim setup."
+    },
+    "prompts": {
+      "type": "file",
+      "path": "lua/prompts/*.lua",
+      "description": "Prompt files for LLM interactions."
+    },
+    "snippets": {
+      "type": "file",
+      "path": "lua/snippets/*.lua",
+      "description": "Snippet files."
+    },
+    "disabled_colorscheme": {
+      "type": "file",
+      "path": "lua/plugins/disabled/colorscheme.lua",
+      "description": "Configuration file for disabled colorscheme plugins."
+    },
+    "disabled_oil": {
+      "type": "file",
+      "path": "lua/plugins/disabled/oil.lua",
+      "description": "Configuration file for the disabled oil plugin."
+    },
+    "disabled_toggleterm": {
+      "type": "file",
+      "path": "lua/plugins/disabled/toggleterm.lua",
+      "description": "Configuration file for the disabled toggleterm plugin."
+    },
+    "disabled_telescope": {
+      "type": "file",
+      "path": "lua/plugins/disabled/telescope.lua",
+      "description": "Configuration file for the disabled telescope plugin."
+    }
+  }
+}
