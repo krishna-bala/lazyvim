@@ -4,6 +4,7 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
     "Davidyz/VectorCode",
+    "ravitemer/mcphub.nvim",
   },
   opts = {
     strategies = {
