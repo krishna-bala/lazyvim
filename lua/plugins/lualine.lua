@@ -39,6 +39,9 @@ return {
     -- opts.options.globalstatus = true
     opts.sections.lualine_c = {}
 
+    -- VectorCode integration
+    -- opts.sections.lualine_y = opts.sections.lualine_y or {}
+    -- table.insert(opts.sections.lualine_y, require("vectorcode.integrations").lualine({ show_job_count = true }))
     return opts
   end,
 }
