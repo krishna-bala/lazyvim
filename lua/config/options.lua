@@ -19,3 +19,8 @@ vim.g.root_spec = { { ".git", "lua" }, "lsp", "cwd" }
 vim.o.cursorlineopt = "number"
 
 -- vim.g.trouble_lualine = false
+vim.filetype.add({
+  extension = {
+    h = "cpp",
+  },
+})

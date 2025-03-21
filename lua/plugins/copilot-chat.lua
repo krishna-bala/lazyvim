@@ -1,11 +1,10 @@
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
-  enabled = false,
+  enabled = true,
   ---@param opts CopilotChat.config
   opts = function(_, opts)
     opts.model = "claude-3.7-sonnet"
 
-    opts.prompts = opts.prompts or {}
     opts.prompts = require("prompts.copilot-prompts")
 
     opts.contexts = opts.contexts or {}
@@ -26,14 +25,6 @@ return {
 
         ---@type {content: string, filename: string, filetype: string}[]
         local files_data = {}
-
-        local function detect_filetype(path, content)
-          local filetype = vim.filetype.match({ filename = path }) or "text"
-          if filetype == "text" and path:match("%.h$") then
-            filetype = "cpp"
-          end
-          return filetype
-        end
 
         -- Get file content from git index or working tree
         local function get_file_content(path, from_index)
@@ -85,7 +76,7 @@ return {
           if not content then
             return
           end
-          local filetype = detect_filetype(path, content)
+          local filetype = require("CopilotChat.utils").filetype(path)
           table.insert(files_data, {
             content = content,
             filename = path,
@@ -286,15 +277,24 @@ return {
     {
       "<leader>al",
       function()
-        vim.ui.input({ prompt = "Load chat from file (empty for default): " }, function(filename)
-          if filename == "" then
-            vim.cmd("CopilotChatLoad")
-          elseif filename then
-            vim.cmd("CopilotChatLoad " .. filename)
-          end
-        end)
+        -- Use the picker to select a chat file
+        require("snacks.picker").pick({
+          finder = "files",
+          format = "file",
+          cwd = vim.fn.expand(require("CopilotChat.config").history_path),
+          confirm = function(picker, item)
+            picker:close()
+            if item then
+              -- Extract just the filename without path
+              local filename = vim.fn.fnamemodify(item.file, ":t:r")
+              print(filename)
+              vim.cmd("CopilotChatLoad " .. filename)
+            end
+          end,
+          main = { current = true },
+        })
       end,
-      desc = "CopilotChatLoad (with prompt)",
+      desc = "CopilotChatLoad (with picker)",
       mode = { "n", "v" },
     },
   },

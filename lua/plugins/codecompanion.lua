@@ -1,9 +1,9 @@
 return {
   "olimorris/codecompanion.nvim",
+  enabled = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
-    "Davidyz/VectorCode",
     "ravitemer/mcphub.nvim",
   },
   opts = {
@@ -83,7 +83,7 @@ return {
             callback = function()
               return require("vectorcode.integrations.codecompanion").chat.make_tool()
             end,
-          }
+          },
         },
       },
     },
@@ -112,7 +112,7 @@ return {
         local current_buf = vim.api.nvim_get_current_buf()
         vim.api.nvim_win_set_buf(current_win, temp_buf)
 
-        require("codecompanion").toggle()
+        require("codecompanion").chat()
         vim.api.nvim_win_set_buf(current_win, current_buf)
         vim.api.nvim_buf_delete(temp_buf, { force = true })
       end,
@@ -126,37 +126,9 @@ return {
         if mode ~= "v" and mode ~= "V" and mode ~= "\22" then
           vim.cmd("normal! ggVG")
         end
-        require("codecompanion").toggle()
+        require("codecompanion").chat()
       end,
       desc = "CodeCompanion Selection",
-      mode = { "n", "v" },
-    },
-    {
-      "<leader>aw",
-      function()
-        vim.ui.input({ prompt = "Save chat to file (empty for default): " }, function(filename)
-          if filename == "" then
-            require("codecompanion.chat").save()
-          elseif filename then
-            require("codecompanion.chat").save(filename)
-          end
-        end)
-      end,
-      desc = "CodeCompanion Save (with prompt)",
-      mode = { "n", "v" },
-    },
-    {
-      "<leader>al",
-      function()
-        vim.ui.input({ prompt = "Load chat from file (empty for default): " }, function(filename)
-          if filename == "" then
-            require("codecompanion.chat").load()
-          elseif filename then
-            require("codecompanion.chat").load(filename)
-          end
-        end)
-      end,
-      desc = "CodeCompanion Load (with prompt)",
       mode = { "n", "v" },
     },
   },
