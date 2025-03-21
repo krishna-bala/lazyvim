@@ -75,6 +75,7 @@ return {
           format = true,
         },
       },
+      marksman = { enabled = false },
     })
   end,
 }

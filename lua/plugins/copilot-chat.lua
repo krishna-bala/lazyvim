@@ -233,16 +233,29 @@ return {
     {
       "<leader>aa",
       function()
-        local temp_buf = vim.api.nvim_create_buf(false, true)
-        -- Switch to the temporary buffer
-        local current_win = vim.api.nvim_get_current_win()
+        -- Check if current window is already a CopilotChat window
         local current_buf = vim.api.nvim_get_current_buf()
-        vim.api.nvim_win_set_buf(current_win, temp_buf)
+        local buf_name = vim.api.nvim_buf_get_name(current_buf)
+        local buf_basename = vim.fn.fnamemodify(buf_name, ":t")
+        local is_copilot_chat = buf_basename == "copilot-chat"
 
-        require("CopilotChat").toggle()
-        -- Return to original buffer and delete temporary buffer
-        vim.api.nvim_win_set_buf(current_win, current_buf)
-        vim.api.nvim_buf_delete(temp_buf, { force = true })
+        -- Only create temp buffer if we're not already in a CopilotChat window
+        local temp_buf, current_win
+        if not is_copilot_chat then
+          temp_buf = vim.api.nvim_create_buf(false, true)
+          current_win = vim.api.nvim_get_current_win()
+          local original_buf = current_buf
+          vim.api.nvim_win_set_buf(current_win, temp_buf)
+
+          require("CopilotChat").toggle()
+
+          -- Return to original buffer and delete temporary buffer
+          vim.api.nvim_win_set_buf(current_win, original_buf)
+          vim.api.nvim_buf_delete(temp_buf, { force = true })
+        else
+          -- Already in a CopilotChat window, just toggle
+          require("CopilotChat").toggle()
+        end
       end,
       desc = "CopilotChat - No Selection",
       mode = { "n", "v" },
@@ -255,7 +268,7 @@ return {
           -- Not in visual mode, select the entire buffer
           vim.cmd("normal! ggVG")
         end
-        require("CopilotChat").toggle()
+        require("CopilotChat").open()
       end,
       desc = "CopilotChat Selection",
       mode = { "n", "v" },
