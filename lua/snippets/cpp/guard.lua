@@ -63,7 +63,7 @@ return {
         rel_path = rel_path:gsub("/[^/]+$", "")
       end
 
-      -- Split directory into components and uppercase
+      --Split directory into components and uppercase
       local dir_parts = {}
       for part in string.gmatch(rel_path, "[^/\\]+") do
         table.insert(dir_parts, string.upper(part))
