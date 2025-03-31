@@ -1,6 +1,7 @@
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
-  enabled = true,
+  build = "make tiktoken",
+  -- enabled = false,
   ---@param opts CopilotChat.config
   opts = function(_, opts)
     opts.model = "claude-3.7-sonnet"
@@ -247,7 +248,7 @@ return {
           local original_buf = current_buf
           vim.api.nvim_win_set_buf(current_win, temp_buf)
 
-          require("CopilotChat").toggle()
+          require("CopilotChat").open()
 
           -- Return to original buffer and delete temporary buffer
           vim.api.nvim_win_set_buf(current_win, original_buf)
