@@ -1,12 +1,25 @@
 return {
   "olimorris/codecompanion.nvim",
   enabled = false,
+  lazy = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
     "ravitemer/mcphub.nvim",
   },
   opts = {
+    display = {
+      action_palette = {
+        width = 95,
+        height = 10,
+        prompt = "Prompt ",                   -- Prompt used for interactive LLM calls
+        provider = "default",                 -- default|telescope|mini_pick
+        opts = {
+          show_default_actions = true,        -- Show the default actions in the action palette?
+          show_default_prompt_library = true, -- Show the default prompt library in the action palette?
+        },
+      },
+    },
     strategies = {
       chat = {
         adapter = "copilot",
@@ -78,6 +91,11 @@ return {
           },
         },
         tools = {
+          ["mcp"] = {
+            -- calling it in a function would prevent mcphub from being loaded before it's needed
+            callback = function() return require("mcphub.extensions.codecompanion") end,
+            description = "Call tools and resources from the MCP Servers",
+          },
           vectorcode = {
             description = "Run VectorCode to retrieve the project context.",
             callback = function()
@@ -86,50 +104,38 @@ return {
           },
         },
       },
-    },
-    window = {
-      width = 100,
-    },
-    prompts = require("prompts.copilot-prompts"),
-    log_level = "DEBUG",
-    mappings = {
-      clear = "<C-x>",
+      window = {
+        width = 100,
+      },
+      prompts = require("prompts.copilot-prompts"),
+      log_level = "DEBUG",
+      mappings = {
+        clear = "<C-x>",
+      },
     },
   },
   keys = {
     {
-      "<leader>ap",
+      "<leader>cc", false,
+    },
+    {
+      "<leader>cca",
       function()
         vim.cmd("CodeCompanionActions")
       end,
-      desc = "CodeCompanion Prompt Actions",
+      desc = "CodeCompanionActions",
     },
     {
-      "<leader>aa",
+      "<leader>ccc",
       function()
-        local temp_buf = vim.api.nvim_create_buf(false, true)
-        local current_win = vim.api.nvim_get_current_win()
-        local current_buf = vim.api.nvim_get_current_buf()
-        vim.api.nvim_win_set_buf(current_win, temp_buf)
-
-        require("codecompanion").chat()
-        vim.api.nvim_win_set_buf(current_win, current_buf)
-        vim.api.nvim_buf_delete(temp_buf, { force = true })
-      end,
-      desc = "CodeCompanion - No Selection",
-      mode = { "n", "v" },
-    },
-    {
-      "<leader>as",
-      function()
-        local mode = vim.fn.mode()
-        if mode ~= "v" and mode ~= "V" and mode ~= "\22" then
-          vim.cmd("normal! ggVG")
-        end
         require("codecompanion").chat()
       end,
-      desc = "CodeCompanion Selection",
+      desc = "CodeCompanionChat",
       mode = { "n", "v" },
     },
   },
+  config = function(_, opts)
+    require("plugins.codecompanion.snacks_notifier").setup()
+    require("codecompanion").setup(opts)
+  end,
 }
