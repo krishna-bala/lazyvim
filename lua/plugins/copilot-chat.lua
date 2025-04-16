@@ -278,10 +278,11 @@ return {
       "<leader>aw",
       function()
         vim.ui.input({ prompt = "Save chat to file (empty for default): " }, function(filename)
+          local datetime = os.date("%Y%m%d_%H%M%S")
           if filename == "" then
-            vim.cmd("CopilotChatSave")
+            vim.cmd("CopilotChatSave " .. datetime)
           elseif filename then
-            vim.cmd("CopilotChatSave " .. filename)
+            vim.cmd("CopilotChatSave " .. datetime .. "_" .. filename)
           end
         end)
       end,
