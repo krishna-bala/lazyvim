@@ -1,39 +1,48 @@
 -- lua/plugins/ai/extensions/codecompanion/noice-notification.lua
-
-local Format = require("noice.text.format")
+local Format  = require("noice.text.format")
 local Message = require("noice.message")
 local Manager = require("noice.message.manager")
-local Router = require("noice.message.router")
+local Router  = require("noice.message.router")
 
-local ThrottleTime = 200
-local M = {}
+local M       = { handles = {} }
+M.config      = { throttle = 200 }
 
--- Use weak-valued table so handles auto‑clear if dropped elsewhere
-M.handles = setmetatable({}, { __mode = "v" })
+function M.setup(opts)
+  M.config = vim.tbl_deep_extend("force", M.config, opts or {})
+end
 
-local function make_progress(request)
-  local id, adapter = request.data.id, request.data.adapter
-  local msg = Message("lsp", "progress")
+local function make_progress(id, adapter)
+  adapter           = adapter or {}
+  local client      = adapter.formatted_name or "unknown"
+  local model       = adapter.model or ""
+  local msg         = Message("lsp", "progress")
   msg.opts.progress = {
-    client_id = id, -- keep as a number
-    client    = (adapter.formatted_name
-      .. (adapter.model and adapter.model ~= "" and " (" .. adapter.model .. ")" or "")),
+    client_id = id,
+    client    = client .. (model ~= "" and " (" .. model .. ")" or ""),
     id        = id,
-    message   = "Awaiting Response: ",
+    message   = "Awaiting Response…",
   }
   return msg
 end
 
-local function schedule_update(msg)
-  if M.handles[msg.opts.progress.id] then
-    -- update the existing progress message
+local function start_timer(id, msg)
+  local t = vim.uv.new_timer()
+  t:start(0, M.config.throttle, vim.schedule_wrap(function()
+    if not M.handles[id] then
+      t:stop(); t:close()
+      return
+    end
     Manager.add(Format.format(msg, "lsp_progress"))
     Router.update()
-    vim.defer_fn(function() schedule_update(msg) end, ThrottleTime)
-  end
+  end))
+  M.handles[id].timer = t
 end
 
-local function finish(msg, status)
+local function finish(id, status)
+  local entry = M.handles[id]
+  if not entry then return end
+  entry.timer:stop(); entry.timer:close()
+  local msg = entry.msg
   msg.opts.progress.message = ({
     success   = "Completed",
     error     = " Error",
@@ -42,31 +51,27 @@ local function finish(msg, status)
   Manager.add(Format.format(msg, "lsp_progress"))
   Router.update()
   Manager.remove(msg)
+  M.handles[id] = nil
 end
 
 function M.init()
   local group = vim.api.nvim_create_augroup("NoiceCompanionRequests", {})
-
   vim.api.nvim_create_autocmd("User", {
     pattern  = "CodeCompanionRequestStarted",
     group    = group,
     callback = function(evt)
-      local msg = make_progress(evt)
-      M.handles[evt.data.id] = msg
-      schedule_update(msg)
+      local id, adapter = evt.data.id, evt.data.adapter
+      if not id or not adapter then return end
+      local msg = make_progress(id, adapter)
+      M.handles[id] = { msg = msg }
+      start_timer(id, msg)
     end,
   })
-
   vim.api.nvim_create_autocmd("User", {
     pattern  = "CodeCompanionRequestFinished",
     group    = group,
     callback = function(evt)
-      local id = evt.data.id
-      local msg = M.handles[id]
-      M.handles[id] = nil
-      if msg then
-        finish(msg, evt.data.status)
-      end
+      finish(evt.data.id, evt.data.status)
     end,
   })
 end

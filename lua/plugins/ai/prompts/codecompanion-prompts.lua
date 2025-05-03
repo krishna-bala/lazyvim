@@ -1,11 +1,11 @@
-local docs_prompt = require("prompts.docs")
-local commit_prompt = require("prompts.commit")
-local sys_review_prompt = require("prompts.sys_review_prompt")
-local sys_base_prompt = require("prompts.sys_base_prompt")
-local review_prompt = require("prompts.review")
-local deep_understanding_prompt = require("prompts.deep_understanding")
-local nemawashi_prompt = require("prompts.nemawashi")
-local nemawashi_refined_prompt = require("prompts.nemawashi")
+local docs_prompt = require("plugins.ai.prompts.docs")
+local commit_prompt = require("plugins.ai.prompts.commit")
+local sys_review_prompt = require("plugins.ai.prompts.sys_review_prompt")
+local sys_base_prompt = require("plugins.ai.prompts.sys_base_prompt")
+local review_prompt = require("plugins.ai.prompts.review")
+local deep_understanding_prompt = require("plugins.ai.prompts.deep_understanding")
+local nemawashi_prompt = require("plugins.ai.prompts.nemawashi")
+local nemawashi_refined_prompt = require("plugins.ai.prompts.nemawashi")
 
 local prompt_library = {
   Docs = {
@@ -33,9 +33,17 @@ local prompt_library = {
       {
         role = "user",
         content = function()
+          local handle = io.popen("git diff --staged")
+          local result
+          if handle ~= nil then
+            result = handle:read("*a")
+            handle:close()
+          else
+            result = "ERROR: Unable to generate a git diff of staged files."
+          end
           return commit_prompt ..
               "\nProvide a commit for the following staged changes:\n\n" ..
-              "```diff\n" .. vim.fn.system("git diff --staged") .. "```"
+              "```diff\n" .. result .. "```"
         end,
       }
     },

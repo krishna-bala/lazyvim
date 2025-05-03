@@ -12,7 +12,7 @@ return {
     require("plugins.ai.extensions.codecompanion.noice-notification"):init()
   end,
   opts = {
-    system_prompt = require("prompts.sys_base_prompt"),
+    system_prompt = require("plugins.ai.prompts.sys_base_prompt"),
     display = {
       action_palette = {
         width = 95,
@@ -52,7 +52,7 @@ return {
         })
       end,
     },
-    prompt_library = require("prompts.codecompanion-prompts"),
+    prompt_library = require("plugins.ai.prompts.codecompanion-prompts"),
   },
   keys = {
     {
