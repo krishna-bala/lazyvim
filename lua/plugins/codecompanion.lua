@@ -105,7 +105,7 @@ return {
       },
       log_level = "DEBUG",
     },
-    prompt_library = require("prompts.copilot-prompts"),
+    prompt_library = require("prompts.codecompanion-prompts"),
   },
   keys = {
     {
