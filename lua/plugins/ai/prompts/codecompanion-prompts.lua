@@ -3,9 +3,7 @@ local commit_prompt = require("plugins.ai.prompts.commit")
 local sys_review_prompt = require("plugins.ai.prompts.sys_review_prompt")
 local sys_base_prompt = require("plugins.ai.prompts.sys_base_prompt")
 local review_prompt = require("plugins.ai.prompts.review")
-local deep_understanding_prompt = require("plugins.ai.prompts.deep_understanding")
 local nemawashi_prompt = require("plugins.ai.prompts.nemawashi")
-local nemawashi_refined_prompt = require("plugins.ai.prompts.nemawashi")
 
 local prompt_library = {
   Docs = {
@@ -62,20 +60,6 @@ local prompt_library = {
       }
     },
   },
-  DeepUnderstanding = {
-    strategy = "chat",
-    description = "Gain a deep understanding of the code",
-    {
-      role = "system",
-      content = sys_base_prompt,
-    },
-    prompts = {
-      {
-        role = "user",
-        content = deep_understanding_prompt,
-      }
-    },
-  },
   Nemawashi = {
     strategy = "chat",
     description = "Facilitate consensus-building (Nemawashi)",
@@ -87,20 +71,6 @@ local prompt_library = {
       {
         role = "user",
         content = nemawashi_prompt,
-      }
-    },
-  },
-  NemawashiRefined = {
-    strategy = "chat",
-    description = "Refined Nemawashi process",
-    prompts = {
-      {
-        role = "system",
-        content = sys_base_prompt,
-      },
-      {
-        role = "user",
-        content = nemawashi_refined_prompt,
       }
     },
   },

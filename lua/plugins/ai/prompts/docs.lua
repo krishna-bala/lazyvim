@@ -1,4 +1,4 @@
-return [[/COPILOT_GENERATE Please add documentation comments for the selection using the Doxygen Style Guide:
+return [[Please add documentation comments for the selection using the Doxygen Style Guide:
 
 Doxygen Style Guide¶
 We follow the following general guidelines when writing C++ Doxygen content:
