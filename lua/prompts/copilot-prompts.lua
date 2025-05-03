@@ -3,6 +3,8 @@ local commit_prompt = require("prompts.commit")
 local sys_review_prompt = require("prompts.sys_review_prompt")
 local review_prompt = require("prompts.review")
 local deep_understanding_prompt = require("prompts.deep_understanding")
+local nemawashi_prompt = require("prompts.nemawashi")
+local nemawashi_refined_prompt = require("prompts.nemawashi")
 
 local prompts = {
   Docs = {
@@ -17,6 +19,12 @@ local prompts = {
   },
   DeepUnderstanding = {
     prompt = deep_understanding_prompt,
+  },
+  Nemawashi = {
+    prompt = nemawashi_prompt,
+  },
+  NemawashiRefined = {
+    prompt = nemawashi_refined_prompt,
   },
 }
 

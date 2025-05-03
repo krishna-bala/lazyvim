@@ -1,5 +1,6 @@
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
+  enabled = false,
   build = "make tiktoken",
   -- enabled = false,
   ---@param opts CopilotChat.config
@@ -214,6 +215,44 @@ return {
         main = { current = true },
       })
     end
+
+    opts.contexts.vectorspace = {
+      description =
+      [[Semantic search through workspace using vector embeddings.
+      Find relevant code with natural language queries.
+      Supports input (query)]],
+      input = function(callback)
+        vim.ui.input({
+          prompt = 'Enter search query> ',
+        }, callback)
+      end,
+      resolve = function(input, source, prompt)
+        if not input or input == '' then
+          input = prompt
+        end
+        local embeddings = require('CopilotChat.utils').curl_post('http://localhost:8000/query', {
+          json_request = true,
+          json_response = true,
+          body = {
+            dir = source.cwd(),
+            text = input,
+            max = 50
+          }
+        }).body
+
+        require('CopilotChat.utils').schedule_main()
+        return vim.iter(embeddings)
+            :map(function(embedding)
+              embedding.filetype = require('CopilotChat.utils').filetype(embedding.filename)
+              return embedding
+            end)
+            :filter(function(embedding)
+              return embedding.filetype
+            end)
+            :totable()
+      end,
+    }
+
 
     opts.mappings = opts.mappings or {}
     opts.mappings.reset = opts.mappings.reset or {}
