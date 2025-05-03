@@ -4,6 +4,7 @@ local sys_review_prompt = require("plugins.ai.prompts.sys_review_prompt")
 local sys_base_prompt = require("plugins.ai.prompts.sys_base_prompt")
 local review_prompt = require("plugins.ai.prompts.review")
 local nemawashi_prompt = require("plugins.ai.prompts.nemawashi")
+local compact = require("plugins.ai.prompts.compact")
 
 local prompt_library = {
   Docs = {
@@ -74,6 +75,7 @@ local prompt_library = {
       }
     },
   },
+  Compact = compact,
 }
 
 return prompt_library
