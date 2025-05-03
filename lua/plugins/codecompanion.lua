@@ -6,15 +6,17 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
     "ravitemer/mcphub.nvim",
+    "folke/noice.nvim",
   },
+  init = function()
+    require("plugins.ai.extensions.codecompanion.noice-notification"):init()
+  end,
   opts = {
     system_prompt = require("prompts.sys_base_prompt"),
     display = {
       action_palette = {
         width = 95,
         height = 10,
-        prompt = "Prompt ",                    -- Prompt used for interactive LLM calls
-        provider = "default",                  -- default|telescope|mini_pick
         opts = {
           show_default_actions = true,         -- Show the default actions in the action palette?
           show_default_prompt_library = false, -- Show the default prompt library in the action palette?
@@ -33,84 +35,6 @@ return {
     strategies = {
       chat = {
         adapter = "copilot",
-        model = "claude-3.7-sonnet",
-        slash_commands = {
-          ["file"] = {
-            callback = "strategies.chat.slash_commands.file",
-            description = "Select a file using snacks.nvim",
-            opts = {
-              provider = "snacks",
-              contains_code = true,
-            },
-          },
-          ["buffer"] = {
-            callback = "strategies.chat.slash_commands.buffer",
-            description = "Select a buffer using snacks.nvim",
-            opts = {
-              provider = "snacks",
-              contains_code = true,
-            },
-          },
-          ["fetch"] = {
-            callback = "strategies.chat.slash_commands.fetch",
-            description = "Fetch content from a URL",
-            opts = {
-              provider = "snacks",
-              contains_code = true,
-            },
-          },
-          ["help"] = {
-            callback = "strategies.chat.slash_commands.help",
-            description = "Select help content using snacks.nvim",
-            opts = {
-              provider = "snacks",
-              contains_code = true,
-            },
-          },
-          ["now"] = {
-            callback = "strategies.chat.slash_commands.now",
-            description = "Insert current datetime",
-            opts = {
-              provider = "snacks",
-              contains_code = true,
-            },
-          },
-          ["symbols"] = {
-            callback = "strategies.chat.slash_commands.symbols",
-            description = "Select symbols using snacks.nvim",
-            opts = {
-              provider = "snacks",
-              contains_code = true,
-            },
-          },
-          ["terminal"] = {
-            callback = "strategies.chat.slash_commands.terminal",
-            description = "Share terminal output",
-            opts = {
-              provider = "snacks",
-              contains_code = true,
-            },
-          },
-          ["workspace"] = {
-            callback = "strategies.chat.slash_commands.workspace",
-            description = "Share workspace context",
-            opts = {
-              provider = "snacks",
-              contains_code = true,
-            },
-          },
-        },
-        keymaps = {
-          send = {
-            callback = function(chat)
-              vim.cmd("stopinsert")
-              chat:add_buf_message({ role = "llm", content = "" })
-              chat:submit()
-            end,
-            index = 1,
-            description = "Send",
-          },
-        },
       },
       window = {
         width = 100,
@@ -158,9 +82,4 @@ return {
       mode = { "v" },
     }
   },
-  config = function(_, opts)
-    -- require("plugins.codecompanion.snacks_notifier").setup()
-    require("codecompanion").setup(opts)
-    require("plugins.codecompanion.spinner"):init()
-  end,
 }
