@@ -8,6 +8,7 @@ return {
     "ravitemer/mcphub.nvim",
   },
   opts = {
+    system_prompt = require("prompts.sys_base_prompt"),
     display = {
       action_palette = {
         width = 95,
@@ -32,7 +33,7 @@ return {
     strategies = {
       chat = {
         adapter = "copilot",
-        model = "claude-3-7-sonnet",
+        model = "claude-3.7-sonnet",
         slash_commands = {
           ["file"] = {
             callback = "strategies.chat.slash_commands.file",
@@ -99,11 +100,33 @@ return {
             },
           },
         },
+        keymaps = {
+          send = {
+            callback = function(chat)
+              vim.cmd("stopinsert")
+              chat:add_buf_message({ role = "llm", content = "" })
+              chat:submit()
+            end,
+            index = 1,
+            description = "Send",
+          },
+        },
       },
       window = {
         width = 100,
       },
       log_level = "DEBUG",
+    },
+    adapters = {
+      copilot = function()
+        return require("codecompanion.adapters").extend("copilot", {
+          schema = {
+            model = {
+              default = "o4-mini",
+            },
+          },
+        })
+      end,
     },
     prompt_library = require("prompts.codecompanion-prompts"),
   },
@@ -138,5 +161,6 @@ return {
   config = function(_, opts)
     -- require("plugins.codecompanion.snacks_notifier").setup()
     require("codecompanion").setup(opts)
+    require("plugins.codecompanion.spinner"):init()
   end,
 }

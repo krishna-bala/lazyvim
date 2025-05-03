@@ -34,7 +34,8 @@ local prompt_library = {
         role = "user",
         content = function()
           return commit_prompt ..
-          "\nHere are the staged changes:\n\n" .. "```txt\n" .. vim.fn.system("git diff --staged") .. "\n```"
+              "\nProvide a commit for the following staged changes:\n\n" ..
+              "```diff\n" .. vim.fn.system("git diff --staged") .. "```"
         end,
       }
     },
