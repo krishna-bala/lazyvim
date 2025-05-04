@@ -77,3 +77,21 @@ function M.init()
 end
 
 return M
+
+-- SOME ERRORS I GET WHEN USING THIS PLUGIN
+--    Error  12:31:35 PM msg_show.lua_error Error executing vim.schedule lua callback: ...ugins/ai/extensions/codecompanion/noice-notification.lua:32: handle 0x608ba50714e0 is already closing
+-- stack traceback:
+-- 	[C]: in function 'close'
+-- 	...ugins/ai/extensions/codecompanion/noice-notification.lua:32: in function ''
+-- 	vim/_editor.lua: in function <vim/_editor.lua:0>
+--    Error  12:32:02 PM msg_show.lua_error Error executing vim.schedule lua callback: ...ugins/ai/extensions/codecompanion/noice-notification.lua:32: handle 0x608ba508ab70 is already closing
+-- stack traceback:
+-- 	[C]: in function 'close'
+-- 	...ugins/ai/extensions/codecompanion/noice-notification.lua:32: in function ''
+-- 	vim/_editor.lua: in function <vim/_editor.lua:0>
+--    Error  12:33:21 PM msg_show.emsg E21: Cannot make changes, 'modifiable' is off
+--    Error  12:34:18 PM msg_show.lua_error Error executing vim.schedule lua callback: ...ugins/ai/extensions/codecompanion/noice-notification.lua:32: handle 0x608ba545dc20 is already closing
+-- stack traceback:
+-- 	[C]: in function 'close'
+-- 	...ugins/ai/extensions/codecompanion/noice-notification.lua:32: in function ''
+-- 	vim/_editor.lua: in function <vim/_editor.lua:0>

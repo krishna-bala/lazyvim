@@ -10,8 +10,10 @@ return {
   },
   init = function()
     require("plugins.ai.extensions.codecompanion.noice-notification"):init()
+    -- require("plugins.ai.extensions.codecompanion.save-history"):init()
   end,
   opts = {
+    -- compact_export_dir = vim.fn.stdpath("data") .. "/codecompanion",
     system_prompt = require("plugins.ai.prompts.sys_base_prompt"),
     display = {
       action_palette = {
@@ -30,11 +32,27 @@ return {
         show_settings = false, -- Show LLM settings at the top of the chat buffer?
         show_token_count = true, -- Show the token count for each response?
         start_in_insert_mode = false, -- Open the chat buffer in insert mode?
+        auto_scroll = false,
       },
     },
     strategies = {
       chat = {
         adapter = "copilot",
+        slash_commands = {
+          save = {
+            description = "Save last assistant message",
+            callback = function()
+              require("plugins.ai.extensions.codecompanion.history").exports.save()
+            end,
+            -- you can set opts.contains_code = false if you want
+          },
+          load = {
+            description = "Load saved chat history",
+            callback = function()
+              require("plugins.ai.extensions.codecompanion.history").exports.load()
+            end,
+          },
+        },
       },
       window = {
         width = 100,
@@ -53,6 +71,16 @@ return {
       end,
     },
     prompt_library = require("plugins.ai.prompts.codecompanion-prompts"),
+    extensions = {
+      history = {
+        enabled  = true,
+        callback = require("plugins.ai.extensions.codecompanion.history"),
+        opts     = {
+          data_dir = vim.fn.stdpath("data")
+              .. "/codecompanion/",
+        },
+      },
+    },
   },
   keys = {
     {
@@ -80,6 +108,23 @@ return {
       end,
       desc = "Send selection to CodeCompanionChat",
       mode = { "v" },
-    }
+    },
+    {
+      "<leader>al",
+      function()
+        vim.cmd("CodeCompanionLoad")
+      end,
+      desc = "Load a CodeCompanionChat summary",
+      mode = { "n" },
+    },
+    {
+      "<leader>as",
+      function()
+        vim.cmd("CodeCompanionSave")
+      end,
+      desc = "Save a CodeCompanionChat summary",
+      mode = { "n" },
+
+    },
   },
 }
