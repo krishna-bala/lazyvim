@@ -1,10 +1,9 @@
 local docs_prompt = require("plugins.ai.prompts.docs")
 local commit_prompt = require("plugins.ai.prompts.commit")
-local sys_review_prompt = require("plugins.ai.prompts.sys_review_prompt")
-local sys_base_prompt = require("plugins.ai.prompts.sys_base_prompt")
+local system_prompt = require("plugins.ai.prompts.system_prompt")
 local review_prompt = require("plugins.ai.prompts.review")
 local nemawashi_prompt = require("plugins.ai.prompts.nemawashi")
-local compact = require("plugins.ai.prompts.compact")
+local compact_prompt = require("plugins.ai.prompts.compact")
 
 local prompt_library = {
   Docs = {
@@ -13,7 +12,7 @@ local prompt_library = {
     prompts = {
       {
         role = "system",
-        content = sys_base_prompt,
+        content = system_prompt,
       },
       {
         role = "user",
@@ -27,7 +26,7 @@ local prompt_library = {
     prompts = {
       {
         role = "system",
-        content = sys_base_prompt,
+        content = system_prompt,
       },
       {
         role = "user",
@@ -53,7 +52,7 @@ local prompt_library = {
     prompts = {
       {
         role = "system",
-        content = sys_review_prompt,
+        content = system_prompt,
       },
       {
         role = "user",
@@ -67,7 +66,7 @@ local prompt_library = {
     prompts = {
       {
         role = "system",
-        content = sys_base_prompt,
+        content = system_prompt,
       },
       {
         role = "user",
@@ -75,7 +74,43 @@ local prompt_library = {
       }
     },
   },
-  Compact = compact,
+  Compact = {
+    strategy = "chat",
+    description = "Compact the provided code",
+    prompts = {
+      {
+        role = "system",
+        content = system_prompt,
+      },
+      {
+        role = "user",
+        content = function()
+          local last_chat_messages = require("codecompanion").last_chat().messages
+          local formatted_messages = ""
+          if last_chat_messages then
+            for _, message in ipairs(last_chat_messages) do
+              local role = message.role or ""
+              local content = message.content or ""
+              formatted_messages = formatted_messages
+                  .. string.format(
+                    '<message role="%s">\n%s\n</message>\n',
+                    role,
+                    content
+                  )
+            end
+          end
+          -- Replace placeholder and return
+          return compact_prompt:gsub("{{MESSAGE_HISTORY}}", formatted_messages)
+        end,
+      },
+    },
+    opts = {
+      is_slash_cmd = true,
+      short_name = "compact",
+      -- is_default = true,
+      -- index = 9,
+    },
+  },
 }
 
 return prompt_library
