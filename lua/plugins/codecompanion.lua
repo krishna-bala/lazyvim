@@ -44,16 +44,59 @@ return {
           save = {
             description = "Save last assistant message",
             callback = function()
-              require("plugins.ai.extensions.codecompanion.history").exports.save()
+              local data_dir = vim.fn.stdpath("data")
+                  .. "/codecompanion/"
+              require("plugins.ai.extensions.codecompanion.history").exports.save(data_dir)
             end,
             -- you can set opts.contains_code = false if you want
           },
           load = {
             description = "Load saved chat history",
             callback = function()
-              require("plugins.ai.extensions.codecompanion.history").exports.load()
+              local data_dir = vim.fn.stdpath("data")
+                  .. "/codecompanion/"
+              require("plugins.ai.extensions.codecompanion.history").exports.load(data_dir)
             end,
           },
+          compact = {
+            description = "Compact the chat buffer",
+            callback = function()
+              local chat = require("codecompanion").last_chat()
+              if not chat then
+                vim.notify("[CodeCompanion] no active chat buffer", vim.log.levels.WARN)
+                return
+              end
+              chat:add_buf_message({
+                role = "user",
+                content = require("plugins.ai.prompts.compact")
+              })
+              -- require("plugins.ai.extension.codecompanion.history").exports.compact()
+            end,
+          },
+          clear = {
+            description = "Clear the chat buffer except for the last message.",
+            callback = function()
+              local chat = require("codecompanion").last_chat()
+              if not chat then
+                vim.notify("[CodeCompanion] no active chat buffer", vim.log.levels.WARN)
+                return
+              end
+              local msgs = chat.messages
+              if not msgs then
+                return vim.notify("No message found.", vim.log.levels.WARN)
+              end
+              local last = msgs[#msgs]
+              chat:clear()
+              chat:add_message({
+                role = "system",
+                content = require("plugins.ai.prompts.system_prompt")
+              })
+              chat:add_message({
+                role = last.role,
+                content = last.content,
+              })
+            end,
+          }
         },
       },
       window = {
@@ -73,16 +116,16 @@ return {
       end,
     },
     prompt_library = require("plugins.ai.prompts.codecompanion_prompts"),
-    -- extensions = {
-    --   history = {
-    --     enabled  = true,
-    --     callback = require("plugins.ai.extensions.codecompanion.history"),
-    --     opts     = {
-    --       data_dir = vim.fn.stdpath("data")
-    --           .. "/codecompanion/",
-    --     },
-    --   },
-    -- },
+    extensions = {
+      history = {
+        enabled  = true,
+        callback = require("plugins.ai.extensions.codecompanion.history"),
+        opts     = {
+          data_dir = vim.fn.stdpath("data")
+              .. "/codecompanion/",
+        },
+      },
+    },
   },
   keys = {
     {

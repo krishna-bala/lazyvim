@@ -33,7 +33,7 @@ end
 
 local function load(data_dir)
   -- ensure history dir exists
-  if not vim.loop.fs_stat(data_dir) then
+  if not vim.uv.fs_stat(data_dir) then
     vim.notify("[CodeCompanion] no history directory found: " .. data_dir, vim.log.levels.WARN)
     return
   end
@@ -56,7 +56,7 @@ local function load(data_dir)
       return
     end
     -- add loaded file as a system message (or adjust role as needed)
-    chat:add_buf_message({ content = content })
+    chat:add_message({ role = "system", content = content })
   end)
 end
 
