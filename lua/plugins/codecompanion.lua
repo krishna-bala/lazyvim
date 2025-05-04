@@ -1,3 +1,10 @@
+local data_dir = vim.fn.stdpath("data") .. "/codecompanion/"
+local history_exports = require("plugins.ai.extensions.codecompanion.history").exports
+local system_prompt = require("plugins.ai.prompts.system_prompt")
+local compact_prompt = require("plugins.ai.prompts.compact")
+local prompt_library = require("plugins.ai.prompts.codecompanion_prompts")
+local codecompanion = require("codecompanion")
+
 return {
   "olimorris/codecompanion.nvim",
   enabled = true,
@@ -13,25 +20,22 @@ return {
     -- require("plugins.ai.extensions.codecompanion.save-history"):init()
   end,
   opts = {
-    -- compact_export_dir = vim.fn.stdpath("data") .. "/codecompanion",
-    system_prompt = function(opts)
-      return require("plugins.ai.prompts.system_prompt")
-    end,
+    system_prompt = function() return system_prompt end,
     display = {
       action_palette = {
         width = 95,
         height = 10,
         opts = {
-          show_default_actions = true,        -- Show the default actions in the action palette?
-          show_default_prompt_library = true, -- Show the default prompt library in the action palette?
+          show_default_actions = true,
+          show_default_prompt_library = true,
         },
       },
       chat = {
         intro_message = "Welcome to CodeCompanion ✨ Press ? for options",
         show_header_separator = true,
         separator = "─",
-        show_references = true, -- Show references (from slash commands and variables) in the chat buffer?
-        show_settings = false,  -- Show LLM settings at the top of the chat buffer?
+        show_references = true,
+        show_settings = false,
         show_token_count = true,
         start_in_insert_mode = false,
         auto_scroll = false,
@@ -44,132 +48,68 @@ return {
           save = {
             description = "Save last assistant message",
             callback = function()
-              local data_dir = vim.fn.stdpath("data")
-                  .. "/codecompanion/"
-              require("plugins.ai.extensions.codecompanion.history").exports.save(data_dir)
+              history_exports.save(data_dir)
             end,
-            -- you can set opts.contains_code = false if you want
           },
           load = {
             description = "Load saved chat history",
             callback = function()
-              local data_dir = vim.fn.stdpath("data")
-                  .. "/codecompanion/"
-              require("plugins.ai.extensions.codecompanion.history").exports.load(data_dir)
-            end,
+              history_exports.load(data_dir)
+            end
           },
           compact = {
             description = "Compact the chat buffer",
             callback = function()
-              local chat = require("codecompanion").last_chat()
+              local chat = codecompanion.last_chat()
               if not chat then
-                vim.notify("[CodeCompanion] no active chat buffer", vim.log.levels.WARN)
-                return
+                return vim.notify("[CodeCompanion] no active chat buffer", vim.log.levels.WARN)
               end
-              chat:add_buf_message({
-                role = "user",
-                content = require("plugins.ai.prompts.compact")
-              })
-              -- require("plugins.ai.extension.codecompanion.history").exports.compact()
-            end,
+              chat:add_buf_message({ role = "user", content = compact_prompt })
+            end
           },
           clear = {
-            description = "Clear the chat buffer except for the last message.",
+            description = "Clear the chat buffer except last message",
             callback = function()
-              local chat = require("codecompanion").last_chat()
+              local chat = codecompanion.last_chat()
               if not chat then
-                vim.notify("[CodeCompanion] no active chat buffer", vim.log.levels.WARN)
-                return
+                return vim.notify("[CodeCompanion] no active chat buffer", vim.log.levels.WARN)
               end
-              local msgs = chat.messages
-              if not msgs then
-                return vim.notify("No message found.", vim.log.levels.WARN)
-              end
+              local msgs = chat.messages or {}
               local last = msgs[#msgs]
               chat:clear()
-              chat:add_message({
-                role = "system",
-                content = require("plugins.ai.prompts.system_prompt")
-              })
-              chat:add_message({
-                role = last.role,
-                content = last.content,
-              })
-            end,
-          }
+              chat:add_message({ role = "system", content = system_prompt })
+              if last then
+                chat:add_message({ role = last.role, content = last.content })
+              end
+            end
+          },
         },
       },
-      window = {
-        width = 100,
-      },
+      window = { width = 100 },
       log_level = "DEBUG",
     },
     adapters = {
       copilot = function()
         return require("codecompanion.adapters").extend("copilot", {
-          schema = {
-            model = {
-              default = "o4-mini",
-            },
-          },
+          schema = { model = { default = "o4-mini" } },
         })
       end,
     },
-    prompt_library = require("plugins.ai.prompts.codecompanion_prompts"),
+    prompt_library = prompt_library,
     extensions = {
       history = {
-        enabled  = true,
+        enabled = true,
         callback = require("plugins.ai.extensions.codecompanion.history"),
-        opts     = {
-          data_dir = vim.fn.stdpath("data")
-              .. "/codecompanion/",
-        },
+        opts = { data_dir = data_dir },
       },
     },
   },
   keys = {
-    {
-      "<leader>cc", false,
-    },
-    {
-      "<leader>aa",
-      function()
-        vim.cmd("CodeCompanionActions")
-      end,
-      desc = "CodeCompanionActions",
-    },
-    {
-      "<leader>ac",
-      function()
-        vim.cmd("CodeCompanionChat Toggle")
-      end,
-      desc = "CodeCompanionChat",
-      mode = { "n" },
-    },
-    {
-      "<leader>ac",
-      function()
-        vim.cmd("CodeCompanionChat Add")
-      end,
-      desc = "Send selection to CodeCompanionChat",
-      mode = { "v" },
-    },
-    {
-      "<leader>al",
-      function()
-        vim.cmd("CodeCompanionLoad")
-      end,
-      desc = "Load a CodeCompanionChat summary",
-      mode = { "n" },
-    },
-    {
-      "<leader>as",
-      function()
-        vim.cmd("CodeCompanionSave")
-      end,
-      desc = "Save a CodeCompanionChat summary",
-      mode = { "n" },
-
-    },
+    { "<leader>cc", false },
+    { "<leader>ac", "<cmd>CodeCompanionActions<CR>",     desc = "CodeCompanionActions" },
+    { "<leader>aa", "<cmd>CodeCompanionChat Toggle<CR>", desc = "CodeCompanionChat",                   mode = { "n" } },
+    { "<leader>aa", "<cmd>CodeCompanionChat Add<CR>",    desc = "Send selection to CodeCompanionChat", mode = { "v" } },
+    { "<leader>al", "<cmd>CodeCompanionLoad<CR>",        desc = "Load a CodeCompanionChat summary",    mode = { "n" } },
+    { "<leader>as", "<cmd>CodeCompanionSave<CR>",        desc = "Save a CodeCompanionChat summary",    mode = { "n" } },
   },
 }
