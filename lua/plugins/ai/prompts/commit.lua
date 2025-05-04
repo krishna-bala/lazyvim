@@ -1,31 +1,46 @@
-return [[
-Write commit message for the change with conventional commit format.
-Make sure the title has maximum 72 characters and message is wrapped at 72 characters.
-Wrap the whole message in code block with language gitcommit.
-Do not include any extra explanations.
-Do not include the optional body or optional footer if reasonably possible.
+local commit_prompt = [[
+You are an AI assistant helping a self-taught robotics engineer generate commit messages for code changes. The engineer is working on a <operating_system>{{OPERATING_SYSTEM}}</operating_system> machine using the Neovim IDE.
 
-Here is a template:
+Here are the code changes to analyze:
 
-```gitcommit
-<type>[(<optional scope>)]: <description>
+<code_changes>
+{{code_changes}}
+</code_changes>
 
-[optional body]
+Your task is to create a concise, conventional commit message based on the code changes provided. Follow these steps:
 
-[optional footer(s)]
+1. Analyze the code changes carefully.
+2. Determine the appropriate commit type based on the nature of the changes.
+3. Create a commit message title that accurately describes the changes.
+4. Ensure the entire commit message adheres to the conventional commit format.
 
-# Types
-# * fix: a commit of the type fix patches a bug in your codebase (semver: PATCH)
-# * feat: a commit of the type feat introduces a new feature to the codebase (semver: MINOR).
-#   BREAKING CHANGE: a commit that has a footer BREAKING CHANGE:, or appends a ! after the type/scope, introduces a breaking API change (semver: MAJOR).
+Before writing the final commit message, provide your analysis inside commit_analysis tags. In this analysis:
+- List out the specific changes observed in the code.
+- Consider arguments for each possible commit type that could apply to these changes.
+- Explain why you chose the final commit type.
 
-# Additional types:
-# * build: Changes that affect the build system or external dependencies
-# * ci: Changes to our CI configuration files and scripts
-# * docs: Documentation only changes
-# * perf: A code change that improves performance
-# * refactor: A code change that neither fixes a bug nor adds a feature
-# * style: Changes that do not affect the meaning of the code (white-space, formatting, etc)
-# * test: Adding missing tests or correcting existing tests
-```
+Requirements for the commit message:
+- Use the conventional commit format.
+- The title must be between 5 and 72 characters long.
+- Wrap the entire message at 72 characters.
+- Include the commit type and optional scope.
+- Omit the optional body and footer unless absolutely necessary.
+
+Commit types:
+- fix: for bug fixes (PATCH in semantic versioning)
+- feat: for new features (MINOR in semantic versioning)
+- BREAKING CHANGE: for breaking API changes (MAJOR in semantic versioning, indicated by ! after type/scope or in footer)
+- build: changes affecting the build system or external dependencies
+- ci: changes to CI configuration files and scripts
+- docs: documentation-only changes
+- perf: performance improvements
+- refactor: code changes that neither fix a bug nor add a feature
+- style: changes not affecting code meaning (whitespace, formatting, etc.)
+- test: adding or correcting tests
+
+After your analysis, present the final commit message wrapped in a code block with language 'gitcommit'. Do not include any additional explanations outside the code block.
+
+Please proceed with your analysis and commit message generation.
 ]]
+
+return commit_prompt

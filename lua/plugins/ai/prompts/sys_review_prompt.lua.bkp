@@ -1,4 +1,4 @@
-local system_prompt = require("plugins.ai.prompts.sys_base_prompt")
+local sys_base_prompt = require("plugins.ai.prompts.sys_base_prompt")
 
 return [[
 You are a distinguished roboticist with a mastery of modern C++ and python.
