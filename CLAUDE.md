@@ -5,9 +5,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 - Format: Use `stylua` for Lua formatting
 - Lint: Use language-specific linters configured in `nvim-lint.lua`
-  - Shell: `shellcheck`
+  - Shell: `shellcheck -x`
   - Dockerfile: `hadolint`
-  - RST: `doc8`
+  - RST: `doc8 --quiet`
 
 ## Code Style
 - Indentation: 2 spaces
@@ -16,12 +16,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Prefer descriptive variable/function names in snake_case
 - Organize imports alphabetically
 - Keep plugin configurations in separate files under `lua/plugins/`
+- Follow `return { plugin, config }` pattern for plugin definitions
 
-## AI Tools
-- Use custom prompts from `lua/prompts/` when appropriate
-- Respect existing plugin structures and naming conventions
-- When editing config, maintain user-defined keymaps and options
+## Development Patterns
+- Use Plenary for testing when needed
+- Custom AI prompts should be placed in `lua/plugins/ai/prompts/`
+- Extensions should be organized in dedicated subdirectories 
+- Respect LazyVim's plugin structure with opts, keys, and dependencies
 
 ## Git Workflow
 - Always use mcp__git__* tools instead of Bash for git operations
-- Commit messages should be clear and follow conventional commits format
+- Follow conventional commits format (feat/fix/refactor/docs)

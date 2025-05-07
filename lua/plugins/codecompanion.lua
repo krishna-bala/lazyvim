@@ -3,7 +3,6 @@ local history_exports = require("plugins.ai.extensions.codecompanion.history").e
 local system_prompt = require("plugins.ai.prompts.system_prompt")
 local compact_prompt = require("plugins.ai.prompts.compact")
 local prompt_library = require("plugins.ai.prompts.codecompanion_prompts")
-local codecompanion = require("codecompanion")
 
 return {
   "olimorris/codecompanion.nvim",
@@ -17,7 +16,6 @@ return {
   },
   init = function()
     require("plugins.ai.extensions.codecompanion.noice_notification"):init()
-    -- require("plugins.ai.extensions.codecompanion.save-history"):init()
   end,
   opts = {
     system_prompt = function() return system_prompt end,
@@ -60,7 +58,7 @@ return {
           compact = {
             description = "Compact the chat buffer",
             callback = function()
-              local chat = codecompanion.last_chat()
+              local chat = require("codecompanion").last_chat()
               if not chat then
                 return vim.notify("[CodeCompanion] no active chat buffer", vim.log.levels.WARN)
               end
@@ -70,7 +68,7 @@ return {
           clear = {
             description = "Clear the chat buffer except last message",
             callback = function()
-              local chat = codecompanion.last_chat()
+              local chat = require("codecompanion").last_chat()
               if not chat then
                 return vim.notify("[CodeCompanion] no active chat buffer", vim.log.levels.WARN)
               end
@@ -111,5 +109,6 @@ return {
     { "<leader>aa", "<cmd>CodeCompanionChat Add<CR>",    desc = "Send selection to CodeCompanionChat", mode = { "v" } },
     { "<leader>al", "<cmd>CodeCompanionLoad<CR>",        desc = "Load a CodeCompanionChat summary",    mode = { "n" } },
     { "<leader>as", "<cmd>CodeCompanionSave<CR>",        desc = "Save a CodeCompanionChat summary",    mode = { "n" } },
+    { "<leader>an", ":file ",                            desc = "Change the name of a buffer",         mode = { "n" } },
   },
 }

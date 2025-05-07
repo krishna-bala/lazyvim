@@ -5,6 +5,7 @@ return {
       -- Format:
       -- { "<keymap>", group = "<name>" },
       { "<leader>ue", group = "+edgy" },
+      { "<leader>a",  group = "+ai" },
     })
   end,
 }
