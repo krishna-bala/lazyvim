@@ -23,6 +23,7 @@ return {
       action_palette = {
         width = 95,
         height = 10,
+        provider = "default", -- default|telescope|mini_pick
         opts = {
           show_default_actions = true,
           show_default_prompt_library = true,
