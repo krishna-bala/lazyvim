@@ -8,3 +8,4 @@ foo.*
 data
 
 **/.claude/settings.local.json
+spell/*
