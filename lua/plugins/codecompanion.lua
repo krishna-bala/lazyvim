@@ -18,7 +18,9 @@ return {
     require("plugins.ai.extensions.codecompanion.noice_notification"):init()
   end,
   opts = {
-    system_prompt = function() return system_prompt end,
+    system_prompt = function()
+      return system_prompt
+    end,
     display = {
       action_palette = {
         width = 95,
@@ -54,7 +56,7 @@ return {
             description = "Load saved chat history",
             callback = function()
               history_exports.load(data_dir)
-            end
+            end,
           },
           compact = {
             description = "Compact the chat buffer",
@@ -64,7 +66,7 @@ return {
                 return vim.notify("[CodeCompanion] no active chat buffer", vim.log.levels.WARN)
               end
               chat:add_buf_message({ role = "user", content = compact_prompt })
-            end
+            end,
           },
           clear = {
             description = "Clear the chat buffer except last message",
@@ -80,7 +82,7 @@ return {
               if last then
                 chat:add_message({ role = last.role, content = last.content })
               end
-            end
+            end,
           },
         },
       },
@@ -90,7 +92,7 @@ return {
     adapters = {
       copilot = function()
         return require("codecompanion.adapters").extend("copilot", {
-          schema = { model = { default = "o4-mini" } },
+          schema = { model = { default = "claude-3.7-sonnet" } },
         })
       end,
     },
@@ -105,11 +107,11 @@ return {
   },
   keys = {
     { "<leader>cc", false },
-    { "<leader>ac", "<cmd>CodeCompanionActions<CR>",     desc = "CodeCompanionActions" },
-    { "<leader>aa", "<cmd>CodeCompanionChat Toggle<CR>", desc = "CodeCompanionChat",                   mode = { "n" } },
-    { "<leader>aa", "<cmd>CodeCompanionChat Add<CR>",    desc = "Send selection to CodeCompanionChat", mode = { "v" } },
-    { "<leader>al", "<cmd>CodeCompanionLoad<CR>",        desc = "Load a CodeCompanionChat summary",    mode = { "n" } },
-    { "<leader>as", "<cmd>CodeCompanionSave<CR>",        desc = "Save a CodeCompanionChat summary",    mode = { "n" } },
-    { "<leader>an", ":file ",                            desc = "Change the name of a buffer",         mode = { "n" } },
+    { "<leader>ac", "<cmd>CodeCompanionActions<CR>", desc = "CodeCompanionActions" },
+    { "<leader>aa", "<cmd>CodeCompanionChat Toggle<CR>", desc = "CodeCompanionChat", mode = { "n" } },
+    { "<leader>aa", "<cmd>CodeCompanionChat Add<CR>", desc = "Send selection to CodeCompanionChat", mode = { "v" } },
+    { "<leader>al", "<cmd>CodeCompanionLoad<CR>", desc = "Load a CodeCompanionChat summary", mode = { "n" } },
+    { "<leader>as", "<cmd>CodeCompanionSave<CR>", desc = "Save a CodeCompanionChat summary", mode = { "n" } },
+    { "<leader>an", ":file ", desc = "Change the name of a buffer", mode = { "n" } },
   },
 }
