@@ -6,7 +6,7 @@ local prompt_library = require("plugins.ai.prompts.codecompanion_prompts")
 
 return {
   "olimorris/codecompanion.nvim",
-  enabled = true,
+  enabled = false,
   lazy = false,
   dependencies = {
     "nvim-lua/plenary.nvim",

@@ -30,3 +30,17 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt.bufhidden = "delete"
   end,
 })
+
+vim.api.nvim_create_autocmd("BufFilePost", {
+  group = augroup("claude-code"),
+  pattern = {
+    "*",
+  },
+  callback = function()
+    local buf_name = vim.api.nvim_buf_get_name(0)
+    if buf_name:match("claude%-code$") then
+      vim.bo.buflisted = false
+    end
+  end,
+  desc = "Hide Claude Code buffer from buffer list",
+})
