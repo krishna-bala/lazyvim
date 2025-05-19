@@ -94,3 +94,14 @@ map("n", "<leader>ba", function()
     vim.api.nvim_set_option_value("buflisted", true, { buf = buf })
   end
 end, { noremap = true, desc = "Add <cfile> to buffer list and pick window" })
+
+-- Custom toggle: Example for a plugin or custom state
+map("n",
+  "<leader>ud", function()
+    local buf = vim.api.nvim_get_current_buf()
+    local enabled = vim.diagnostic.is_enabled({ bufnr = buf })
+    vim.diagnostic.enable(not enabled, { bufnr = buf, })
+    print((not enabled and "Enabled" or "Disabled") .. " buffer diagnostics")
+  end,
+  { noremap = true, desc = "Close all other windows" }
+)
