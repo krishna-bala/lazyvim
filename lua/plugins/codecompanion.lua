@@ -107,11 +107,10 @@ return {
   },
   keys = {
     { "<leader>cc", false },
-    { "<leader>ac", "<cmd>CodeCompanionActions<CR>", desc = "CodeCompanionActions" },
-    { "<leader>aa", "<cmd>CodeCompanionChat Toggle<CR>", desc = "CodeCompanionChat", mode = { "n" } },
-    { "<leader>aa", "<cmd>CodeCompanionChat Add<CR>", desc = "Send selection to CodeCompanionChat", mode = { "v" } },
-    { "<leader>al", "<cmd>CodeCompanionLoad<CR>", desc = "Load a CodeCompanionChat summary", mode = { "n" } },
-    { "<leader>as", "<cmd>CodeCompanionSave<CR>", desc = "Save a CodeCompanionChat summary", mode = { "n" } },
-    { "<leader>an", ":file ", desc = "Change the name of a buffer", mode = { "n" } },
+    { "<leader>ac", "<cmd>CodeCompanionActions<CR>",     desc = "CodeCompanionActions" },
+    { "<leader>aa", "<cmd>CodeCompanionChat Toggle<CR>", desc = "CodeCompanionChat",                   mode = { "n" } },
+    { "<leader>aa", "<cmd>CodeCompanionChat Add<CR>",    desc = "Send selection to CodeCompanionChat", mode = { "v" } },
+    { "<leader>al", "<cmd>CodeCompanionLoad<CR>",        desc = "Load a CodeCompanionChat summary",    mode = { "n" } },
+    { "<leader>as", "<cmd>CodeCompanionSave<CR>",        desc = "Save a CodeCompanionChat summary",    mode = { "n" } },
   },
 }
