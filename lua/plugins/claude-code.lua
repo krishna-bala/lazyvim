@@ -23,7 +23,7 @@ return {
     },
   },
   keys = {
-    { "<leader>acc", "<cmd>ClaudeCode<cr>", desc = "Claude Code" },
-    { "<leader>acp", "<cmd>ClaudeCodeResume<cr>", desc = "Claude Code Interactive Session Picker" },
+    { "<leader>ac", "<cmd>ClaudeCodeResume<cr>", desc = "Claude Code" },
+    -- { "<leader>acp", "<cmd>ClaudeCodeResume<cr>", desc = "Claude Code Interactive Session Picker" },
   },
 }
