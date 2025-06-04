@@ -20,7 +20,7 @@ return {
         cmd = {
           "docker", "run", "--rm", "-i",
           "-v", "/home/krishna/.cache/bazel:/home/krishna/.cache/bazel",
-          "-v", "/home/krishna/foxbots:/home/krishna/foxbots",
+          "-v", vim.fn.getcwd() .. ":/home/krishna/foxbots",
           "--workdir", "/home/krishna/foxbots",
           "--entrypoint", "clangd-19",
           "gcr.io/studied-biplane-165901/foxbots/devel-tools:2025-04-14",
@@ -30,6 +30,7 @@ return {
           "--completion-style=detailed", "--function-arg-placeholders",
           "--fallback-style=llvm", "--header-insertion=iwyu",
           "--query-driver=**",
+          "--path-mappings=" .. vim.fn.getcwd() .. "=/home/krishna/foxbots",
         },
         -- stylua: ignore end
       },

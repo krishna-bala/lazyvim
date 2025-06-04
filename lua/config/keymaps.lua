@@ -105,3 +105,14 @@ map("n",
   end,
   { noremap = true, desc = "Close all other windows" }
 )
+
+-- Change directory to current buffer git root
+map("n", "<leader>cd", function()
+  local git_root = LazyVim.root.git()
+  if git_root then
+    vim.cmd("cd " .. vim.fn.fnameescape(git_root))
+    vim.notify("Changed to: " .. git_root)
+  else
+    vim.notify("Not in a git repository", vim.log.levels.WARN)
+  end
+end, { noremap = true, desc = "Change directory to current buffer git root" })

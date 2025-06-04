@@ -1,30 +1,29 @@
 return {
   "krishna-bala/claude-code.nvim",
-  branch = "krishna.add-floating-window",
+  dir = "/home/krishna/src/claude-code.nvim", -- Use local directory instead of remote
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
   opts = {
     -- Terminal window settings
     window = {
-      split_ratio = 0.4,  -- Percentage of screen for the terminal window (height for horizontal, width for vertical splits)
-      position = "float", -- Position of the window: "botright", "topleft", "vertical", "rightbelow vsplit", etc.
+      split_ratio = 0.4,
+      position = "float",
       float = {
-        width = "90%",
-        height = "90%",
+        width = "85%",
+        height = "85%",
         row = "center",
         col = "center",
         relative = "editor",
         border = "rounded",
       },
-      enter_insert = true,    -- Whether to enter insert mode when opening Claude Code
-      hide_numbers = true,    -- Hide line numbers in the terminal window
-      hide_signcolumn = true, -- Hide the sign column in the terminal window
+      enter_insert = true,
+      hide_numbers = true,
+      hide_signcolumn = true,
     },
   },
   keys = {
     { "<leader>ac", "<cmd>ClaudeCode<cr>",       desc = "Claude Code" },
     { "<leader>ap", "<cmd>ClaudeCodeResume<cr>", desc = "Claude Code" },
-    -- { "<leader>acp", "<cmd>ClaudeCodeResume<cr>", desc = "Claude Code Interactive Session Picker" },
   },
 }
