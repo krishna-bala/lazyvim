@@ -14,6 +14,7 @@ return {
       options = {
         "-synctex=1",
         "-interaction=nonstopmode",
+        "-xelatex",
       },
     }
 

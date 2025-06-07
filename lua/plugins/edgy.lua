@@ -1,18 +1,20 @@
 return {
   "folke/edgy.nvim",
+  enabled = true,
   opts = function(_, opts)
     opts.right = opts.right or {}
-    -- Find and update the existing copilot-chat element
-    for i, item in ipairs(opts.right) do
-      if item.ft == "copilot-chat" then
-        opts.right[i] = {
-          ft = "copilot-chat",
-          title = "Copilot Chat",
-          size = { width = 0.35 },
-        }
-        break
-      end
-    end
+
+    -- Add claude-code integration
+    table.insert(opts.right, {
+      ft = "claude-code",
+      title = "Claude Code",
+      size = { width = 0.5 },
+      filter = function(buf, win)
+        -- Only include non-floating windows
+        return vim.api.nvim_win_get_config(win).relative == ""
+      end,
+    })
+    return opts
   end,
   keys = {
     { "<leader>ue", false },

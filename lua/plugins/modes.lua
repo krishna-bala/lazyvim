@@ -1,5 +1,6 @@
 return {
   "mvllow/modes.nvim",
+  commit = "da1d0b6d0407b3988d29b83d1adcc4be1cc0d587",
   opts = {
     colors = {
       bg = "", -- Optional bg param, defaults to Normal hl group

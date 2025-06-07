@@ -107,7 +107,7 @@ map("n",
 )
 
 -- Change directory to current buffer git root
-map("n", "<leader>cd", function()
+map("n", "<localleader>cd", function()
   local git_root = LazyVim.root.git()
   if git_root then
     vim.cmd("cd " .. vim.fn.fnameescape(git_root))

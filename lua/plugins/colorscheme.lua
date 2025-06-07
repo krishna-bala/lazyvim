@@ -12,6 +12,7 @@ return {
       end,
     },
   },
+  { "rose-pine/neovim", name = "rose-pine" },
   {
     "LazyVim/LazyVim",
     opts = {

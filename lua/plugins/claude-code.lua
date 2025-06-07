@@ -7,23 +7,24 @@ return {
   opts = {
     -- Terminal window settings
     window = {
-      split_ratio = 0.4,
-      position = "float",
-      float = {
-        width = "85%",
-        height = "85%",
-        row = "center",
-        col = "center",
-        relative = "editor",
-        border = "rounded",
-      },
+      split_ratio = 0.5,
+      -- position = "float",
+      position = "vertical",
+      -- float ={
+      --   width = "50%",
+      --   height = "95%",
+      --   row = "center",
+      --   col = "50%",
+      --   relative = "editor",
+      --   border = "rounded",
+      -- },
       enter_insert = true,
       hide_numbers = true,
       hide_signcolumn = true,
     },
   },
   keys = {
-    { "<leader>ac", "<cmd>ClaudeCode<cr>",       desc = "Claude Code" },
+    { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Claude Code" },
     { "<leader>ap", "<cmd>ClaudeCodeResume<cr>", desc = "Claude Code" },
   },
 }
