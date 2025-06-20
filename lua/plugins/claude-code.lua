@@ -1,5 +1,6 @@
 return {
   "krishna-bala/claude-code.nvim",
+  enabled = false,
   dir = "/home/krishna/src/claude-code.nvim", -- Use local directory instead of remote
   dependencies = {
     "nvim-lua/plenary.nvim",

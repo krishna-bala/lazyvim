@@ -1,6 +1,6 @@
 return {
   "folke/edgy.nvim",
-  enabled = true,
+  enabled = false,
   opts = function(_, opts)
     opts.right = opts.right or {}
 
