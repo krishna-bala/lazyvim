@@ -26,6 +26,6 @@ return {
   },
   keys = {
     { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Claude Code" },
-    { "<leader>ap", "<cmd>ClaudeCodeResume<cr>", desc = "Claude Code" },
+    { "<leader>ar", "<cmd>ClaudeCodeResume<cr>", desc = "Claude Code" },
   },
 }
