@@ -1,6 +1,8 @@
 return {
+  -- "krishna-bala/claudecode.nvim",
   "coder/claudecode.nvim",
-  enabled = true,
+  enabled = false,
+  -- dir = "/home/krishna/src/claudecode.nvim", -- Use local directory instead of remote
   opts = {
     -- Terminal Configuration
     terminal = {
