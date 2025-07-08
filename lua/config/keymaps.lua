@@ -35,7 +35,14 @@ map("x", "x", '"_x', { noremap = true })
 -- allows * to highlight and search but not (preserves jump list)
 map("n", "*", "<cmd>keepjumps normal! mi*`i<CR>", { noremap = true, silent = true })
 
+-- Add custom visual mappings
+map("v", "<C-h>", [[<Cmd>wincmd h<CR>]], { noremap = true, desc = "Go to Left window" })
+map("v", "<C-j>", [[<Cmd>wincmd j<CR>]], { noremap = true, desc = "Go to Below window" })
+map("v", "<C-k>", [[<Cmd>wincmd k<CR>]], { noremap = true, desc = "Go to Above window" })
+map("v", "<C-l>", [[<Cmd>wincmd l<CR>]], { noremap = true, desc = "Go to Right window" })
+
 -- Add custom terminal mappings
+map("t", "<C-n>", "<C-\\><C-n>", { noremap = true, desc = "Exit terminal mode" })
 map("t", "<esc><C-h>", [[<Cmd>wincmd h<CR>]], { noremap = true, desc = "Go to Left window" })
 map("t", "<esc><C-j>", [[<Cmd>wincmd j<CR>]], { noremap = true, desc = "Go to Below window" })
 map("t", "<esc><C-k>", [[<Cmd>wincmd k<CR>]], { noremap = true, desc = "Go to Above window" })
@@ -96,15 +103,12 @@ map("n", "<leader>ba", function()
 end, { noremap = true, desc = "Add <cfile> to buffer list and pick window" })
 
 -- Custom toggle: Example for a plugin or custom state
-map("n",
-  "<leader>ud", function()
-    local buf = vim.api.nvim_get_current_buf()
-    local enabled = vim.diagnostic.is_enabled({ bufnr = buf })
-    vim.diagnostic.enable(not enabled, { bufnr = buf, })
-    print((not enabled and "Enabled" or "Disabled") .. " buffer diagnostics")
-  end,
-  { noremap = true, desc = "Close all other windows" }
-)
+map("n", "<leader>ud", function()
+  local buf = vim.api.nvim_get_current_buf()
+  local enabled = vim.diagnostic.is_enabled({ bufnr = buf })
+  vim.diagnostic.enable(not enabled, { bufnr = buf })
+  print((not enabled and "Enabled" or "Disabled") .. " buffer diagnostics")
+end, { noremap = true, desc = "Close all other windows" })
 
 -- Change directory to current buffer git root
 map("n", "<localleader>cd", function()
