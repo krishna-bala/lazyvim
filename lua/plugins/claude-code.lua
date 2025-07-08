@@ -1,6 +1,6 @@
 return {
-  "krishna-bala/claude-code.nvim",
-  enabled = false,
+  "greggh/claude-code.nvim",
+  enabled = true,
   dir = "/home/krishna/src/claude-code.nvim", -- Use local directory instead of remote
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -11,7 +11,7 @@ return {
       split_ratio = 0.5,
       -- position = "float",
       position = "vertical",
-      -- float ={
+      -- float = {
       --   width = "50%",
       --   height = "95%",
       --   row = "center",
