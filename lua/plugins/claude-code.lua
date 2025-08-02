@@ -1,7 +1,7 @@
 return {
   "greggh/claude-code.nvim",
-  enabled = true,
-  dir = "/home/krishna/src/claude-code.nvim", -- Use local directory instead of remote
+  enabled = false,
+  dir = "/home/krishna/src/nvim-plugins/claude-code.nvim", -- Use local directory instead of remote
   dependencies = {
     "nvim-lua/plenary.nvim",
   },

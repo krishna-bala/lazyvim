@@ -1,7 +1,7 @@
 return {
   -- "krishna-bala/claudecode.nvim",
   "coder/claudecode.nvim",
-  enabled = false,
+  enabled = true,
   -- dir = "/home/krishna/src/claudecode.nvim", -- Use local directory instead of remote
   opts = {
     -- Terminal Configuration
@@ -14,7 +14,7 @@ return {
     },
   },
   keys = {
-    { "<leader>a", nil, desc = "AI/Claude Code" },
+    { "<leader>a", nil, desc = "+AI/Claude Code" },
     { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
     { "<C-,>", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude", mode = { "t", "n" } },
     { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
