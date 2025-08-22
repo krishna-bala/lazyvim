@@ -12,7 +12,7 @@ return {
       end,
     },
   },
-  -- { "rose-pine/neovim", name = "rose-pine" },
+  { "rose-pine/neovim", name = "rose-pine" },
   -- { "neanias/everforest-nvim", name = "everforest" },
   -- { "rebelot/kanagawa.nvim", name = "kanagawa" },
   {
