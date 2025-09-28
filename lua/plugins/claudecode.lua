@@ -8,41 +8,6 @@ return {
         provider = "external", -- "auto", "snacks", "native", or "external"
         provider_opts = {
           external_terminal_cmd = "/home/krishna/.config/kitty/launch.sh -- %s",
-          -- external_terminal_cmd = function(cmd, env)
-          --   -- Use kitty remote control with socket and preserve environment
-          --   local user = vim.fn.getenv("USER")
-          --   local socket = string.format("unix:/tmp/kitty-%s", user)
-          --   local cwd = vim.fn.getcwd()
-          --
-          --   -- Build the kitty command with environment variables
-          --   local kitty_cmd = {
-          --     "kitty",
-          --     "@",
-          --     "--to",
-          --     socket,
-          --     "launch",
-          --     "--type=window",
-          --     "--cwd",
-          --     cwd,
-          --   }
-          --
-          --   -- Add environment variables
-          --   for key, value in pairs(env) do
-          --     table.insert(kitty_cmd, "--env")
-          --     table.insert(kitty_cmd, string.format("%s=%s", key, value))
-          --   end
-          --
-          --   -- Add the command separator and the actual command
-          --   table.insert(kitty_cmd, "--")
-          --
-          --   -- Parse and add command parts
-          --   local cmd_parts = vim.split(cmd, " ")
-          --   for _, part in ipairs(cmd_parts) do
-          --     table.insert(kitty_cmd, part)
-          --   end
-          --
-          --   return kitty_cmd
-          -- end,
         },
         show_native_term_exit_tip = true, -- Show exit tip for native terminal
         auto_close = true, -- Auto-close terminal after command completion
@@ -133,42 +98,4 @@ return {
       { "<leader>an", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
     },
   },
-  -- {
-  --   "pittcat/claude-fzf.nvim",
-  --   dependencies = {
-  --     "ibhagwan/fzf-lua",
-  --     "coder/claudecode.nvim",
-  --   },
-  --   opts = {
-  --     auto_context = true,
-  --     batch_size = 10,
-  --
-  --     -- Claude integration configuration
-  --     claude_opts = {
-  --       auto_open_terminal = true, -- Auto open terminal after sending
-  --       context_lines = 5, -- Additional context lines
-  --       source_tag = "claude-fzf", -- Source tag
-  --     },
-  --   },
-  --   cmd = {
-  --     "ClaudeFzf",
-  --     "ClaudeFzfHealth",
-  --     "ClaudeFzfFiles",
-  --     "ClaudeFzfGrep",
-  --     "ClaudeFzfBuffers",
-  --     "ClaudeFzfGitFiles",
-  --   },
-  --   keys = {
-  --     { "<leader>cf", false },
-  --     { "<leader>cg", false },
-  --     { "<leader>cb", false },
-  --     { "<leader>cgf", false },
-  --     { "<leader>cd", false },
-  --     { "<leader>a<leader>", "<cmd>ClaudeFzfFiles<cr>", desc = "Claude: Add files" },
-  --     { "<leader>a/", "<cmd>ClaudeFzfGrep<cr>", desc = "Claude: Search and add" },
-  --     { "<leader>a,", "<cmd>ClaudeFzfBuffers<cr>", desc = "Claude: Add buffers" },
-  --     { "<leader>af", "<cmd>ClaudeFzfGitFiles<cr>", desc = "Claude: Add Git files" },
-  --     -- { "<leader>ad", "<cmd>ClaudeFzfDirectory<cr>", desc = "Claude: Add directory files" },
-  --   },
-  -- },
 }
