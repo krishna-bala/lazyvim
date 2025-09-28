@@ -8,24 +8,42 @@ return {
         provider = "external", -- "auto", "snacks", "native", or "external"
         provider_opts = {
           external_terminal_cmd = "/home/krishna/.config/kitty/launch.sh -- %s",
+          -- external_terminal_cmd = function(cmd, env)
+          --   -- Use kitty remote control with socket and preserve environment
+          --   local user = vim.fn.getenv("USER")
+          --   local socket = string.format("unix:/tmp/kitty-%s", user)
+          --   local cwd = vim.fn.getcwd()
+          --
+          --   -- Build the kitty command with environment variables
+          --   local kitty_cmd = {
+          --     "kitty",
+          --     "@",
+          --     "--to",
+          --     socket,
+          --     "launch",
+          --     "--type=window",
+          --     "--cwd",
+          --     cwd,
+          --   }
+          --
+          --   -- Add environment variables
+          --   for key, value in pairs(env) do
+          --     table.insert(kitty_cmd, "--env")
+          --     table.insert(kitty_cmd, string.format("%s=%s", key, value))
+          --   end
+          --
+          --   -- Add the command separator and the actual command
+          --   table.insert(kitty_cmd, "--")
+          --
+          --   -- Parse and add command parts
+          --   local cmd_parts = vim.split(cmd, " ")
+          --   for _, part in ipairs(cmd_parts) do
+          --     table.insert(kitty_cmd, part)
+          --   end
+          --
+          --   return kitty_cmd
+          -- end,
         },
-        -- snacks_win_opts = {
-        --   position = "float",
-        --   width = 0.9,
-        --   height = 0.9,
-        --   keys = {
-        --     claude_hide = {
-        --       "<C-,>",
-        --       function(self)
-        --         self:hide()
-        --       end,
-        --       mode = "t",
-        --       desc = "Hide",
-        --     },
-        --   },
-        -- },
-        -- split_side = "right", -- "left" or "right"
-        -- split_width_percentage = 0.50, -- Width as percentage (0.0 to 1.0)
         show_native_term_exit_tip = true, -- Show exit tip for native terminal
         auto_close = true, -- Auto-close terminal after command completion
       },
