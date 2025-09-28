@@ -16,6 +16,7 @@ return {
         auto_close_on_accept = true,
         vertical_split = true,
         open_in_current_tab = false,
+        open_in_new_tab = true, -- Opens diffs in a new tab instead of splitting current window
         keep_terminal_focus = false, -- If true, moves focus back to terminal after diff opens
       },
     },
