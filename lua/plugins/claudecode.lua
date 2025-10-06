@@ -11,6 +11,21 @@ return {
         },
         show_native_term_exit_tip = true, -- Show exit tip for native terminal
         auto_close = true, -- Auto-close terminal after command completion
+        snacks_win_opts = {
+          position = "right",
+          width = 0.4,
+          height = 1.0,
+          keys = {
+            claude_hide = {
+              "<C-,>",
+              function(self)
+                self:hide()
+              end,
+              mode = "t",
+              desc = "Hide",
+            },
+          },
+        },
       },
       diff_opts = {
         auto_close_on_accept = true,
@@ -25,6 +40,22 @@ return {
 
       -- Override the default commands to prevent closing running instances
       local terminal = require("claudecode.terminal")
+
+      -- Track the last known width
+      local last_width = nil
+
+      -- Capture current terminal width if visible
+      local function capture_terminal_width()
+        local bufnr = terminal.get_active_terminal_bufnr()
+        if bufnr then
+          local wins = vim.fn.win_findbuf(bufnr)
+          if #wins > 0 then
+            local width = vim.api.nvim_win_get_width(wins[1])
+            local total_width = vim.o.columns
+            last_width = width / total_width
+          end
+        end
+      end
 
       -- Track if we have a running instance (external provider specific)
       local function is_external_running()
@@ -58,7 +89,7 @@ return {
         force = true, -- Override existing command
       })
 
-      -- Override ClaudeCodeFocus command to only open, never close
+      -- Override ClaudeCodeFocus command with width preservation
       vim.api.nvim_create_user_command("ClaudeCodeFocus", function(opt)
         local current_mode = vim.fn.mode()
         if current_mode == "v" or current_mode == "V" or current_mode == "\22" then
@@ -73,11 +104,28 @@ return {
           return
         end
 
-        -- Not running, open it
-        terminal.open({}, cmd_args)
+        -- Capture width before toggling
+        capture_terminal_width()
+
+        -- Use focus_toggle
+        terminal.focus_toggle({}, cmd_args)
+
+        -- Restore width after toggle if we have a saved width
+        if last_width then
+          vim.schedule(function()
+            local bufnr = terminal.get_active_terminal_bufnr()
+            if bufnr then
+              local wins = vim.fn.win_findbuf(bufnr)
+              if #wins > 0 then
+                local target_width = math.floor(vim.o.columns * last_width)
+                vim.api.nvim_win_set_width(wins[1], target_width)
+              end
+            end
+          end)
+        end
       end, {
         nargs = "*",
-        desc = "Focus Claude Code (won't close if already running)",
+        desc = "Focus Claude Code with width preservation",
         force = true, -- Override existing command
       })
     end,
