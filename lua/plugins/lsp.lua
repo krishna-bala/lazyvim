@@ -18,6 +18,15 @@ return {
           "cpp",
           "cuda",
         },
+        on_attach = function(client, bufnr)
+          -- Detach from non-file buffers (e.g., diffview:// URIs)
+          local uri = vim.uri_from_bufnr(bufnr)
+          if not uri:match("^file://") then
+            vim.defer_fn(function()
+              vim.lsp.buf_detach_client(bufnr, client.id)
+            end, 0)
+          end
+        end,
         -- stylua: ignore start
         cmd = {
           "docker", "run", "--rm", "-i",
