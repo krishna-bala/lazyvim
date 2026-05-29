@@ -1,6 +1,16 @@
 return {
   "neovim/nvim-lspconfig",
   opts = function(_, opts)
+    -- Match the devcontainer mount path so bazel-emitted execroot symlinks
+    -- (e.g. /workspaces/.worktrees/<name>/...) resolve inside the clangd
+    -- container. Worktrees mount at /workspaces/.worktrees/<name>; the main
+    -- repo mounts at /workspaces/foxbots.
+    local cwd = vim.fn.getcwd()
+    local worktree_name = cwd:match("/%.worktrees/([^/]+)$")
+    local container_path = worktree_name
+        and "/workspaces/.worktrees/" .. worktree_name
+      or "/workspaces/foxbots"
+
     opts.servers = vim.tbl_deep_extend("force", opts.servers, {
       -- Apply goto definition override to all LSP servers
       ['*'] = {
@@ -31,17 +41,17 @@ return {
         cmd = {
           "docker", "run", "--rm", "-i",
           "-v", "/home/krishna/.cache/bazel:/home/krishna/.cache/bazel",
-          "-v", vim.fn.getcwd() .. ":/home/krishna/foxbots",
-          "--workdir", "/home/krishna/foxbots",
+          "-v", cwd .. ":" .. container_path,
+          "--workdir", container_path,
           "--entrypoint", "clangd-19",
           "gcr.io/studied-biplane-165901/foxbots/devel-tools:2025-04-14",
           -- clangd arguments
-          "--compile-commands-dir", "/home/krishna/foxbots",
+          "--compile-commands-dir", container_path,
           "--background-index", "--clang-tidy",
           "--completion-style=detailed", "--function-arg-placeholders",
           "--fallback-style=llvm", "--header-insertion=iwyu",
           "--query-driver=**",
-          "--path-mappings=" .. vim.fn.getcwd() .. "=/home/krishna/foxbots",
+          "--path-mappings=" .. cwd .. "=" .. container_path,
         },
         -- stylua: ignore end
       },
