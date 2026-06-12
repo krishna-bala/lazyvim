@@ -144,7 +144,7 @@ return {
         split_width_percentage = 0.30, -- Width of terminal split
         provider = "external", -- "auto", "snacks", "native", "external", or "none"
         provider_opts = {
-          external_terminal_cmd = "/home/krishna/.config/kitty/launch.sh -- %s",
+          external_terminal_cmd = vim.fn.expand("~/.config/kitty/launch.sh") .. " -- %s",
         },
         snacks_win_opts = {}, -- Options for floating window (when using snacks provider)
         auto_close = true, -- Auto-close terminal after command completion

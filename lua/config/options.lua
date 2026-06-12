@@ -10,7 +10,6 @@ vim.opt.wrap = true
 -- Disable swap files
 vim.o.swapfile = false
 
--- vim.g.node_host_prog = "/home/krishna/.nvm/versions/node/v16.20.0/bin/node"
 -- vim.fn.setenv("GIT_EDITOR", "nvr -cc split --remote-wait")
 vim.g.root_spec = { { ".git", "lua" }, "lsp", "cwd" }
 

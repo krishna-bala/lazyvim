@@ -9,3 +9,8 @@ data
 
 **/.claude/settings.local.json
 spell/*
+
+# Machine-local plugin specs (work-only LSP quirks, proxies, ...).
+# lazy.nvim auto-loads every file in lua/plugins/, so a local-*.lua present
+# on one machine is loaded there and silently absent everywhere else.
+lua/plugins/local-*.lua

@@ -9,7 +9,6 @@ return {
       sh = { "shellcheck" },
       dockerfile = { "hadolint" },
       -- yaml = { "eslint_d" },
-      rst = { "doc8" },
       -- Use the "*" filetype to run linters on all filetypes.
       -- ['*'] = { 'global linter' },
       -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
@@ -30,21 +29,6 @@ return {
       --     return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]
       --   end,
       -- },
-      doc8 = {
-        cmd = "/home/krishna/.local/bin/doc8",
-        stdin = false,
-        args = { "--quiet" },
-        stream = "both",
-        ignore_exitcode = true,
-        parser = require("lint.parser").from_pattern(
-          "(.+):(%d+): (.+)",
-          { "file", "lnum", "message" },
-          {
-            [""] = vim.diagnostic.severity.WARN,
-          }, -- default severity mapping
-          { source = "doc8" }
-        ),
-      },
     },
   },
 }

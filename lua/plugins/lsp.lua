@@ -1,21 +1,16 @@
 return {
   "neovim/nvim-lspconfig",
   opts = function(_, opts)
-    -- Match the devcontainer mount path so bazel-emitted execroot symlinks
-    -- (e.g. /workspaces/.worktrees/<name>/...) resolve inside the clangd
-    -- container. Worktrees mount at /workspaces/.worktrees/<name>; the main
-    -- repo mounts at /workspaces/foxbots.
-    local cwd = vim.fn.getcwd()
-    local worktree_name = cwd:match("/%.worktrees/([^/]+)$")
-    local container_path = worktree_name
-        and "/workspaces/.worktrees/" .. worktree_name
-      or "/workspaces/foxbots"
-
     opts.servers = vim.tbl_deep_extend("force", opts.servers, {
       -- Apply goto definition override to all LSP servers
-      ['*'] = {
+      ["*"] = {
         keys = {
-          { "gd", "<cmd>lua vim.lsp.buf.definition({reuse_win = false})<cr>", desc = "Goto Definition (no reuse)", has = "definition" },
+          {
+            "gd",
+            "<cmd>lua vim.lsp.buf.definition({reuse_win = false})<cr>",
+            desc = "Goto Definition (no reuse)",
+            has = "definition",
+          },
         },
       },
       clangd = {
@@ -28,32 +23,6 @@ return {
           "cpp",
           "cuda",
         },
-        on_attach = function(client, bufnr)
-          -- Detach from non-file buffers (e.g., diffview:// URIs)
-          local uri = vim.uri_from_bufnr(bufnr)
-          if not uri:match("^file://") then
-            vim.defer_fn(function()
-              vim.lsp.buf_detach_client(bufnr, client.id)
-            end, 0)
-          end
-        end,
-        -- stylua: ignore start
-        cmd = {
-          "docker", "run", "--rm", "-i",
-          "-v", "/home/krishna/.cache/bazel:/home/krishna/.cache/bazel",
-          "-v", cwd .. ":" .. container_path,
-          "--workdir", container_path,
-          "--entrypoint", "clangd-19",
-          "gcr.io/studied-biplane-165901/foxbots/devel-tools:2025-04-14",
-          -- clangd arguments
-          "--compile-commands-dir", container_path,
-          "--background-index", "--clang-tidy",
-          "--completion-style=detailed", "--function-arg-placeholders",
-          "--fallback-style=llvm", "--header-insertion=iwyu",
-          "--query-driver=**",
-          "--path-mappings=" .. cwd .. "=" .. container_path,
-        },
-        -- stylua: ignore end
       },
       pylsp = { enabled = false },
       pyright = {

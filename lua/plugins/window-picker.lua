@@ -2,7 +2,8 @@ return {
   "s1n7ax/nvim-window-picker",
   name = "window-picker",
   event = "VeryLazy",
-  version = "2.*",
+  -- rely on the lazy-lock.json pin; a semver range would let updates drift
+  version = false,
   enabled = true,
   opts = {
     hint = "floating-big-letter",
