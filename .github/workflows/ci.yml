@@ -41,11 +41,4 @@ jobs:
         run: nvim --headless "+Lazy! restore" +qa
 
       - name: Start Neovim and check for errors
-        run: |
-          # Give lazy-loaded (VeryLazy) plugins time to load, then quit.
-          nvim --headless "+lua vim.defer_fn(function() vim.cmd('qa!') end, 5000)" > startup.log 2>&1 || true
-          cat startup.log
-          if grep -qE 'E[0-9]+:|Error' startup.log; then
-            echo "::error::Neovim reported errors during startup"
-            exit 1
-          fi
+        run: timeout 120 nvim --headless --cmd "luafile .github/ci/startup-check.lua"
