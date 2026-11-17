@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  format:
+    name: StyLua
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check init.lua lua/
+
+  startup:
+    name: Headless startup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: stable
+
+      # nvim-treesitter (main branch) compiles parsers with the tree-sitter CLI.
+      - name: Install tree-sitter CLI
+        run: npm install -g tree-sitter-cli
+
+      - name: Use this checkout as the Neovim config
+        run: |
+          mkdir -p ~/.config
+          ln -s "$GITHUB_WORKSPACE" ~/.config/nvim
+
+      - name: Install plugins at lockfile versions
+        run: nvim --headless "+Lazy! restore" +qa
+
+      - name: Start Neovim and check for errors
+        run: |
+          # Give lazy-loaded (VeryLazy) plugins time to load, then quit.
+          nvim --headless "+lua vim.defer_fn(function() vim.cmd('qa!') end, 5000)" > startup.log 2>&1 || true
+          cat startup.log
+          if grep -qE 'E[0-9]+:|Error' startup.log; then
+            echo "::error::Neovim reported errors during startup"
+            exit 1
+          fi
