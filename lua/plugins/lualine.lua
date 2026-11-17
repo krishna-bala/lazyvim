@@ -3,7 +3,7 @@ return {
   opts = function(_, opts)
     -- dont show the winbar for some filetypes
     opts.options.disabled_filetypes = {
-      winbar = { "dashboard", "lazy", "alpha", "edgy", "neo-tree", "toggleterm", "harpoon" },
+      winbar = { "dashboard", "lazy", "alpha", "neo-tree", "toggleterm", "harpoon" },
       statusline = { "dashboard", "alpha", "ministarter", "harpoon" },
     }
 

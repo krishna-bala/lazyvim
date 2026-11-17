@@ -1,8 +1,5 @@
 return {
-  "sindrets/diffview.nvim",
-  dependencies = {
-    "lewis6991/gitsigns.nvim", -- Ensure gitsigns loads when diffview opens
-  },
+  "dlyongemallo/diffview-plus.nvim",
   config = function(_, opts)
     require("diffview").setup(opts)
 
@@ -44,6 +41,10 @@ return {
         disable_diagnostics = true, -- Temporarily disable diagnostics for conflict buffers while in the view.
         winbar_info = true, -- See ':h diffview-config-view.x.winbar_info'
       },
+    },
+    file_panel = {
+      listing_style = "tree",
+      win_config = { position = "bottom", height = 20 }, -- Use "auto" to fit content
     },
   },
 }
