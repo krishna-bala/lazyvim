@@ -5,6 +5,12 @@
 
 local errors = {}
 
+-- Noice reports an error when something else replaces vim.notify, which is
+-- exactly what this check does. Ignore that one message.
+local function is_own_noise(msg)
+  return msg:find("`vim.notify` has been overwritten by another plugin", 1, true) ~= nil
+end
+
 -- Headless Neovim stops printing messages once startup is over, so errors are
 -- caught at the source instead. LazyVim, snacks and noice each replace
 -- vim.notify during startup, so keep re-wrapping whatever is current.
@@ -14,7 +20,7 @@ local function wrap_notify()
     return
   end
   local function wrapped(msg, level, opts)
-    if level == vim.log.levels.ERROR or level == "error" then
+    if (level == vim.log.levels.ERROR or level == "error") and not is_own_noise(tostring(msg)) then
       table.insert(errors, tostring(msg))
     end
     return current(msg, level, opts)
@@ -49,10 +55,11 @@ local function finish()
     io.stdout:write("No startup errors\n")
     vim.cmd("qall!")
   else
-    io.stderr:write(("%d startup error(s):\n"):format(#errors))
+    io.stdout:write(("%d startup error(s):\n"):format(#errors))
     for _, err in ipairs(errors) do
-      io.stderr:write("  " .. err:gsub("\n", "\n  ") .. "\n")
+      io.stdout:write("  " .. err:gsub("\n", "\n  ") .. "\n")
     end
+    io.stdout:flush()
     vim.cmd("cquit 1")
   end
 end
