@@ -1,0 +1,198 @@
+/*
+ * TokyoNight-inspired highlight.js theme for markdown-preview.nvim.
+ * Theme follows markdown-preview.nvim's <main data-theme="dark|light"> toggle.
+ */
+
+/* ---------- Dark ---------- */
+
+main[data-theme="dark"] .hljs {
+  display: block;
+  overflow-x: auto;
+  background: #16161e !important;
+  color: #c0caf5;
+}
+
+main[data-theme="dark"] .hljs-comment,
+main[data-theme="dark"] .hljs-quote {
+  color: #737aa2;
+  font-style: italic;
+}
+
+main[data-theme="dark"] .hljs-keyword,
+main[data-theme="dark"] .hljs-selector-tag,
+main[data-theme="dark"] .hljs-literal,
+main[data-theme="dark"] .hljs-section {
+  color: #b59be6;
+}
+
+main[data-theme="dark"] .hljs-title,
+main[data-theme="dark"] .hljs-title.function_,
+main[data-theme="dark"] .hljs-function .hljs-title {
+  color: #86a8e7;
+}
+
+main[data-theme="dark"] .hljs-title.class_,
+main[data-theme="dark"] .hljs-type,
+main[data-theme="dark"] .hljs-built_in,
+main[data-theme="dark"] .hljs-builtin-name {
+  color: #d2b47c;
+}
+
+main[data-theme="dark"] .hljs-string,
+main[data-theme="dark"] .hljs-meta .hljs-string,
+main[data-theme="dark"] .hljs-regexp,
+main[data-theme="dark"] .hljs-template-tag,
+main[data-theme="dark"] .hljs-template-variable {
+  color: #9bbf7f;
+}
+
+main[data-theme="dark"] .hljs-number,
+main[data-theme="dark"] .hljs-symbol,
+main[data-theme="dark"] .hljs-bullet,
+main[data-theme="dark"] .hljs-variable.constant_ {
+  color: #d89a72;
+}
+
+main[data-theme="dark"] .hljs-variable,
+main[data-theme="dark"] .hljs-params,
+main[data-theme="dark"] .hljs-property,
+main[data-theme="dark"] .hljs-subst {
+  color: #c0caf5;
+}
+
+main[data-theme="dark"] .hljs-attr,
+main[data-theme="dark"] .hljs-attribute,
+main[data-theme="dark"] .hljs-selector-id,
+main[data-theme="dark"] .hljs-selector-class,
+main[data-theme="dark"] .hljs-selector-attr,
+main[data-theme="dark"] .hljs-selector-pseudo {
+  color: #7ebbd8;
+}
+
+main[data-theme="dark"] .hljs-operator {
+  color: #89b8c9;
+}
+
+main[data-theme="dark"] .hljs-punctuation {
+  color: #a9b1d6;
+}
+
+main[data-theme="dark"] .hljs-meta {
+  color: #86a8e7;
+}
+
+main[data-theme="dark"] .hljs-tag,
+main[data-theme="dark"] .hljs-name {
+  color: #d98291;
+}
+
+main[data-theme="dark"] .hljs-addition {
+  color: #9bbf7f;
+  background: #20303b;
+}
+
+main[data-theme="dark"] .hljs-deletion {
+  color: #d98291;
+  background: #37222c;
+}
+
+/* ---------- Light ---------- */
+
+main[data-theme="light"] .hljs {
+  display: block;
+  overflow-x: auto;
+  background: #e1e2e7 !important;
+  color: #2e3448;
+}
+
+main[data-theme="light"] .hljs-comment,
+main[data-theme="light"] .hljs-quote {
+  color: #848cb5;
+  font-style: italic;
+}
+
+main[data-theme="light"] .hljs-keyword,
+main[data-theme="light"] .hljs-selector-tag,
+main[data-theme="light"] .hljs-literal,
+main[data-theme="light"] .hljs-section {
+  color: #7847bd;
+}
+
+main[data-theme="light"] .hljs-title,
+main[data-theme="light"] .hljs-title.function_,
+main[data-theme="light"] .hljs-function .hljs-title {
+  color: #34548a;
+}
+
+main[data-theme="light"] .hljs-title.class_,
+main[data-theme="light"] .hljs-type,
+main[data-theme="light"] .hljs-built_in,
+main[data-theme="light"] .hljs-builtin-name {
+  color: #8c6c3e;
+}
+
+main[data-theme="light"] .hljs-string,
+main[data-theme="light"] .hljs-meta .hljs-string,
+main[data-theme="light"] .hljs-regexp,
+main[data-theme="light"] .hljs-template-tag,
+main[data-theme="light"] .hljs-template-variable {
+  color: #587539;
+}
+
+main[data-theme="light"] .hljs-number,
+main[data-theme="light"] .hljs-symbol,
+main[data-theme="light"] .hljs-bullet,
+main[data-theme="light"] .hljs-variable.constant_ {
+  color: #b15c00;
+}
+
+main[data-theme="light"] .hljs-variable,
+main[data-theme="light"] .hljs-params,
+main[data-theme="light"] .hljs-property,
+main[data-theme="light"] .hljs-subst {
+  color: #2e3448;
+}
+
+main[data-theme="light"] .hljs-attr,
+main[data-theme="light"] .hljs-attribute,
+main[data-theme="light"] .hljs-selector-id,
+main[data-theme="light"] .hljs-selector-class,
+main[data-theme="light"] .hljs-selector-attr,
+main[data-theme="light"] .hljs-selector-pseudo {
+  color: #0f708d;
+}
+
+main[data-theme="light"] .hljs-operator {
+  color: #006a9c;
+}
+
+main[data-theme="light"] .hljs-punctuation {
+  color: #6172a3;
+}
+
+main[data-theme="light"] .hljs-meta {
+  color: #34548a;
+}
+
+main[data-theme="light"] .hljs-tag,
+main[data-theme="light"] .hljs-name {
+  color: #c64343;
+}
+
+main[data-theme="light"] .hljs-addition {
+  color: #587539;
+  background: #dce7d4;
+}
+
+main[data-theme="light"] .hljs-deletion {
+  color: #c64343;
+  background: #ead7d7;
+}
+
+main .hljs-emphasis {
+  font-style: italic;
+}
+
+main .hljs-strong {
+  font-weight: bold;
+}

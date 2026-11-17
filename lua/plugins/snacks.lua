@@ -36,6 +36,12 @@ return {
       file = "/src/{branch}/{file}#lines-{line_start}:{line_end}",
       commit = "/commits/{commit}",
     }
+    opts.gitbrowse.url_patterns["gitlab%..*%.com"] = {
+      branch = "/-/tree/{branch}",
+      permalink = "/-/blob/{commit}/{file}#L{line_start}-{line_end}",
+      file = "/-/blob/{branch}/{file}#L{line_start}-{line_end}",
+      commit = "/-/commit/{commit}",
+    }
 
     -- picker tweaks for git_status
     opts.picker = opts.picker or {}

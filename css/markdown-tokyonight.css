@@ -1,0 +1,412 @@
+/*
+ * TokyoNight-inspired theme for iamcco/markdown-preview.nvim
+ * Supports the plugin's built-in Dark Mode toggle via:
+ *   <main data-theme="dark|light">
+ */
+
+/* ---------- Shared layout ---------- */
+
+main {
+  --radius: 6px;
+}
+
+main #page-ctn {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 38px 56px;
+}
+
+main .markdown-body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height: 1.65;
+}
+
+/* Make markdown-preview's permalink/link SVGs inherit theme colors. */
+main .anchor,
+main .anchor svg,
+main .anchor svg path,
+main #page-header svg,
+main #page-header svg path {
+  color: inherit !important;
+  fill: currentColor !important;
+}
+
+main .anchor {
+  opacity: 0.65;
+}
+
+main .anchor:hover {
+  opacity: 1;
+}
+
+main img {
+  max-width: 100%;
+  border-radius: var(--radius);
+}
+
+main table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+main th,
+main td {
+  padding: 8px 12px;
+}
+
+main input[type="checkbox"] {
+  vertical-align: middle;
+}
+
+main pre {
+  border-radius: var(--radius);
+  padding: 16px;
+  overflow: auto;
+}
+
+main code {
+  border-radius: 4px;
+  padding: 0.12em 0.34em;
+}
+
+main pre code {
+  padding: 0;
+  background: transparent !important;
+}
+
+main blockquote {
+  margin-left: 0;
+  padding: 0.45em 1em;
+}
+
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
+  font-weight: 650;
+}
+
+main h1,
+main h2 {
+  padding-bottom: 0.3em;
+}
+
+/* ---------- Dark: TokyoNight Night, softened ---------- */
+
+main[data-theme="dark"] {
+  --bg: #1a1b26;
+  --bg-dark: #16161e;
+  --bg-soft: #202230;
+  --bg-code: #24283b;
+  --fg: #c0caf5;
+  --fg-muted: #a9b1d6;
+  --comment: #737aa2;
+  --border: #3b4261;
+
+  /* Muted accents: less neon than stock TokyoNight */
+  --purple: #b59be6;
+  --blue: #86a8e7;
+  --cyan: #7ebbd8;
+  --green: #9bbf7f;
+  --yellow: #d2b47c;
+  --orange: #d89a72;
+  --red: #d98291;
+  --link: #78b8d8;
+
+  background: var(--bg) !important;
+  color: var(--fg) !important;
+}
+
+main[data-theme="dark"] #page-ctn,
+main[data-theme="dark"] .markdown-body {
+  background: var(--bg) !important;
+  color: var(--fg) !important;
+}
+
+main[data-theme="dark"] #page-header {
+  background: var(--bg) !important;
+  border-color: var(--border) !important;
+  color: var(--fg-muted) !important;
+}
+
+main[data-theme="dark"] #page-header h3,
+main[data-theme="dark"] #page-header span {
+  color: var(--fg-muted) !important;
+}
+
+main[data-theme="dark"] .markdown-body p,
+main[data-theme="dark"] .markdown-body li,
+main[data-theme="dark"] .markdown-body td {
+  color: var(--fg);
+}
+
+main[data-theme="dark"] .markdown-body h1 {
+  color: var(--purple);
+  border-color: var(--border);
+}
+
+main[data-theme="dark"] .markdown-body h2 {
+  color: var(--blue);
+  border-color: var(--border);
+}
+
+main[data-theme="dark"] .markdown-body h3 {
+  color: var(--cyan);
+}
+
+main[data-theme="dark"] .markdown-body h4,
+main[data-theme="dark"] .markdown-body h5,
+main[data-theme="dark"] .markdown-body h6 {
+  color: var(--green);
+}
+
+main[data-theme="dark"] .markdown-body a {
+  color: var(--link) !important;
+  text-decoration: none;
+}
+
+main[data-theme="dark"] .markdown-body a:hover {
+  color: #9ac7e0 !important;
+  text-decoration: underline;
+}
+
+/* Critical fix for the black heading permalink icons. */
+main[data-theme="dark"] .markdown-body .anchor,
+main[data-theme="dark"] .markdown-body .anchor svg,
+main[data-theme="dark"] .markdown-body .anchor svg path {
+  color: var(--fg-muted) !important;
+  fill: currentColor !important;
+}
+
+main[data-theme="dark"] .markdown-body strong {
+  color: var(--yellow);
+}
+
+main[data-theme="dark"] .markdown-body em {
+  color: var(--fg-muted);
+}
+
+main[data-theme="dark"] .markdown-body code {
+  background: var(--bg-code);
+  color: var(--purple);
+}
+
+main[data-theme="dark"] .markdown-body pre {
+  background: var(--bg-dark) !important;
+  border: 1px solid var(--border);
+}
+
+main[data-theme="dark"] .markdown-body blockquote {
+  color: var(--fg-muted);
+  background: var(--bg-dark);
+  border-left: 4px solid var(--purple);
+}
+
+main[data-theme="dark"] .markdown-body blockquote p {
+  color: var(--fg-muted);
+}
+
+main[data-theme="dark"] .markdown-body hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+main[data-theme="dark"] .markdown-body th,
+main[data-theme="dark"] .markdown-body td {
+  border: 1px solid var(--border);
+}
+
+main[data-theme="dark"] .markdown-body th {
+  background: var(--bg-code);
+  color: var(--blue);
+}
+
+main[data-theme="dark"] .markdown-body tr:nth-child(even) {
+  background: #1e2030;
+}
+
+main[data-theme="dark"] .markdown-body li::marker {
+  color: var(--purple);
+}
+
+main[data-theme="dark"] input[type="checkbox"] {
+  accent-color: var(--blue);
+}
+
+main[data-theme="dark"] ::selection {
+  background: #33467c;
+  color: var(--fg);
+}
+
+main[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+main[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 5px;
+}
+
+main[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--comment);
+}
+
+/* ---------- Light: TokyoNight Day-inspired ---------- */
+
+main[data-theme="light"] {
+  --bg: #e9e9ec;
+  --bg-soft: #e1e2e7;
+  --bg-code: #dfe0e7;
+  --fg: #3760bf;
+  --fg-body: #2e3448;
+  --fg-muted: #6172a3;
+  --border: #c4c8da;
+
+  --purple: #7847bd;
+  --blue: #34548a;
+  --cyan: #0f708d;
+  --green: #587539;
+  --yellow: #8c6c3e;
+  --orange: #b15c00;
+  --red: #c64343;
+  --link: #006a9c;
+
+  background: var(--bg) !important;
+  color: var(--fg-body) !important;
+}
+
+main[data-theme="light"] #page-ctn,
+main[data-theme="light"] .markdown-body {
+  background: var(--bg) !important;
+  color: var(--fg-body) !important;
+}
+
+main[data-theme="light"] #page-header {
+  background: var(--bg) !important;
+  border-color: var(--border) !important;
+  color: var(--fg) !important;
+}
+
+main[data-theme="light"] #page-header h3,
+main[data-theme="light"] #page-header span {
+  color: var(--fg) !important;
+}
+
+main[data-theme="light"] .markdown-body p,
+main[data-theme="light"] .markdown-body li,
+main[data-theme="light"] .markdown-body td {
+  color: var(--fg-body);
+}
+
+main[data-theme="light"] .markdown-body h1 {
+  color: var(--purple);
+  border-color: var(--border);
+}
+
+main[data-theme="light"] .markdown-body h2 {
+  color: var(--blue);
+  border-color: var(--border);
+}
+
+main[data-theme="light"] .markdown-body h3 {
+  color: var(--cyan);
+}
+
+main[data-theme="light"] .markdown-body h4,
+main[data-theme="light"] .markdown-body h5,
+main[data-theme="light"] .markdown-body h6 {
+  color: var(--green);
+}
+
+main[data-theme="light"] .markdown-body a {
+  color: var(--link) !important;
+  text-decoration: none;
+}
+
+main[data-theme="light"] .markdown-body a:hover {
+  color: #004f75 !important;
+  text-decoration: underline;
+}
+
+main[data-theme="light"] .markdown-body .anchor,
+main[data-theme="light"] .markdown-body .anchor svg,
+main[data-theme="light"] .markdown-body .anchor svg path {
+  color: var(--fg-muted) !important;
+  fill: currentColor !important;
+}
+
+main[data-theme="light"] .markdown-body strong {
+  color: var(--yellow);
+}
+
+main[data-theme="light"] .markdown-body em {
+  color: var(--fg-muted);
+}
+
+main[data-theme="light"] .markdown-body code {
+  background: var(--bg-code);
+  color: var(--purple);
+}
+
+main[data-theme="light"] .markdown-body pre {
+  background: #e1e2e7 !important;
+  border: 1px solid var(--border);
+}
+
+main[data-theme="light"] .markdown-body blockquote {
+  color: var(--fg-muted);
+  background: #e1e2e7;
+  border-left: 4px solid var(--purple);
+}
+
+main[data-theme="light"] .markdown-body blockquote p {
+  color: var(--fg-muted);
+}
+
+main[data-theme="light"] .markdown-body hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+main[data-theme="light"] .markdown-body th,
+main[data-theme="light"] .markdown-body td {
+  border: 1px solid var(--border);
+}
+
+main[data-theme="light"] .markdown-body th {
+  background: var(--bg-code);
+  color: var(--blue);
+}
+
+main[data-theme="light"] .markdown-body tr:nth-child(even) {
+  background: #e4e5ea;
+}
+
+main[data-theme="light"] .markdown-body li::marker {
+  color: var(--purple);
+}
+
+main[data-theme="light"] input[type="checkbox"] {
+  accent-color: var(--blue);
+}
+
+main[data-theme="light"] ::selection {
+  background: #c8d5f2;
+  color: var(--fg-body);
+}
+
+main[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #e1e2e7;
+}
+
+main[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #b6bbcf;
+  border-radius: 5px;
+}
+
+main[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #9da5c2;
+}
