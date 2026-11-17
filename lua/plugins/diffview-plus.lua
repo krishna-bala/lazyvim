@@ -30,8 +30,22 @@ return {
     keymaps = {
       view = {
         -- Override treesitter-textobjects ]c/[c class navigation with native diff navigation
-        { "n", "]c", function() vim.cmd("normal! ]c") end, { desc = "Next change" } },
-        { "n", "[c", function() vim.cmd("normal! [c") end, { desc = "Previous change" } },
+        {
+          "n",
+          "]c",
+          function()
+            vim.cmd("normal! ]c")
+          end,
+          { desc = "Next change" },
+        },
+        {
+          "n",
+          "[c",
+          function()
+            vim.cmd("normal! [c")
+          end,
+          { desc = "Previous change" },
+        },
       },
     },
     view = {
