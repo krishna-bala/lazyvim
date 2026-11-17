@@ -4,7 +4,7 @@ return {
     opts.spec = vim.tbl_deep_extend("force", opts.defaults, {
       -- Format:
       -- { "<keymap>", group = "<name>" },
-      { "<leader>a",  group = "+ai" },
+      { "<leader>a", group = "+ai" },
     })
   end,
 }
